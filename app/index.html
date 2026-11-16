@@ -379,7 +379,7 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
     <div class="side r"><b id="eHpN"></b><span class="bar red"><i id="eHp"></i></span><span class="who" id="eName"></span></div>
   </div>
   <div id="dock">
-    <div class="food" title="Food"><img id="iSeed" alt="food" width="20" height="20"><b id="food"></b><small id="inc"></small><span class="ebar"><i id="eBar"></i></span></div><button class="card hire" id="hireW" title="Hire a worker: 4 food. Each worker gathers +0.08 food a second at your nest (up to 6). Enemies can kill them. Key W"><b>+ Worker</b><small id="hireN"></small><i class="cfill"></i></button>
+    <div class="food" title="Food"><img id="iSeed" alt="food" width="20" height="20"><b id="food"></b><small id="inc"></small><span class="ebar"><i id="eBar"></i></span></div><button class="card hire" id="hireW" title="Hire a worker: 4 food. Each worker gathers +0.08 food a second (up to 6). Key W"><b>+ Worker</b><small id="hireN"></small><i class="cfill"></i></button>
     <div class="cards" id="units"></div>
     <div class="cards" id="dis"></div>
     <div id="clashBox" class="card clash" aria-live="polite"><b id="clashT">Clash in 12s</b><span id="clashF">Hatch to build your wave</span><span class="tacs"><button id="tac_charge" data-k="charge" title="Run them down: beats Flank, loses to Hold (Z)" aria-pressed="false"><kbd>Z</kbd> Charge</button><button id="tac_hold" data-k="hold" title="Brace the line: beats Charge, loses to Flank (X)" aria-pressed="false"><kbd>X</kbd> Hold</button><button id="tac_flank" data-k="flank" title="Go around them: beats Hold, loses to Charge (C)" aria-pressed="false"><kbd>C</kbd> Flank</button></span></div>
@@ -511,10 +511,10 @@ for(const k in SP)SP[k].id=k;
 // times the class's deployment discount. One formula for every species keeps the classes comparable.
 const TRAIT={fly:1.2,splash:1.4,stun:1.15,burn:1.1,venom:1.15,lethal:1.25,shred:1.1,glue:1.15,dazzle:1.5,heal:1.6,chirp:1.4,cocoon:1.3,infest:1.3,raid:1.1,crush:1.15,
   leech:1.1,dive:1.1,charge:1.1,kick:1.05,shove:1.05,dodge:1.22,shield:1.1,steady:1.05,raptor:1.15,bigbite:1.1,burrow:1.25,leap:1.15,build:1.4,boom:1.4,toxic:1.1,grab:1.15};
-const DEPLOY={ants:{k:1.1,how:"Brood squads: each card hatches a group that marches together"},beetles:{k:0.94,pupa:3.5,how:"Pupation: heavy beetles spend 3.5 seconds as a pupa before they emerge"},
-  butterflies:{k:0.74,pupa:2.5,how:"Chrysalis: butterflies emerge 2.5 seconds after hatching"},flies:{k:0.92,how:"Batches: cheap and fast"},
-  crickets:{k:0.82,how:"Nymphs: they hop straight out, ready to fight"},scorpions:{k:0.86,how:"Stingers: armoured knights whose venom wears down whatever they hit"},
-  bees:{k:0.86,cd:.7,how:"The hive: every card hatches 30% faster"},termites:{k:1.04,how:"Builders: workers raise walls where they meet the enemy"}};
+const DEPLOY={ants:{k:1.2,how:"Brood squads: each card hatches a group that marches together"},beetles:{k:0.94,pupa:3.5,how:"Pupation: heavy beetles spend 3.5 seconds as a pupa before they emerge"},
+  butterflies:{k:0.7,pupa:2.5,how:"Chrysalis: butterflies emerge 2.5 seconds after hatching"},flies:{k:0.92,how:"Batches: cheap and fast"},
+  crickets:{k:0.9,how:"Nymphs: they hop straight out, ready to fight"},scorpions:{k:.88,how:"Stingers: armoured knights whose venom wears down whatever they hit"},
+  bees:{k:0.86,cd:.7,how:"The hive: every card hatches 30% faster"},termites:{k:1.1,how:"Builders: workers raise walls where they meet the enemy"}};
 function unitValue(sp){
   if(sp.forage)return 20;
   const ehp=sp.hp/(1-Math.min(.5,.12*(sp.armor||0))),dps=sp.dmg*sp.rate; // stingers no longer die on their sting, so no discount
@@ -624,10 +624,10 @@ const BOT_LEVELS={easy:{name:"Easy",inc:.8,think:1.2,cast:6},normal:{name:"Norma
 // every 4th attack is the species' special. Overtime at 3:00 doubles food; from 4:00 both nests crumble.
 const KC={nest:1400,round:240,ot:180,cap:12,start:150,baseInc:1,workerCost:4,workerMax:6,workerInc:.5,workerCd:2,size:100,hold:.5,gap:14,rank:3,
   impact:4/8,special:4,specialDmg:1.75,stagger:.15,startWorkers:2,
-  elix:{max:10,start:6,base:.42,perWorker:.08},wave:{first:6,every:20,n:3},hand:3,merge:.6,loadout:6,disLock:15,reroll:1,rerollCd:6}; // a 0-10 food bar, free insect waves, 3 dealt choices (matching knights merge: +60% health and damage per extra copy), up to 6 boost cards
+  elix:{max:10,start:6,base:.42,perWorker:.06},wave:{first:6,every:20,n:3},hand:3,merge:.6,loadout:6,disLock:15,reroll:1,rerollCd:6}; // a 0-10 food bar, free insect waves, 3 dealt choices (matching knights merge: +60% health and damage per extra copy), up to 6 boost cards
 const isWorker=u=>!!(u.worker||u.sp.forage);
 const workerId=team=>CLASSES[M.pl[team].cls].species[0]; // a class's workers are its starter species, gathering instead of fighting
-const workersOf=team=>R.units.filter(u=>u.team===team&&!u.dead&&isWorker(u)).length;
+const workersOf=team=>M.pl[team].workers||0; // workers are a count: they gather off-field, raising food income
 const armyCount=team=>R.units.filter(u=>u.team===team&&!u.dead&&!isWorker(u)&&!u.sp.bug&&u.sp.id!=="maggot").length;
 const slots=sp=>sp.bug?0:sp.cost/(sp.n||1)/25; // the cap counts army weight, not heads: 25 food of knights is one slot, so swarms field more bodies than heavies
 const armyLoad=team=>R.units.reduce((a,u)=>a+(u.team===team&&!u.dead&&!isWorker(u)?slots(u.sp)*(u.star||1):0),0);
@@ -636,9 +636,7 @@ const holdX=team=>R.bases[team].x+(team?-1:1)*Math.abs(WW/2-R.bases[team].x)*KC.
 function hireWorker(team){ // a worker: stands at the food patch in front of the nest and adds food; it never fights
   const p=M.pl[team];if(!R||R.over||R.count>0||p.food<KC.workerCost||(p.cds.worker||0)>0||workersOf(team)>=KC.workerMax)return false;
   p.food-=KC.workerCost;p.cds.worker=KC.workerCd;addWorker(team);sfx("hatch",{x:R.bases[team].x,team});return true;}
-function addWorker(team){const dir=team?-1:1,out=spawn(team,workerId(team),R.bases[team].x+dir*(40+Math.random()*20)),u=out[0];
-  for(const v of out.slice(1))R.units.splice(R.units.indexOf(v),1); // squad species: one worker per hire
-  u.worker=true;u.home=R.bases[team].x+dir*(NEST.r+20+Math.random()*50);return u;}
+function addWorker(team){M.pl[team].workers=(M.pl[team].workers||0)+1;}
 // ======================= the battle draw =======================
 // You are always dealt 3 choices from your class's pool: knights or disasters. Playing one refreshes its slot.
 // Two or more matching knights in the deal merge when played: one stronger knight (stars), costing 1 more food per extra copy.
@@ -737,7 +735,7 @@ function startRound(preview){
   M.pl.forEach((p,i)=>{p.food=KC.elix.start;p.cds={};p.free=0;p.ups={};p.dis={};p.tac={};
     if(!p.boosts)p.boosts=i===0&&!p.bot?loadLoadout(p.cls):randomLoadout(p.cls);p.hand=[null,null,null];p.next=null;p.disLock=0;p.rerollT=0;dealHand(p,[0,1,2]);});
   R.bases.forEach((b,i)=>{b.max=b.hp=KC.nest*mods(M.pl[i]).nest;});
-  for(let i=0;i<2;i++)for(let k=0;k<KC.startWorkers;k++)addWorker(i);
+  for(const p of M.pl)p.workers=KC.startWorkers;
   baked=null;show(null);renderDock();state="play";paused=false;aim=null;
   if(!preview)toast(`${map.name}: play one of your 3 choices (1-3). Matching knights merge into a stronger one. Destroy their nest!`);
 }
@@ -1266,7 +1264,7 @@ function botDraft(p){ // the bot spends its points: a disaster if it holds few, 
 }
 
 // ======================= the round loop =======================
-const NEST={hit:.5,k:1.3,r:105,sink:20}; // sink: how far into the ground the nest's base sits, so it stands on the path, not on its back edge // k: nest drawing scale (knights fit the door); r: how far out from its centre a knight can strike it // bugs that reach a nest hit it this much harder, so a push that breaks through can end the round
+const NEST={hit:.8,k:1.3,r:105,sink:20}; // sink: how far into the ground the nest's base sits, so it stands on the path, not on its back edge // k: nest drawing scale (knights fit the door); r: how far out from its centre a knight can strike it // bugs that reach a nest hit it this much harder, so a push that breaks through can end the round
 const OT_AT=180,FINAL_AT=240; // the diggers' tunnels break through at overtime (3:00); from 4:00 both nests crumble (Knight Command: KC.ot, KC.round)
 const FOODUP=[]; // (was: a wounded nest gathered up to ×2.5 food; cut so a lead can turn into a win, Last Stand is the one comeback)
 const foodBoost=team=>{const b=R.bases[team],f=b.hp/b.max;let m=1;for(const[at,x]of FOODUP)if(f<=at)m=x;return m;};
