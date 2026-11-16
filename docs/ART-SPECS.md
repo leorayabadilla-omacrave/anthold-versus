@@ -60,6 +60,51 @@ The `smooth-2d-v1` sheets use 256 px cells with almost no room around the figure
 | Effects | Slash arcs, sparks and puffs stay inside their own frame's cell |
 | One figure per cell | Never draw a piece of the next or previous frame in a cell |
 
+### Character sizes
+
+**Draw every knight the same size in its sheet: standing about 200 px tall, head to feet, in the 384 px cell.** The game measures the figure in the walk sheet and scales it to that species' height on the battlefield, so you do not make big species bigger in the file. Draw them bigger in the file and the game shrinks them back, but you lose the room for weapons and wings.
+
+Wide or tall species (long horns, claws, tails, big wings) still keep the 16 px margin. Make the body a little shorter than 200 px if that is what it takes.
+
+On the battlefield a knight's height is `100 × size^0.6` world units. The game then makes some knights bigger still:
+
+| Bonus | Effect |
+|---|---|
+| Veteran | 1.18 × |
+| 2-star merge | 1.15 × |
+| 3-star merge | 1.30 × |
+
+The biggest knight on screen is a 3-star veteran Emperor Scorpion, about 190 units tall. The art needs to stay sharp at that size.
+
+| Class | Species id: name, height in world units |
+|---|---|
+| Ants | `worker` Worker Ant 100 · `fire` Fire Ant 100 · `leafcutter` Leafcutter Ant 100 · `wingedant` Flying Ant 100 (flies) · `army` Army Ant 106 · `bullet` Bullet Ant 114 |
+| Beetles | `ladybug` Ladybug 94 (flies) · `bombardier` Bombardier Beetle 109 · `dung` Dung Beetle 112 · `stag` Stag Beetle 117 · `rhino` Rhino Beetle 120 |
+| Butterflies (all fly) | `monarch` Monarch 100 · `morpho` Blue Morpho 100 · `swallowtail` Swallowtail 100 · `hawkmoth` Hawk Moth 106 · `atlas` Atlas Moth 117 |
+| Flies (all fly) | `fruitfly` Fruit Fly 81 · `housefly` Housefly 100 · `botfly` Botfly 100 · `horsefly` Horsefly 109 · `robberfly` Robber Fly 109 |
+| Crickets | `field` Field Cricket 100 · `mole` Mole Cricket 100 · `katydid` Katydid 100 · `camel` Camel Cricket 100 · `weta` Giant Weta 120 |
+| Scorpions | `pseudo` Pseudoscorpion 84 · `bark` Bark Scorpion 109 · `deathstalker` Deathstalker 112 · `vinegaroon` Vinegaroon 114 · `emperor` Emperor Scorpion 125 |
+| Bees (all fly) | `forager` Forager Bee 91 · `killer` Killer Bee 94 · `honeybee` Honeybee 100 · `carpenter` Carpenter Bee 109 · `bumble` Bumblebee 117 |
+| Termites | `tworker` Worker Termite 100 · `nasute` Nasute Soldier 100 · `kamikaze` Kamikaze Termite 100 · `alate` Alate 100 (flies) · `major` Major Soldier 120 |
+| Wave insects | The plain insects in the free waves: 84 each. The Maggot (flies) is 81 |
+
+**How big that is on a real screen.** The pixel sizes below are CSS pixels.
+
+| Screen | Pixels per world unit | 100-unit knight | Emperor Scorpion (125) |
+|---|---|---|---|
+| 1920 × 1080 desktop | 1.33 | 133 px | 166 px |
+| 1366 × 768 laptop | 0.82 | 82 px | 103 px |
+| 1180 × 820 tablet | 0.84 | 84 px | 105 px |
+| 932 × 430 large phone | 0.46 | 46 px | 57 px |
+| 800 × 360 small phone | 0.36 | 36 px | 45 px |
+
+On a small phone a knight is only about 36 px tall, so the design has to read as a silhouette:
+
+- bold shapes;
+- a clear weapon;
+- strong contrast between the dark armour and the cream outlines;
+- no fine detail that only works at full size.
+
 ### The moves
 
 | Move | Frames | Plays | Notes |
@@ -95,7 +140,7 @@ The `arena-parallax-layers` images are 1920 × 1088 and cover only the playfield
 
 - The playfield is 1400 × 700 units. The lane (where feet stand) is at y = 560.
 - Nests stand at x = 130 and x = 1270, drawn about 333 units wide and 324 tall.
-- Knights stand about 100 units tall; heavy ones up to 130.
+- Knights stand 81 to 125 units tall, and up to about 190 with the veteran and star bonuses (see Character sizes).
 
 ### The canvas
 
@@ -123,7 +168,18 @@ The six arenas and their planned rules are in `knights/imported-art/arenas-v3/RE
 
 ---
 
-## 3. Checklist before uploading
+## 3. Rules for AI image tools
+
+These rules apply when an AI image generator makes or edits any of this art.
+
+- **Copy the design exactly.** The 8 class sheets in `knights/final/` are the only design reference. Every frame must show that exact knight. Keep the helmet, horn, armour plates, colours, weapon and crest. Do not invent a new version, restyle it or add parts.
+- **Change only the pose.** For a walk, attack and so on, only the limbs and the weapon move. The design stays the same.
+- **Keep it flat.** Use the same flat colours and line style as the sheet. No motion blur, ghosting, smears, extra limbs or second figure.
+- **Use a plain background.** Transparent (RGBA), or one flat colour that is easy to remove. Never scenery.
+- **Follow the format in section 1.** Face right in side view, 8 frames, 384 px cells, 16 px margin, feet on y = 352, standing figure about 200 px tall.
+- **Run the checker.** Every result has to pass `tools/check-art.py` before it goes in the game.
+
+## 4. Checklist before uploading
 
 - [ ] `python tools/check-art.py anim …` passes for every strip
 - [ ] `python tools/check-art.py arena …` passes for every arena pair

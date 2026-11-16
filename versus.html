@@ -2451,7 +2451,6 @@ function renderHand(){ // your 3 dealt choices: cost, art, stats and what it doe
     b.innerHTML=`<span class="ccost"><em class="ec"></em></span><img class="${f.pix?"pix":"art"}" src="${f.img}" alt=""><span class="cbody"><b><kbd>${i+1}</kbd>${f.name}</b><span class="cstat">${f.stats}</span><span class="cdesc">${f.desc}</span></span>`+
       (n>1?`<span class="cmerge">×${n} merge · +${Math.round(KC.merge*(n-1)*100)}%</span>`:"")+`<i class="cfill"></i>`;
     b.onclick=()=>playCard(0,i);box.appendChild(b);});
-  if(p.next){const n=cardInfo(p.cls,p.next),nx=document.createElement("div");nx.className="card next";nx.title="Next: "+n.name+" (it takes the place of the card you play)";nx.innerHTML=`<small>Next</small><img class="${n.pix?"pix":"art"}" src="${n.img}" alt="">`;box.appendChild(nx);}
   const rb=document.createElement("button");rb.className="card reroll";rb.id="hRe";rb.title=`Refresh: deal 3 new choices and a new Next (${KC.reroll} food, then ${KC.rerollCd} s to recharge). Key R`;
   rb.innerHTML=`<b>↻</b><small>${KC.reroll} food</small><i class="cfill"></i>`;rb.onclick=()=>refreshHand(0);box.appendChild(rb);}
 function deckScreen(){ // the collection: your boost cards as trading cards; pick up to 6 for this class's loadout
