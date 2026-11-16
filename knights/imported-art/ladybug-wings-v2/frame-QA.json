@@ -1,0 +1,65 @@
+[
+  {
+    "move": "walk",
+    "source": "01-ladybug-walk-v3.png",
+    "scale": 0.5283018867924528,
+    "frames": 8,
+    "isolatedComponents": 8
+  },
+  {
+    "move": "attack",
+    "source": "01-ladybug-attack.png",
+    "scale": 0.5910290237467019,
+    "frames": 8,
+    "isolatedComponents": 8
+  },
+  {
+    "move": "special",
+    "source": "01-ladybug-special.png",
+    "scale": 0.6455331412103746,
+    "frames": 8,
+    "isolatedComponents": 8
+  },
+  {
+    "move": "hit",
+    "source": "01-ladybug-hit.png",
+    "scale": 0.632768361581921,
+    "frames": 8,
+    "isolatedComponents": 8
+  },
+  {
+    "move": "death",
+    "source": "01-ladybug-death.png",
+    "scale": 0.7804878048780488,
+    "frames": 8,
+    "isolatedComponents": 8
+  },
+  {
+    "move": "takeoff",
+    "source": "01-ladybug-takeoff.png",
+    "scale": 0.5863874345549738,
+    "frames": 8,
+    "isolatedComponents": 8
+  },
+  {
+    "move": "fly",
+    "source": "01-ladybug-fly.png",
+    "scale": 0.5656565656565656,
+    "frames": 8,
+    "isolatedComponents": 8
+  },
+  {
+    "move": "land",
+    "source": "01-ladybug-land-v4.png",
+    "scale": 0.4618556701030928,
+    "frames": 8,
+    "isolatedComponents": 8
+  },
+  {
+    "move": "air-death",
+    "source": "01-ladybug-air-death.png",
+    "scale": 0.7202572347266881,
+    "frames": 8,
+    "isolatedComponents": 8
+  }
+]

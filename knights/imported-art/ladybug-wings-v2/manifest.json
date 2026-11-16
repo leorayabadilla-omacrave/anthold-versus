@@ -1,0 +1,82 @@
+{
+  "species": "Ladybug",
+  "class": "beetle",
+  "version": "winged-v2",
+  "facing": "right",
+  "cell": 256,
+  "columns": 8,
+  "fps": 12,
+  "pivot": [
+    128,
+    244
+  ],
+  "groundRows": [
+    "walk",
+    "attack",
+    "special",
+    "hit",
+    "death"
+  ],
+  "flightRows": [
+    "takeoff",
+    "fly",
+    "land",
+    "air-death"
+  ],
+  "animations": {
+    "walk": {
+      "file": "01-ladybug-walk.png",
+      "frames": 8,
+      "loop": true,
+      "frameSeconds": 0.08333333333333333
+    },
+    "attack": {
+      "file": "01-ladybug-attack.png",
+      "frames": 8,
+      "loop": false,
+      "frameSeconds": 0.08333333333333333
+    },
+    "special": {
+      "file": "01-ladybug-special.png",
+      "frames": 8,
+      "loop": false,
+      "frameSeconds": 0.08333333333333333
+    },
+    "hit": {
+      "file": "01-ladybug-hit.png",
+      "frames": 8,
+      "loop": false,
+      "frameSeconds": 0.08333333333333333
+    },
+    "death": {
+      "file": "01-ladybug-death.png",
+      "frames": 8,
+      "loop": false,
+      "frameSeconds": 0.08333333333333333
+    },
+    "takeoff": {
+      "file": "01-ladybug-takeoff.png",
+      "frames": 8,
+      "loop": false,
+      "frameSeconds": 0.08333333333333333
+    },
+    "fly": {
+      "file": "01-ladybug-fly.png",
+      "frames": 8,
+      "loop": true,
+      "frameSeconds": 0.08333333333333333
+    },
+    "land": {
+      "file": "01-ladybug-land.png",
+      "frames": 8,
+      "loop": false,
+      "frameSeconds": 0.08333333333333333
+    },
+    "air-death": {
+      "file": "01-ladybug-air-death.png",
+      "frames": 8,
+      "loop": false,
+      "frameSeconds": 0.08333333333333333
+    }
+  }
+}
