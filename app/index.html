@@ -1382,7 +1382,7 @@ function botDraft(p){ // the bot spends its points: a disaster if it holds few, 
 
 // ======================= the round loop =======================
 KC.laneDepth=0; // world units below each arena's ground line (the v4 arenas are painted to walk exactly on y 560)
-const NEST={hit:.8,k:1.3,r:105,sink:20}; // sink: how far into the ground the nest's base sits, so it stands on the path, not on its back edge // k: nest drawing scale (knights fit the door); r: how far out from its centre a knight can strike it // bugs that reach a nest hit it this much harder, so a push that breaks through can end the round
+const NEST={hit:.8,k:.95,r:105,sink:20}; // sink: how far into the ground the nest's base sits, so it stands on the path, not on its back edge // k: nest drawing scale (knights fit the door); r: how far out from its centre a knight can strike it // bugs that reach a nest hit it this much harder, so a push that breaks through can end the round
 const OT_AT=180,FINAL_AT=240; // the diggers' tunnels break through at overtime (3:00); from 4:00 both nests crumble (Knight Command: KC.ot, KC.round)
 const FOODUP=[]; // (was: a wounded nest gathered up to ×2.5 food; cut so a lead can turn into a win, Last Stand is the one comeback)
 const foodBoost=team=>{const b=R.bases[team],f=b.hp/b.max;let m=1;for(const[at,x]of FOODUP)if(f<=at)m=x;return m;};
@@ -2871,7 +2871,7 @@ function pencilEnv(g,k,B){
   for(let i=0;i<5;i++)tuft(X(rr()<.5?rr()*.12:.88+rr()*.12),B.y1+3,10+rr()*8,.85,"#b0a172");
 }
 function drawPencil(g,W,H,k,t){
-  const fx=10,fy=46,fw=W-20,fh=H-52,gy=fy+fh-14,d=devicePixelRatio||1;
+  const fx=10,fy=46,fw=W-20,fh=H-52,gy=fy+fh-14,d=DPR();
   g.save();g.beginPath();g.rect(fx+2,fy+2,fw-4,fh-4);g.clip();g.fillStyle="#f6eed3";g.fillRect(fx,fy,fw,fh);
   const v=g.createRadialGradient(fx+fw/2,fy+fh/2,fh*.3,fx+fw/2,fy+fh/2,fw*.75);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(23,17,14,.16)");g.fillStyle=v;g.fillRect(fx,fy,fw,fh);g.restore();
   const sc=Math.min(fh*1.08/100,fw/170)*SIZE[k],ox=fx+fw/2,oy=gy,br=calm?0:Math.sin(t*2)*.007;
@@ -3227,7 +3227,7 @@ const SPBOX=new WeakMap(),spriteBox=c=>{let b=SPBOX.get(c);if(b)return b;const d
   for(let y=0;y<c.height;y+=2)for(let x=0;x<c.width;x+=2)if(d[(y*c.width+x)*4+3]>30){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
   b=x1>x0?{x:x0,y:y0,w:x1-x0+2,h:y1-y0+2}:{x:0,y:0,w:c.width,h:c.height};SPBOX.set(c,b);return b;};
 function menuAnim(now){ // every visible canvas on the menu: species march, flutter and strike
-  if(state!=="menu"){menuAnim.on=0;return;}const t=calm?0:now/1000,d=devicePixelRatio||1;
+  if(state!=="menu"){menuAnim.on=0;return;}const t=calm?0:now/1000,d=DPR();
   for(const cv of $("menu").querySelectorAll("canvas")){if(cv.offsetParent===null)continue;
     const W=cv.clientWidth,H=cv.clientHeight;if(cv.width!==Math.round(W*d)){cv.width=Math.round(W*d);cv.height=Math.round(H*d);}
     const g=cv.getContext("2d");g.setTransform(d,0,0,d,0,0);g.clearRect(0,0,W,H);g.imageSmoothingQuality="high";
@@ -3453,10 +3453,11 @@ function netLost(){
 $("netHost").onclick=()=>netOpen("h");$("netJoin").onclick=()=>netOpen("g",$("netCode").value);$("netCancel").onclick=()=>netLeave();
 $("netCode").addEventListener("keydown",e=>{if(e.key==="Enter")netOpen("g",e.target.value);});
 
+const DPR=()=>Math.min(2,devicePixelRatio||1),VIEW={w:1340,h:270,bottom:605}; // world x 30..1370 across the screen; at least y 335..605 tall (a whole nest); y 605 sits on the dock
 function resize(){
-  cv.width=cv.clientWidth*devicePixelRatio;cv.height=cv.clientHeight*devicePixelRatio;
+  cv.width=cv.clientWidth*DPR();cv.height=cv.clientHeight*DPR();
   const on=!$("hud").hidden,top=on?$("top").getBoundingClientRect().bottom+6:0,bot=on?cv.clientHeight-$("dock").getBoundingClientRect().top:0,room=Math.max(140,cv.clientHeight-top-bot);
-  scale=Math.min(cv.clientWidth/WW,room/WH);ox=(cv.clientWidth-WW*scale)/2;oy=top+(room-WH*scale)/2;
+  scale=Math.min(cv.clientWidth/VIEW.w,room/VIEW.h);ox=cv.clientWidth/2-WW/2*scale;oy=top+room-VIEW.bottom*scale; // fill the width; a short screen loses sky, never the lane
 }
 // ======================= sound: everything synthesized, nothing loaded
 let AC=null,OUT,MUS,FX,NOISE,soundOn=true,musMode="",mStep=0,mNext=0,sfxLast={};
@@ -3565,11 +3566,13 @@ function music(){
     }
     mNext+=step;mStep++;}
 }
-function frame(){
-  if(state==="play"){NET.role==="g"?netGuestStep():update();if(R.over)renderDock();}
+let lastT=0,acc=0;
+function frame(now){
+  acc=Math.min(acc+Math.min(.1,((now||0)-(lastT||now||0))/1000),4*DT);lastT=now; // fixed 60 steps a second whatever the screen draws: a slow phone no longer plays in slow motion
+  if(state==="play"){let n=0;while(acc>=DT&&n++<4){NET.role==="g"?netGuestStep():update();acc-=DT;if(R.over)break;}if(R.over)renderDock();}
   netTick();
   if(state==="play"&&R&&!R.over){const p=M.pl[0];if(Object.keys(p.dis).filter(k=>p.dis[k]>0).length!==$("dis").children.length)renderDock();}
-  const d=devicePixelRatio,S=scale,O=ox,P=oy;scale*=d;ox*=d;oy*=d;
+  const d=DPR(),S=scale,O=ox,P=oy;scale*=d;ox*=d;oy*=d;
   ctx=main;main.imageSmoothingEnabled=true;draw();
   main.setTransform(scale,0,0,scale,ox+shake[0]*scale,oy+shake[1]*scale);main.imageSmoothingEnabled=true;main.imageSmoothingQuality="high";flush(main);ctx=main;drawOver();
   if(baked&&R){main.setTransform(1,0,0,1,0,0);main.imageSmoothingEnabled=true;main.drawImage(baked.front,0,0);}
