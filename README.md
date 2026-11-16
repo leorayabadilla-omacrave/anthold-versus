@@ -1,6 +1,6 @@
 # ANTHOLD Versus
 
-A 1v1 side-view lane battler (Knight Command rules): two colonies of armoured bug knights march on each other's nest. Food trickles in and workers add more; hatch knights up to a 12-slot army (cheap swarms take less than a slot, heavies more) and give one order, Advance or Hold. Every attack plays its full animation and lands on the impact frame; every 4th is the species' special. Destroy the enemy nest to win. One round: overtime at 3:00 doubles food, and from 4:00 both nests crumble.
+A 1v1 side-view lane battler (Card Command rules): two colonies of armoured bug knights march on each other's nest. Before the match you build a deck of 8 cards from your class's pool: its knights, the Worker and 8 disasters. In the match you hold 4 cards and play them from a food bar that fills from 0 to 10 (workers fill it faster); knights hatch at your nest and always march, up to a 12-slot army. Every 20 seconds each nest also sends a free wave of plain insects. Every attack plays its full animation and lands on the impact frame; every 4th is the species' special. Destroy the enemy nest to win. One round: overtime at 3:00 doubles food, and from 4:00 both nests crumble.
 
 8 classes (Ants, Beetles, Butterflies, Flies, Crickets, Scorpions, Bees, Termites), 41 species, a bot with three difficulties and Auto mode. Online play is hidden until it moves to the new rules.
 
