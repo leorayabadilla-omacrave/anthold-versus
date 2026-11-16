@@ -190,8 +190,8 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
 #menu .pick{padding:calc(.24 * clamp(84px,19vh,150px) + 2px) 4px 6px;gap:5px;text-align:center}#menu .pick .art{height:clamp(84px,19vh,150px)}#menu .pick b{font-size:20px}
 #menu .pick .pro,#menu .pick .con,#menu .pick .more{display:none}
 #menu .clsWrap{min-height:0}#menu .clsWrap:has(#clsInfo:not([hidden])) #classes{display:none}#menu #clsInfo{position:relative;inset:auto;max-height:64vh}
-#menu .sum{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;min-height:30px;font:500 15px/1.3 var(--body)}#menu .sum b{font:400 20px/1 var(--display)}
-#menu .sum .pro{color:#2f5a2a}#menu .sum .con{color:var(--ember-d)}#menu .sum button{padding:5px 10px;font-size:13px}#menu .sum .hint{color:var(--muted)}
+#menu .sum{display:flex;flex-wrap:nowrap;align-items:center;gap:4px 14px;min-height:30px;font:500 15px/1.3 var(--body)}#menu .sum b{font:400 20px/1 var(--display)}
+#menu .sum .pro{color:#2f5a2a}#menu .sum .con{color:var(--ember-d)}#menu .sum button{padding:5px 10px;font-size:13px;flex:none;margin-left:auto;white-space:nowrap}#menu .sum .pro,#menu .sum .con{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} /* one row for every class: the pros and cons shorten, the button never wraps */#menu .sum .hint{color:var(--muted)}
 #menu .foot{align-items:center}#menu .foot .sp1{flex:1}#menu .foot .go{font-size:24px;padding:8px 22px}
 #menu .net{font-size:13px}
 @media (max-width:760px){#clsInfo{overflow:auto}#clsInfo .dz{grid-template-columns:1fr}#clsInfo .roster{overflow:visible}}
@@ -2194,7 +2194,7 @@ function menu(){
     b.onpointermove=e=>{if(calm||e.pointerType!=="mouse")return;const r=b.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;b.style.transform=`perspective(700px) rotateX(${-y*10}deg) rotateY(${x*12}deg)`;};
     b.onpointerleave=()=>{b.style.transform="";};
     b.setAttribute("aria-pressed",pickCls===k);b.onclick=()=>{pickCls=k;menu();};b.ondblclick=()=>{pickCls=k;deckScreen();};box.appendChild(b);}
-  {const c=CLASSES[pickCls],el=$("clsSum");el.innerHTML=c?`<b>${KNIGHT_NAME[pickCls]}</b><span class="pro">+ ${c.pro}</span><span class="con">− ${c.con}</span><button id="sumDos">Units and power-ups →</button>`:`<span class="hint">Tap a colony to pick it. Double-tap to pick and start.</span>`;if(c)$("sumDos").onclick=()=>dossier(pickCls);}
+  {const c=CLASSES[pickCls],el=$("clsSum");el.innerHTML=c?`<span class="pro">+ ${c.pro}</span><span class="con">− ${c.con}</span><button id="sumDos">Units and power-ups →</button>`:`<span class="hint">Tap a colony to pick it. Double-tap to pick and start.</span>`;if(c)$("sumDos").onclick=()=>dossier(pickCls);}
   $("clsInfo").hidden=true;
   const db=$("diffs");db.innerHTML="";for(const[k,L]of Object.entries(BOT_LEVELS)){const b=document.createElement("button");b.textContent=L.name;b.className=pickDiff===k?"on":"";b.onclick=()=>{pickDiff=k;menu();};db.appendChild(b);}
   $("startMatch").disabled=!pickCls;$("startMatch").onclick=()=>deckScreen();
