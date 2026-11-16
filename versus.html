@@ -319,6 +319,54 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
 #units .card.reroll b{font:700 24px/1 var(--body)}#units .card.reroll small{display:block;font:700 10px var(--body);color:var(--muted)}
 #units .card.reroll .cfill{position:absolute;left:0;bottom:0;height:4px;width:calc(var(--p,1)*100%);background:var(--ember)}#units .card.reroll:not(.poor) .cfill{opacity:0}
 #units .card.reroll:disabled{opacity:.6}
+
+#dock .card.hire{position:relative;display:grid;align-content:center;justify-items:start;gap:2px;min-width:0;padding:4px 10px;overflow:hidden}
+#dock .card.hire b{font:700 13px var(--body);text-transform:uppercase;letter-spacing:.04em}#dock .card.hire small{display:block;font:600 11px var(--body);color:var(--muted)}
+#dock .card.hire .cfill{position:absolute;left:0;bottom:0;height:3px;width:calc(var(--p,1)*100%);background:var(--ember)}#dock .card.hire:not(.poor) .cfill{opacity:0}
+
+/* ===== the dock: one full-width tray. Left: food, worker, army. Middle: the 3 choices, Next, Refresh. Right: Auto and the menu buttons. ===== */
+#dock{display:grid;grid-template-columns:118px 118px minmax(0,1fr) auto;grid-template-areas:"food food units auto" "hire army units acts";
+  align-items:stretch;gap:6px 12px;pointer-events:auto;background:linear-gradient(var(--bone),#efe4c4);border-top:3px solid var(--ink);box-shadow:0 -3px 0 rgba(23,17,14,.18);
+  padding:8px max(12px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+#dock .food{grid-area:food;justify-content:flex-start;box-shadow:none;min-width:0}#dock .food .ebar{flex:1;width:auto;min-width:40px}
+#dock #hireW{grid-area:hire;box-shadow:none;width:auto}
+#dock #clashBox{grid-area:army;box-shadow:none;max-width:none;min-width:0;width:auto;display:grid;align-content:center;gap:1px;padding:4px 8px}
+#dock #clashBox b{font-size:13px}#dock #ordF{font-size:10px;display:block}
+#dock #units{grid-area:units;display:flex;gap:8px;align-items:stretch;overflow:visible;padding:8px 2px 0 6px;min-width:0}
+#dock #units .hc{flex:1 1 0;width:auto;min-width:0;min-height:0;height:auto;box-shadow:2px 2px 0 var(--ink)}
+#dock #units .card.next,#dock #units .card.reroll{flex:none;width:58px;box-shadow:2px 2px 0 var(--ink)}
+#dock #autoBtn{grid-area:auto;box-shadow:none;margin:0}
+#dock .acts{grid-area:acts;display:grid;grid-template-columns:repeat(3,auto);gap:5px;margin:0}
+#dock .acts button{min-height:0;padding:5px 9px;font-size:11px}
+#dock #dis,#dock #standBtn{display:none!important}
+@media (max-width:700px),(max-height:520px){
+  #dock{grid-template-columns:84px 84px minmax(0,1fr) auto;gap:4px 8px;padding:5px max(8px,env(safe-area-inset-right,0px)) calc(5px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+  #dock #units{gap:5px;padding-top:6px}#dock #units .card.next,#dock #units .card.reroll{width:44px}
+  #dock .acts{grid-template-columns:repeat(3,auto);gap:3px}#dock .acts button{padding:4px 6px;font-size:9px}#dock #autoBtn{font-size:10px;padding:3px 6px}
+  #dock #hireW b{font-size:10px}#dock #hireW small{font-size:9px}#dock #clashBox b{font-size:11px}#dock #ordF{font-size:8px}}
+
+/* choice cards size themselves to their slot: compact when narrow, full detail when wide */
+#dock{grid-template-columns:104px 104px minmax(0,1fr) auto}
+#dock #units .hc{container-type:inline-size;grid-template-columns:44px minmax(0,1fr);gap:0 8px;padding:6px 8px 7px 6px}
+#dock #units .hc img{width:44px;height:44px}#dock #units .hc img.art{width:42px;height:42px}
+#dock #units .hc b{white-space:normal;line-height:1.05;font-size:13px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#dock #units .hc .cstat{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@container (max-width:210px){#dock #units .hc .cdesc{display:none}#dock #units .hc b kbd{display:none}}
+@container (max-width:150px){#dock #units .hc{grid-template-columns:34px minmax(0,1fr);gap:0 5px}#dock #units .hc img,#dock #units .hc img.art{width:34px;height:34px}#dock #units .hc b{font-size:11px}#dock #units .hc .cstat{font-size:9px}}
+@media (max-width:700px),(max-height:520px){#dock{grid-template-columns:80px 80px minmax(0,1fr) auto}}
+
+@media (max-width:700px),(max-height:520px){
+  #dock{grid-template-columns:96px minmax(0,1fr) auto;grid-template-areas:"food units auto" "hire units acts";gap:3px 6px;padding-top:4px}
+  #dock #clashBox{display:none!important}
+  #dock .food{padding:2px 6px;gap:4px}#dock .food b{font-size:16px}#dock .food small{display:none}#dock .food .ebar{height:9px}
+  #dock #hireW{padding:2px 6px}#dock #hireW small{display:none}#dock #hireW b{font-size:10px;white-space:nowrap}
+  #dock #units{padding-top:5px}#dock #units .hc{padding:3px 6px 4px 4px;min-height:0}
+  #dock #units .hc .ccost{width:20px;height:20px;left:-6px;top:-6px}#dock #units .hc .ccost em{width:15px;height:15px;font-size:10px}
+  #dock #units .hc .cmerge{font-size:8px;padding:1px 5px;top:-8px}
+  #dock #units .card.next small,#dock #units .card.reroll small{font-size:8px}
+  #dock #autoBtn{padding:2px 6px;font-size:9px}#dock .acts button{padding:3px 6px}}
+
+@media (max-width:700px),(max-height:520px){#dock #hireW,#dock #autoBtn,#dock .acts button,#dock #units .card.next,#dock #units .card.reroll{min-height:32px}#dock .food{min-height:30px}}
 </style>
 
 <div id="hud" hidden>
@@ -328,7 +376,7 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
     <div class="side r"><b id="eHpN"></b><span class="bar red"><i id="eHp"></i></span><span class="who" id="eName"></span></div>
   </div>
   <div id="dock">
-    <div class="food" title="Food"><img id="iSeed" alt="food" width="20" height="20"><b id="food"></b><small id="inc"></small><span class="ebar"><i id="eBar"></i></span></div>
+    <div class="food" title="Food"><img id="iSeed" alt="food" width="20" height="20"><b id="food"></b><small id="inc"></small><span class="ebar"><i id="eBar"></i></span></div><button class="card hire" id="hireW" title="Hire a worker: 4 food. Each worker gathers +0.08 food a second at your nest (up to 6). Enemies can kill them. Key W"><b>+ Worker</b><small id="hireN"></small><i class="cfill"></i></button>
     <div class="cards" id="units"></div>
     <div class="cards" id="dis"></div>
     <div id="clashBox" class="card clash" aria-live="polite"><b id="clashT">Clash in 12s</b><span id="clashF">Hatch to build your wave</span><span class="tacs"><button id="tac_charge" data-k="charge" title="Run them down: beats Flank, loses to Hold (Z)" aria-pressed="false"><kbd>Z</kbd> Charge</button><button id="tac_hold" data-k="hold" title="Brace the line: beats Charge, loses to Flank (X)" aria-pressed="false"><kbd>X</kbd> Hold</button><button id="tac_flank" data-k="flank" title="Go around them: beats Hold, loses to Charge (C)" aria-pressed="false"><kbd>C</kbd> Flank</button></span></div>
@@ -460,10 +508,10 @@ for(const k in SP)SP[k].id=k;
 // times the class's deployment discount. One formula for every species keeps the classes comparable.
 const TRAIT={fly:1.2,splash:1.4,stun:1.15,burn:1.1,venom:1.15,lethal:1.25,shred:1.1,glue:1.15,dazzle:1.5,heal:1.6,chirp:1.4,cocoon:1.3,infest:1.3,raid:1.1,crush:1.15,
   leech:1.1,dive:1.1,charge:1.1,kick:1.05,shove:1.05,dodge:1.22,shield:1.1,steady:1.05,raptor:1.15,bigbite:1.1,burrow:1.25,leap:1.15,build:1.4,boom:1.4,toxic:1.1,grab:1.15};
-const DEPLOY={ants:{k:1.1,how:"Brood squads: each card hatches a group that marches together"},beetles:{k:1,pupa:3.5,how:"Pupation: heavy beetles spend 3.5 seconds as a pupa before they emerge"},
-  butterflies:{k:.8,pupa:2.5,how:"Chrysalis: butterflies emerge 2.5 seconds after hatching"},flies:{k:0.82,how:"Batches: cheap and fast"},
-  crickets:{k:0.73,how:"Nymphs: they hop straight out, ready to fight"},scorpions:{k:1.04,how:"Ambush: scorpions travel underground from your nest, surface beside the first enemy and strike first for +50%"},
-  bees:{k:0.76,cd:.7,how:"The hive: every card hatches 30% faster"},termites:{k:1.04,how:"Builders: workers raise walls where they meet the enemy"}};
+const DEPLOY={ants:{k:1.1,how:"Brood squads: each card hatches a group that marches together"},beetles:{k:0.94,pupa:3.5,how:"Pupation: heavy beetles spend 3.5 seconds as a pupa before they emerge"},
+  butterflies:{k:0.74,pupa:2.5,how:"Chrysalis: butterflies emerge 2.5 seconds after hatching"},flies:{k:0.92,how:"Batches: cheap and fast"},
+  crickets:{k:0.82,how:"Nymphs: they hop straight out, ready to fight"},scorpions:{k:0.86,how:"Stingers: armoured knights whose venom wears down whatever they hit"},
+  bees:{k:0.86,cd:.7,how:"The hive: every card hatches 30% faster"},termites:{k:1.04,how:"Builders: workers raise walls where they meet the enemy"}};
 function unitValue(sp){
   if(sp.forage)return 20;
   const ehp=sp.hp/(1-Math.min(.5,.12*(sp.armor||0))),dps=sp.dmg*sp.rate; // stingers no longer die on their sting, so no discount
@@ -571,9 +619,9 @@ const BOT_LEVELS={easy:{name:"Easy",inc:.8,think:1.2,cast:6},normal:{name:"Norma
 // One lane, one 4-minute round: destroy the enemy nest. Food trickles in and workers add more; hatch knights (12 at most);
 // one order for the army (Advance / Hold). Every attack plays its full animation and lands on the impact frame;
 // every 4th attack is the species' special. Overtime at 3:00 doubles food; from 4:00 both nests crumble.
-const KC={nest:1400,round:240,ot:180,cap:12,start:150,baseInc:1,workerCost:60,workerMax:8,workerInc:.5,workerCd:2,size:100,hold:.5,gap:14,rank:3,
+const KC={nest:1400,round:240,ot:180,cap:12,start:150,baseInc:1,workerCost:4,workerMax:6,workerInc:.5,workerCd:2,size:100,hold:.5,gap:14,rank:3,
   impact:4/8,special:4,specialDmg:1.75,stagger:.15,startWorkers:2,
-  elix:{max:10,start:5,base:.32,perWorker:.03},wave:{first:6,every:20,n:3},hand:3,merge:.6,loadout:6,disLock:15,reroll:1,rerollCd:6}; // a 0-10 food bar, free insect waves, 3 dealt choices (matching knights merge: +60% health and damage per extra copy), up to 6 boost cards
+  elix:{max:10,start:6,base:.42,perWorker:.08},wave:{first:6,every:20,n:3},hand:3,merge:.6,loadout:6,disLock:15,reroll:1,rerollCd:6}; // a 0-10 food bar, free insect waves, 3 dealt choices (matching knights merge: +60% health and damage per extra copy), up to 6 boost cards
 const isWorker=u=>!!(u.worker||u.sp.forage);
 const workerId=team=>CLASSES[M.pl[team].cls].species[0]; // a class's workers are its starter species, gathering instead of fighting
 const workersOf=team=>R.units.filter(u=>u.team===team&&!u.dead&&isWorker(u)).length;
@@ -595,11 +643,13 @@ const battlePool=cls=>[...CLASSES[cls].species.filter(id=>!SP[id].forage).map(id
 // a disaster is about 1 deal in 8; never two in the choices at once, and none for KC.disLock seconds after one is played
 function dealCard(p,keep=[]){const noDis=keep.some(c=>c&&c.startsWith("dis:"))||R&&(p.disLock||0)>R.t,pool=battlePool(p.cls).filter(([c])=>!(noDis&&c.startsWith("dis:")));
   let r=Math.random()*pool.reduce((n,[,w])=>n+w,0);for(const[c,w]of pool)if((r-=w)<=0)return c;return pool[0][0];}
-function dealHand(p,slots){for(const j of slots)p.hand[j]=dealCard(p,p.hand.filter((x,k)=>k!==j&&!slots.slice(slots.indexOf(j)).includes(k)));}
+function dealHand(p,slots){ // the first freed slot takes the Next card; any others are dealt fresh; then a new Next is dealt
+  slots.forEach((j,n)=>{p.hand[j]=n===0&&p.next?p.next:dealCard(p,p.hand.filter((x,k)=>k!==j&&!slots.slice(n).includes(k)));});
+  p.next=dealCard(p,p.hand);}
 function refreshHand(team){ // redeal all 3 choices for a little food, on a short cooldown
   const p=M.pl[team];if(!R||R.over||R.count>0||!p.hand||p.food<KC.reroll||(p.rerollT||0)>R.t)return false;
-  p.food-=KC.reroll;p.rerollT=R.t+KC.rerollCd;dealHand(p,[0,1,2]);sfx("hatch",{x:R.bases[team].x,team});if(team===0)renderHand();return true;}
-const knightElix=id=>Math.max(1,Math.min(8,Math.round(SP[id].cost/10)));
+  p.food-=KC.reroll;p.rerollT=R.t+KC.rerollCd;p.next=null;dealHand(p,[0,1,2]);sfx("hatch",{x:R.bases[team].x,team});if(team===0)renderHand();return true;}
+const knightElix=id=>Math.max(2,Math.min(8,Math.round(SP[id].cost/10)));
 function cardCost(team,c){return c.startsWith("dis:")?DIS_ELIX[c.slice(4)]:knightElix(c);}
 const mergeN=(hand,i)=>SP[hand[i]]?hand.filter(c=>c===hand[i]).length:1;
 const playCost=(team,i)=>{const p=M.pl[team],n=mergeN(p.hand,i);return cardCost(team,p.hand[i])+(n-1);};
@@ -682,7 +732,7 @@ function startRound(preview){
      disCd:[{},{}],botT:0,callT:[15,15],winner:-1,count:3,fightT:0,hits:[],rally:[0,0],waves:[],stand:[0,0],frenzy:[0,0],wv:[],front:WW/2,mark:0,tac:["charge","charge"],clashT:1e9,clashN:0,clash:null,order:["advance","advance"],waveT:KC.wave.first};
   M.pl[0].auto=autoOn&&NET.role!=="g";if(NET.role==="g"&&autoOn)setTimeout(()=>netOrder(["a",1]),500);
   M.pl.forEach((p,i)=>{p.food=KC.elix.start;p.cds={};p.free=0;p.ups={};p.dis={};p.tac={};
-    if(!p.boosts)p.boosts=i===0&&!p.bot?loadLoadout(p.cls):randomLoadout(p.cls);p.hand=[null,null,null];p.disLock=0;p.rerollT=0;dealHand(p,[0,1,2]);});
+    if(!p.boosts)p.boosts=i===0&&!p.bot?loadLoadout(p.cls):randomLoadout(p.cls);p.hand=[null,null,null];p.next=null;p.disLock=0;p.rerollT=0;dealHand(p,[0,1,2]);});
   R.bases.forEach((b,i)=>{b.max=b.hp=KC.nest*mods(M.pl[i]).nest;});
   for(let i=0;i<2;i++)for(let k=0;k<KC.startWorkers;k++)addWorker(i);
   baked=null;show(null);renderDock();state="play";paused=false;aim=null;
@@ -782,7 +832,6 @@ function spawn(team,id,x){
     if(DEPLOY[sp.cls].pupa&&id!=="maggot"&&!sp.bug&&(sp.cost>=30||sp.fly)){u.pupa=DEPLOY[sp.cls].pupa;} // beetles pupate, butterflies chrysalis
     if(sp.fly){const a=AIR[sp.cls]||AIR.flies;u.baseAlt=a[0]+Math.random()*(a[1]-a[0]);u.alt=0; // hatches on the ground and takes off
 u.flyT=(sp.steady?14:a[2])*(.6+Math.random()*.4);}
-    if(sp.cls==="scorpions"&&!sp.bug)u.under=u.ambush=true; // ambush: underground from the nest until it meets an enemy
     R.units.push(u);out.push(u);
   }
   return out;
@@ -886,7 +935,7 @@ function strike(u,t){ // one attack from u on target t (a unit, a wall or a nest
   const p=M.pl[u.team],m=mods(p),high=t.sp&&altOf(t)-altOf(u)>(u.sp.reach||22)&&!u.sp.fly&&!u.sp.air;
   if(high&&u.sp.cls==="crickets"){u.pounceCd=(u.sp.leap?1.2:2)*(m.flag.pounce2?.5:1);u.hop=20;u.hopH=altOf(t);}
   if(high&&u.sp.cls==="ants")u.climb=24;
-  const sw=m.flag.swarm2?[.08,.6]:[.04,.4];let d=u.sp.dmg*m.dmg*(1+Math.min(sw[1],sw[0]*u.swarm))*(u.sp.raid?1+Math.min(.75,.15*u.kills):1);if(u.vet)d*=1+VET.boost;if(u.star>1)d*=1+KC.merge*(u.star-1);if(u.ambush){d*=1.5;u.ambush=false;} // a scorpion's first strike out of the ground
+  const sw=m.flag.swarm2?[.08,.6]:[.04,.4];let d=u.sp.dmg*m.dmg*(1+Math.min(sw[1],sw[0]*u.swarm))*(u.sp.raid?1+Math.min(.75,.15*u.kills):1);if(u.vet)d*=1+VET.boost;if(u.star>1)d*=1+KC.merge*(u.star-1);
   d*=1+STAND.boost*frK(u.team);if(t.sp&&!t.isWall)d*=roleMul(u.sp,t.sp);if(R.clash&&!R.clash.done&&u.wave!=null&&u.wave===R.clash.w[u.team])d*=tacMul(u.team);if(u.charging){d*=1+WAVE.bonus;u.charging=0;}
   if(u.sp.raptor&&t.sp&&isAir(t))d*=1.8;
   if(high&&u.sp.cls==="crickets"&&m.flag.pounce2)d*=1.5;
@@ -955,7 +1004,6 @@ function stepUnits(){
     if(st.stun>0)continue;
     u.still=false;
     if(isWorker(u)){const g=u.home-u.x;u.x+=g*.02;u.dir=Math.abs(g)>4?Math.sign(g):u.team?-1:1;u.still=true;continue;} // workers gather at the food patch
-    if(u.under&&u.ambush&&(R.units.some(o=>o.team!==u.team&&!o.dead&&!o.under&&!isWorker(o)&&Math.abs(o.x-u.x)<60)||Math.abs(R.bases[1-u.team].x-u.x)<NEST.r+20)){u.under=false;for(let i=0;i<6;i++)R.puffs.push({x:u.x,y:groundY(u.x)-4,vx:(Math.random()-.5)*2,vy:-Math.random()*1.5,life:30});} // a scorpion bursts out beside the first enemy
     if(u.under){ // a mole cricket tunnels until it is deep in enemy ground (a scorpion until it meets an enemy)
       u.x+=u.dir*u.sp.speed*1.2*m.speed;
       if(Math.abs(R.bases[1-u.team].x-u.x)<WW*(has(u.team,"deep")?.12:.3)){u.under=false;u.surfaced=has(u.team,"deep");for(let i=0;i<6;i++)R.puffs.push({x:u.x,y:groundY(u.x)-4,vx:(Math.random()-.5)*2,vy:-Math.random()*1.5,life:30});}
@@ -1180,6 +1228,7 @@ function botThink(team){
   const p=M.pl[team],e=1-team,cls=CLASSES[p.cls],mine=R.units.filter(u=>u.team===team&&!u.dead&&!isWorker(u)),theirs=R.units.filter(u=>u.team===e&&!u.dead&&!isWorker(u));
   const near=theirs.filter(u=>Math.abs(u.x-R.bases[team].x)<450).length,want={easy:3,normal:5,hard:6}[M.diff]||5;
   // the order: hold until the army is worth clearly more than theirs (or overtime), and always hold when they are at the door
+  if(workersOf(team)<Math.min(KC.workerMax,want)&&near===0&&!R.ot&&p.food>=KC.workerCost+1&&hireWorker(team))return; // workers while it is calm
   const hand=p.hand||[],can=i=>p.food>=playCost(team,i)&&(SP[hand[i]]?!capFull(team,hand[i],mergeN(hand,i)):disReady(team,hand[i]));
   if(theirs.length>=5||near>=3){const d=hand.findIndex((c,i)=>c.startsWith("dis:")&&can(i));if(d>=0){playCard(team,d);return;}} // a disaster on a real force
   const fc=[0,0,0];for(const u of theirs)fc["wfr".indexOf(roleOf(u.sp))]++;const dom=fc.some(Boolean)?"wfr"[fc.indexOf(Math.max(...fc))]:null;
@@ -2225,7 +2274,7 @@ function drawDisasters(clock){
   ANTHOLDWeather.draw(ctx,e,{width:WW,height:WH,ground:groundY,palette:{ink:INK,cloud:INK,ice:BONE,rain:"#9fc0cf",water:"#7aa6b8",leaf:"#7f9150",dust:"#a7834d"},reducedMotion:matchMedia("(prefers-reduced-motion: reduce)").matches});
   if(e.phase!=="warning")return;
   const wide=["hail","fire","rain","gale","quake"].includes(e.type),lo=wide?(e.c===0?WW/2:0):e.x-45,w=wide?WW/2:90;
-  ctx.save();ctx.strokeStyle=EMBER;ctx.lineWidth=4;ctx.setLineDash([12,8]);ctx.globalAlpha=.6+.4*Math.sin(clock*12);ctx.strokeRect(lo,80,w,WH-160);ctx.setLineDash([]);ctx.globalAlpha=1;
+  ctx.save();
   ctx.font="bold 26px 'Rubik Dirt', Impact, sans-serif";ctx.textAlign="center";ctx.lineWidth=5;ctx.strokeStyle=PAPER;ctx.fillStyle=EMBER;const t=`${DIS[e.type].name.toUpperCase()} · ${Math.max(0,e.warning).toFixed(1)}s`;
   ctx.strokeText(t,lo+w/2,118);ctx.fillText(t,lo+w/2,118);ctx.restore();}
 function drawDisasters0(clock){
@@ -2391,6 +2440,7 @@ function toast(t){const el=$("toast");el.textContent=t;el.hidden=false;clearTime
 const icon=sp=>bugSprite(sp,1).toDataURL();
 function renderDock(){
   for(const id of["standBtn","tugWrap","fzEdge","dis"])if($(id))$(id).style.display="none"; // the old clash-era controls
+  $("hireW").onclick=()=>hireWorker(0);
   $("clashBox").innerHTML=`<b id="ordT">Army</b><span id="ordF"></span>`;renderHand();
 }
 function renderHand(){ // your 3 dealt choices: cost, art, stats and what it does; matching knights show the merge
@@ -2400,7 +2450,8 @@ function renderHand(){ // your 3 dealt choices: cost, art, stats and what it doe
     b.innerHTML=`<span class="ccost"><em class="ec"></em></span><img class="${f.pix?"pix":"art"}" src="${f.img}" alt=""><span class="cbody"><b><kbd>${i+1}</kbd>${f.name}</b><span class="cstat">${f.stats}</span><span class="cdesc">${f.desc}</span></span>`+
       (n>1?`<span class="cmerge">×${n} merge · +${Math.round(KC.merge*(n-1)*100)}%</span>`:"")+`<i class="cfill"></i>`;
     b.onclick=()=>playCard(0,i);box.appendChild(b);});
-  const rb=document.createElement("button");rb.className="card reroll";rb.id="hRe";rb.title=`Refresh: deal 3 new choices (${KC.reroll} food, then ${KC.rerollCd} s to recharge). Key R`;
+  if(p.next){const n=cardInfo(p.cls,p.next),nx=document.createElement("div");nx.className="card next";nx.title="Next: "+n.name+" (it takes the place of the card you play)";nx.innerHTML=`<small>Next</small><img class="${n.pix?"pix":"art"}" src="${n.img}" alt="">`;box.appendChild(nx);}
+  const rb=document.createElement("button");rb.className="card reroll";rb.id="hRe";rb.title=`Refresh: deal 3 new choices and a new Next (${KC.reroll} food, then ${KC.rerollCd} s to recharge). Key R`;
   rb.innerHTML=`<b>↻</b><small>${KC.reroll} food</small><i class="cfill"></i>`;rb.onclick=()=>refreshHand(0);box.appendChild(rb);}
 function deckScreen(){ // the collection: your boost cards as trading cards; pick up to 6 for this class's loadout
   const cls=pickCls;if(!cls)return;let load=loadLoadout(cls),tab="all";const col=collection(),ORDER=["legend","ultra","rare","common"];
@@ -2441,6 +2492,7 @@ function hud(){
   {const left=Math.max(0,KC.round-R.t);$("rnd").textContent=R.t>KC.round?"The nests are crumbling":`${Math.floor(left/60)}:${String(Math.floor(left%60)).padStart(2,"0")}${R.ot?" · overtime":""}`;$("pips").innerHTML="";}
   $("food").textContent=Math.floor(p.food);$("inc").textContent=`+${elixRate(0).toFixed(1)}/s`;$("eBar").style.width=p.food/KC.elix.max*100+"%";
   $("ordF").textContent=`${Math.ceil(armyLoad(0)-.01)} of ${KC.cap} slots · ${workersOf(0)} workers`;
+  {const hb=$("hireW"),n=workersOf(0),c=p.cds.worker||0;if(hb){hb.disabled=p.food<KC.workerCost||c>0||n>=KC.workerMax;$("hireN").textContent=n>=KC.workerMax?`${n} of ${KC.workerMax}`:`${KC.workerCost} food · ${n} of ${KC.workerMax}`;hb.style.setProperty("--p",Math.min(1,p.food/KC.workerCost).toFixed(3));hb.classList.toggle("poor",p.food<KC.workerCost);}}
   {const rb=$("hRe");if(rb){const left=Math.max(0,(p.rerollT||0)-R.t);rb.disabled=left>0||p.food<KC.reroll;rb.style.setProperty("--p",(1-left/KC.rerollCd).toFixed(3));rb.classList.toggle("poor",left>0);}}
   if(p.hand)p.hand.forEach((c,i)=>{const el=$("h_"+i);if(!el)return;const cost=playCost(0,i),full=!!SP[c]&&capFull(0,c,mergeN(p.hand,i)),busy=!disReady(0,c);el.disabled=p.food<cost||full||busy;el.classList.toggle("busy",busy);
     el.querySelector(".ec").textContent=cost;el.style.setProperty("--p",Math.min(1,p.food/cost).toFixed(3));el.classList.toggle("poor",p.food<cost);el.classList.toggle("full",full);});
@@ -3121,6 +3173,7 @@ addEventListener("keydown",e=>{
   if(e.key==="p"||e.key==="P"){pause();return;}
   if(e.key==="a"||e.key==="A"){setAuto(!autoOn);return;}
   if(e.key==="r"||e.key==="R"){refreshHand(0);return;}
+  if(e.key==="w"||e.key==="W"){hireWorker(0);return;}
   const i=+e.key-1;if(i>=0&&i<KC.hand){playCard(0,i);return;}
 });
 function pause(){if(state!=="play")return;if(M&&M.online){toast("An online match can't be paused");return;}state="pause";show("pause");}
