@@ -1617,7 +1617,10 @@ function animPose(u,spr,eng,kk,wind,lunge,clock){ // which frame an animated kni
 // Rows: 0 walk, 1 attack, 2 hit, 3 death, 4 special. Whole sheet left-facing, or only the walk.
 const ANIM_FLIP={fire:[0,1,2,3,4],stag:[0,1,2,3,4],katydid:[0,1,2,3,4],vinegaroon:[0,1,2,3,4],nasute:[0,1,2,3,4],major:[0,1,2,3,4],
   worker:[0],leafcutter:[0],rhino:[0],dung:[0],weta:[0],pseudo:[0],kamikaze:[0]};
-function animSprite(sp,row,i){ // one frame as a canvas whose bottom edge is the feet; null until the sheet has decoded
+// walks whose steps run backwards in the draft art (the planted foot slides forward: a moonwalk): played in reverse order
+const ANIM_REV=new Set(["wingedant","bullet","dung","major","katydid"]);
+function animSprite(sp,row,i){
+  if(row===0&&ANIM_REV.has(sp.id))i=(8-i)%8; // one frame as a canvas whose bottom edge is the feet; null until the sheet has decoded
   if(!hasAnim(sp))return null;const key=sp.id+"|"+row+"|"+i;if(AN_FR[key])return AN_FR[key];
   const a=ANIM_PNG[sp.id],C=144,CH=112,foot=Math.min(CH,a.y+2),s=KC.size*Math.pow(sp.size||1,.6)/a.h,c=document.createElement("canvas");
   c.width=C;c.height=foot;{const g=c.getContext("2d");if((ANIM_FLIP[sp.id]||[]).includes(row)){g.translate(C,0);g.scale(-1,1);}g.drawImage(AN_IMG[sp.id],i*C,row*CH,C,foot,0,0,C,foot);}c.k=2.4/s;return AN_FR[key]=c;}
