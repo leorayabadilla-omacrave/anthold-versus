@@ -48,6 +48,40 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
 #units .card.next{opacity:.8;cursor:default;grid-template-columns:auto;justify-items:center;padding:3px 6px;min-width:0}#units .card.next small{display:block;font:700 10px var(--body);text-transform:uppercase;letter-spacing:.06em}#units .card.next img{width:30px;height:24px}#units .card.next img.art{width:26px;height:26px}
 #clashBox{min-width:0}
 #units .card.merge{box-shadow:0 0 0 3px #e2b33c,3px 3px 0 var(--ink)}#units .card em.mg{font-style:normal;color:#b07d0a}
+/* the boost-card collection */
+.deckpg{max-width:1000px;width:100%}
+.deckpg::before,.deckpg::after{display:none}.deckpg .cf{position:sticky;bottom:-16px;z-index:2;margin:0 -20px -16px;padding:10px 20px 12px;background:var(--bone);border-top:2px solid var(--ink)} /* the buttons stay in reach while the cards scroll */
+.cx-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px}
+.cx-title{display:flex;align-items:center;gap:12px}.cx-title .sig svg{width:44px;height:52px;display:block}.cx-title h1{margin:0;font-size:40px;line-height:1}
+.cx-load{display:grid;gap:6px;justify-items:end}.cx-load .tag b{color:var(--ink)}
+.slots{display:flex;gap:6px}
+.slot{width:62px;height:76px;display:grid;grid-template-rows:1fr auto;place-items:center;padding:4px;border:2px dashed rgba(23,17,14,.35);border-radius:6px;background:rgba(246,238,211,.6);color:var(--muted);box-shadow:none;cursor:default}
+.slot i{font:700 22px/1 var(--body);font-style:normal;display:grid;place-items:center}.slot:disabled{opacity:1}
+.slot.on{border:2px solid var(--rc);background:color-mix(in srgb,var(--rc) 16%,var(--bone));color:var(--ink);cursor:pointer;box-shadow:2px 2px 0 var(--ink)}
+.slot.on i svg{width:26px;height:30px}.slot.on i .gl{font-size:22px;color:var(--rc)}.slot b{font:700 9px/1.1 var(--body);text-transform:uppercase;letter-spacing:.03em;text-align:center;max-width:56px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cx-tabs{display:flex;gap:6px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.cx-tabs button{padding:6px 14px;font-size:13px;background:var(--bone);color:var(--ink);border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.cx-tabs button[aria-pressed=true]{background:var(--ink);color:var(--bone)}
+.cx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;padding:4px 2px 6px}
+.tc{position:relative;display:grid;grid-template-rows:auto auto auto 1fr auto auto;justify-items:center;gap:6px;padding:0 0 10px;min-height:236px;text-align:center;color:var(--ink);
+  background:var(--bone);border:3px solid var(--rc);border-radius:10px;box-shadow:3px 3px 0 var(--ink);overflow:hidden;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease}
+.tc:hover{transform:translateY(-3px);box-shadow:4px 6px 0 var(--ink)}
+.tc[aria-pressed=true]{box-shadow:0 0 0 3px var(--ink),5px 5px 0 var(--ember);transform:translateY(-2px)}
+.tc-rar{width:100%;padding:4px 0 3px;background:var(--rc);color:var(--bone);font:700 10px var(--body);letter-spacing:.14em;text-transform:uppercase}
+.tc-art{width:78px;height:78px;margin-top:4px;display:grid;place-items:center;border-radius:50%;border:2px solid var(--rc);background:radial-gradient(circle at 35% 30%,var(--bone),color-mix(in srgb,var(--rc) 30%,var(--bone)))}
+.tc-art svg{width:44px;height:52px}.tc-art .gl{font:700 36px/1 system-ui,sans-serif;color:var(--rc)}
+.tc-name{padding:0 8px;font:400 15px/1.08 var(--display);white-space:normal;overflow-wrap:anywhere;max-width:100%;box-sizing:border-box}
+.tc-fx{display:grid;gap:2px;align-content:start;padding:0 8px;font:700 12px/1.25 var(--body)}
+.tc-kind{font:600 10px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tc-foot{display:flex;align-items:center;gap:6px;width:100%;box-sizing:border-box;padding:0 10px;min-width:0}
+.tc-foot em{font:700 11px var(--body);font-style:normal;padding:1px 6px;border-radius:9px;background:var(--ink);color:var(--bone)}
+.tc-foot .bar{flex:1 1 0;min-width:0;display:block;height:7px;border-radius:4px;background:rgba(23,17,14,.15);overflow:hidden}.tc-foot .bar i{display:block;height:100%;background:var(--rc)}
+.tc-foot small{font:700 10px var(--body);color:var(--muted)}
+.tc-chk{position:absolute;top:26px;right:8px;width:24px;height:24px;border-radius:50%;background:var(--ember);color:var(--bone);font:700 14px/24px var(--body);box-shadow:1px 1px 0 var(--ink)}
+.tc.r-legend{background:linear-gradient(160deg,#fbf1c9,var(--bone) 45%,#f4e2a6)}
+.tc.r-ultra{background:linear-gradient(160deg,#efe4f6,var(--bone) 50%)}
+.cx-note{font:600 11px var(--body);color:var(--muted);margin-right:8px}
+@media (max-width:720px),(max-height:520px){.cx-title h1{font-size:28px}.cx-load{justify-items:start}.slot{width:52px;height:62px}.cx-grid{grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px}.tc{min-height:204px}.tc-art{width:60px;height:60px}.tc-art svg{width:34px;height:40px}.tc-name{font-size:15px}.cx-note{display:none}}
 .dkh{grid-column:1/-1;margin:6px 0 0;font:700 13px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .dk.bc{grid-template-columns:40px 1fr;padding:7px 10px;border-color:var(--rc)}.dk.bc[aria-pressed=true]{box-shadow:0 0 0 3px var(--rc),2px 2px 0 var(--ink)}
 .dk.bc .ic{grid-row:span 3;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:var(--rc);color:var(--bone);font:700 20px/1 system-ui,sans-serif;font-style:normal}.dk.bc .ic svg{width:30px;height:30px}
@@ -2147,17 +2181,31 @@ function renderHand(){ // your 3 dealt choices; matching knights show they will 
   p.hand.forEach((c,i)=>{const f=cardInfo(p.cls,c),n=mergeN(p.hand,i),b=document.createElement("button");b.className="card hc"+(n>1?" merge":"");b.id="h_"+i;b.title=f.title+(n>1?` Plays as one merged knight (×${n}).`:"");
     b.innerHTML=`<img class="${f.pix?"pix":"art"}" src="${f.img}" alt=""><b><kbd>${i+1}. </kbd>${f.name}${n>1?` <em class="mg">×${n}</em>`:""}</b><span><em class="ec"></em> food · ${f.tag}</span><small class="c"><em class="ec"></em>${n>1?` ×${n}`:""}</small><i class="cd"></i>`;
     b.onclick=()=>playCard(0,i);box.appendChild(b);});}
-function deckScreen(){ // the collection: pick up to 6 boost cards for this class
-  const cls=pickCls;if(!cls)return;let load=loadLoadout(cls);const col=collection();
-  $("draft").innerHTML=`<div class="page deckpg"><header class="ch"><div><span class="tag">${KNIGHT_NAME[cls]} · boost cards</span><h1>Your collection</h1></div><b id="dkN"></b></header>
-    <p class="sub">Bring up to ${KC.loadout} boost cards into battle. Universal cards boost any class; the others only ${CLASSES[cls].name}. Duplicates from loot will level a card up. For testing, every card is unlocked. Boost values are placeholders for now.</p>
-    <div class="dkgrid" id="dkPool"></div><footer class="cf"><button id="dkBack">Back</button><button id="dkClr">Clear</button><span class="sp1"></span><button class="go" id="dkGo">To battle</button></footer></div>`;
-  const draw=()=>{const box=$("dkPool");box.innerHTML="";
-    for(const[title,list]of[["Universal",BOOSTS.filter(b=>!b.cls)],[CLASSES[cls].name+" only",BOOSTS.filter(b=>b.cls===cls)]]){
-      const h=document.createElement("h3");h.className="dkh";h.textContent=title;box.appendChild(h);
-      for(const b of list){const on=load.includes(b.id),r=RARITY[b.rar],e=document.createElement("button");e.className="dk bc";e.style.setProperty("--rc",r.col);e.setAttribute("aria-pressed",on);
-        const c=col[b.id];e.innerHTML=`<i class="ic">${b.cls?sigilSVG(b.cls,30):STAT[Object.keys(b.fx)[0]][0]}</i><b>${b.name}</b><span class="fx">${boostText(b)}</span><span class="rr">${r.name} · Lv ${c.lv} · ${c.copies}/${c.lv*2} copies</span>`;
-        e.onclick=()=>{if(on)load=load.filter(x=>x!==b.id);else if(load.length>=KC.loadout){toast(`You can bring ${KC.loadout} boost cards: take one out first`);return;}else load=[...load,b.id];draw();};box.appendChild(e);}}
+function deckScreen(){ // the collection: your boost cards as trading cards; pick up to 6 for this class's loadout
+  const cls=pickCls;if(!cls)return;let load=loadLoadout(cls),tab="all";const col=collection(),ORDER=["legend","ultra","rare","common"];
+  const art=b=>b.cls?sigilSVG(b.cls,44):`<span class="gl">${STAT[Object.keys(b.fx)[0]][0]}</span>`;
+  $("draft").innerHTML=`<div class="page deckpg"><header class="cx-head"><div class="cx-title"><span class="sig">${sigilSVG(cls,44)}</span><div><span class="tag">${KNIGHT_NAME[cls]}</span><h1>Boost cards</h1></div></div>
+    <div class="cx-load"><span class="tag">Your loadout · <b id="dkN"></b></span><div class="slots" id="dkSlots"></div></div></header>
+    <nav class="cx-tabs" id="dkTabs"></nav>
+    <div class="cx-grid" id="dkPool"></div>
+    <footer class="cf"><button id="dkBack">Back</button><button id="dkClr">Clear</button><span class="sp1"></span><small class="cx-note">Every card unlocked for testing · boost values are placeholders</small><button class="go" id="dkGo">To battle</button></footer></div>`;
+  const toggle=id=>{if(load.includes(id))load=load.filter(x=>x!==id);else if(load.length>=KC.loadout){toast(`Your loadout holds ${KC.loadout}: take a card out first`);return;}else load=[...load,id];draw();};
+  const draw=()=>{
+    const tabs=[["all","All"],["uni","Universal"],["cls",CLASSES[cls].name]];
+    $("dkTabs").innerHTML=tabs.map(([k,n])=>`<button data-k="${k}" aria-pressed="${tab===k}">${n}</button>`).join("");
+    for(const b of $("dkTabs").children)b.onclick=()=>{tab=b.dataset.k;draw();};
+    $("dkSlots").innerHTML="";for(let k=0;k<KC.loadout;k++){const id=load[k],b=id&&BOOST[id],e=document.createElement("button");e.className="slot"+(b?" on":"");
+      if(b){e.style.setProperty("--rc",RARITY[b.rar].col);e.title=`${b.name}: ${boostText(b)}. Tap to take it out.`;e.innerHTML=`<i>${art(b)}</i><b>${b.name}</b>`;e.onclick=()=>toggle(id);}
+      else{e.disabled=true;e.innerHTML=`<i>+</i>`;e.title="Empty slot: tap a card below";}$("dkSlots").appendChild(e);}
+    const list=boostsFor(cls).filter(b=>tab==="all"||(tab==="uni"?!b.cls:!!b.cls)).sort((a,b)=>ORDER.indexOf(a.rar)-ORDER.indexOf(b.rar)||!!b.cls-!!a.cls);
+    const box=$("dkPool");box.innerHTML="";
+    for(const b of list){const r=RARITY[b.rar],c=col[b.id],on=load.includes(b.id),need=c.lv*2,e=document.createElement("button");
+      e.className="tc r-"+b.rar;e.style.setProperty("--rc",r.col);e.setAttribute("aria-pressed",on);e.title=on?"In your loadout: tap to take it out":"Tap to add it to your loadout";
+      e.innerHTML=`<span class="tc-rar">${r.name}</span><span class="tc-art">${art(b)}</span><b class="tc-name">${b.name}</b>
+        <span class="tc-fx">${Object.entries(b.fx).map(([k,v])=>`<span>+${Math.round(v*100)}% ${STAT[k][1]}</span>`).join("")}</span>
+        <span class="tc-kind">${b.cls?CLASSES[b.cls].name+" only":"Any class"}</span>
+        <span class="tc-foot"><em>Lv ${c.lv}</em><i class="bar"><i style="width:${Math.min(100,c.copies/need*100)}%"></i></i><small>${c.copies}/${need}</small></span>${on?`<span class="tc-chk" aria-hidden="true">✓</span>`:""}`;
+      e.onclick=()=>toggle(b.id);box.appendChild(e);}
     $("dkN").textContent=`${load.length} of ${KC.loadout}`;};
   draw();$("dkBack").onclick=()=>menu();$("dkClr").onclick=()=>{load=[];draw();};
   $("dkGo").onclick=()=>{saveLoadout(cls,load);newMatch(cls,pickDiff);M.pl[0].boosts=[...load];startRound();};
