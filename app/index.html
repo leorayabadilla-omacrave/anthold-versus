@@ -328,7 +328,7 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
 #dock .card.hire .cfill{position:absolute;left:0;bottom:0;height:3px;width:calc(var(--p,1)*100%);background:var(--ember)}#dock .card.hire:not(.poor) .cfill{opacity:0}
 
 /* ===== the dock: one full-width tray. Left: food, worker, army. Middle: the 3 choices, Next, Refresh. Right: Auto and the menu buttons. ===== */
-#dock{display:grid;grid-template-columns:118px 118px minmax(0,1fr) auto;grid-template-areas:"food food units auto" "hire army units acts";
+#dock{display:grid;grid-template-columns:118px 118px minmax(0,1fr) auto;grid-template-areas:"food food units auto" "army army units acts";
   align-items:stretch;gap:6px 12px;pointer-events:auto;background:linear-gradient(var(--bone),#efe4c4);border-top:3px solid var(--ink);box-shadow:0 -3px 0 rgba(23,17,14,.18);
   padding:8px max(12px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
 #dock .food{grid-area:food;justify-content:flex-start;box-shadow:none;min-width:0}#dock .food .ebar{flex:1;width:auto;min-width:40px}
@@ -359,7 +359,7 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
 @media (max-width:700px),(max-height:520px){#dock{grid-template-columns:80px 80px minmax(0,1fr) auto}}
 
 @media (max-width:700px),(max-height:520px){
-  #dock{grid-template-columns:96px minmax(0,1fr) auto;grid-template-areas:"food units auto" "hire units acts";gap:3px 6px;padding-top:4px}
+  #dock{grid-template-columns:96px minmax(0,1fr) auto;grid-template-areas:"food units auto" "food units acts";gap:3px 6px;padding-top:4px}
   #dock #clashBox{display:none!important}
   #dock .food{padding:2px 6px;gap:4px}#dock .food b{font-size:16px}#dock .food small{display:none}#dock .food .ebar{height:9px}
   #dock #hireW{padding:2px 6px}#dock #hireW small{display:none}#dock #hireW b{font-size:10px;white-space:nowrap}
@@ -379,11 +379,11 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
     <div class="side r"><b id="eHpN"></b><span class="bar red"><i id="eHp"></i></span><span class="who" id="eName"></span></div>
   </div>
   <div id="dock">
-    <div class="food" title="Food"><img id="iSeed" alt="food" width="20" height="20"><b id="food"></b><small id="inc"></small><span class="ebar"><i id="eBar"></i></span></div><button class="card hire" id="hireW" title="Hire a worker: 4 food. Each worker gathers +0.08 food a second (up to 6). Key W"><b>+ Worker</b><small id="hireN"></small><i class="cfill"></i></button>
+    <div class="food" title="Food"><img id="iSeed" alt="food" width="20" height="20"><b id="food"></b><small id="inc"></small><span class="ebar"><i id="eBar"></i></span></div>
     <div class="cards" id="units"></div>
     <div class="cards" id="dis"></div>
     <div id="clashBox" class="card clash" aria-live="polite"><b id="clashT">Clash in 12s</b><span id="clashF">Hatch to build your wave</span><span class="tacs"><button id="tac_charge" data-k="charge" title="Run them down: beats Flank, loses to Hold (Z)" aria-pressed="false"><kbd>Z</kbd> Charge</button><button id="tac_hold" data-k="hold" title="Brace the line: beats Charge, loses to Flank (X)" aria-pressed="false"><kbd>X</kbd> Hold</button><button id="tac_flank" data-k="flank" title="Go around them: beats Hold, loses to Charge (C)" aria-pressed="false"><kbd>C</kbd> Flank</button></span></div>
-    <button id="autoBtn" class="card auto" aria-pressed="false" title="Auto (A): the computer plays your side: it plays your cards: workers while it is calm, knights against what the enemy fields, disasters on a big army. Press again to take back control.">Auto off</button>
+    <button id="autoBtn" class="card auto" aria-pressed="false" title="Auto (A): the computer plays your side: it plays your cards: knights against what the enemy fields, disasters on a big army. Press again to take back control.">Auto off</button>
     <button id="standBtn" class="card stand" title="Last Stand (S): charges when your nest falls below 65% health, and again below 30%. A war cry throws back and stuns every enemy in your half, a Swarm hatches (bigger the further behind you are), and your whole army is healed and frenzied: attacking 75% faster, moving and hitting 30% harder, and unstoppable for 6 seconds, then the frenzy fades over 4 more." disabled><b><kbd>S. </kbd>Last Stand</b><span id="standTxt">0%</span></button>
     <div class="acts"><button id="sndBtn" title="M" aria-pressed="true">Sound on</button><button id="pauseBtn" title="P">Pause</button><button id="quitBtn">Quit</button></div>
   </div>
@@ -511,10 +511,10 @@ for(const k in SP)SP[k].id=k;
 // times the class's deployment discount. One formula for every species keeps the classes comparable.
 const TRAIT={fly:1.2,splash:1.4,stun:1.15,burn:1.1,venom:1.15,lethal:1.25,shred:1.1,glue:1.15,dazzle:1.5,heal:1.6,chirp:1.4,cocoon:1.3,infest:1.3,raid:1.1,crush:1.15,
   leech:1.1,dive:1.1,charge:1.1,kick:1.05,shove:1.05,dodge:1.22,shield:1.1,steady:1.05,raptor:1.15,bigbite:1.1,burrow:1.25,leap:1.15,build:1.4,boom:1.4,toxic:1.1,grab:1.15};
-const DEPLOY={ants:{k:1.2,how:"Brood squads: each card hatches a group that marches together"},beetles:{k:0.94,pupa:3.5,how:"Pupation: heavy beetles spend 3.5 seconds as a pupa before they emerge"},
+const DEPLOY={ants:{k:1.2,how:"Brood squads: each card hatches a group that marches together"},beetles:{k:.97,pupa:3.5,how:"Pupation: heavy beetles spend 3.5 seconds as a pupa before they emerge"},
   butterflies:{k:0.7,pupa:2.5,how:"Chrysalis: butterflies emerge 2.5 seconds after hatching"},flies:{k:0.92,how:"Batches: cheap and fast"},
-  crickets:{k:0.9,how:"Nymphs: they hop straight out, ready to fight"},scorpions:{k:.88,how:"Stingers: armoured knights whose venom wears down whatever they hit"},
-  bees:{k:0.86,cd:.7,how:"The hive: every card hatches 30% faster"},termites:{k:1.1,how:"Builders: workers raise walls where they meet the enemy"}};
+  crickets:{k:0.9,how:"Nymphs: they hop straight out, ready to fight"},scorpions:{k:.95,how:"Stingers: armoured knights whose venom wears down whatever they hit"},
+  bees:{k:0.8,cd:.7,how:"The hive: every card hatches 30% faster"},termites:{k:1.1,how:"Builders: workers raise walls where they meet the enemy"}};
 function unitValue(sp){
   if(sp.forage)return 20;
   const ehp=sp.hp/(1-Math.min(.5,.12*(sp.armor||0))),dps=sp.dmg*sp.rate; // stingers no longer die on their sting, so no discount
@@ -624,7 +624,7 @@ const BOT_LEVELS={easy:{name:"Easy",inc:.8,think:1.2,cast:6},normal:{name:"Norma
 // every 4th attack is the species' special. Overtime at 3:00 doubles food; from 4:00 both nests crumble.
 const KC={nest:1400,round:240,ot:180,cap:12,start:150,baseInc:1,workerCost:4,workerMax:6,workerInc:.5,workerCd:2,size:100,hold:.5,gap:14,rank:3,
   impact:4/8,special:4,specialDmg:1.75,stagger:.15,startWorkers:2,
-  elix:{max:10,start:6,base:.42,perWorker:.06},wave:{first:6,every:20,n:3},hand:3,merge:.6,loadout:6,disLock:15,reroll:1,rerollCd:6}; // a 0-10 food bar, free insect waves, 3 dealt choices (matching knights merge: +60% health and damage per extra copy), up to 6 boost cards
+  elix:{max:10,start:6,base:.6},wave:{first:6,every:20,n:3},hand:3,merge:.6,loadout:6,disLock:15,reroll:1,rerollCd:6}; // a 0-10 food bar, free insect waves, 3 dealt choices (matching knights merge: +60% health and damage per extra copy), up to 6 boost cards
 const isWorker=u=>!!(u.worker||u.sp.forage);
 const workerId=team=>CLASSES[M.pl[team].cls].species[0]; // a class's workers are its starter species, gathering instead of fighting
 const workersOf=team=>M.pl[team].workers||0; // workers are a count: they gather off-field, raising food income
@@ -654,7 +654,7 @@ const knightElix=id=>Math.max(2,Math.min(8,Math.round(SP[id].cost/10)));
 function cardCost(team,c){return c.startsWith("dis:")?DIS_ELIX[c.slice(4)]:knightElix(c);}
 const mergeN=(hand,i)=>SP[hand[i]]?hand.filter(c=>c===hand[i]).length:1;
 const playCost=(team,i)=>{const p=M.pl[team],n=mergeN(p.hand,i);return cardCost(team,p.hand[i])+(n-1);};
-const elixRate=i=>(KC.elix.base+KC.elix.perWorker*workersOf(i))*(R.ot?2:1)*(M.pl[i].m?M.pl[i].m.food:1);
+const elixRate=i=>KC.elix.base*(R.ot?2:1)*(M.pl[i].m?M.pl[i].m.food:1); // a flat food rate (no workers); overtime doubles it
 function cardInfo(cls,c){
   if(c.startsWith("dis:")){const k=c.slice(4);return{name:DIS[k].name,img:DIS_ART[k],pix:0,tag:"disaster",stats:"Disaster · hits the whole field",desc:DIS[k].desc,title:DIS[k].desc};}
   const sp=SP[c],m=M&&M.pl&&M.pl[0]&&M.pl[0].cls===cls?mods(M.pl[0]):{hp:1,dmg:1},role={w:"walker",f:"flyer",r:"ranged"}[roleOf(sp)];
@@ -735,7 +735,7 @@ function startRound(preview){
   M.pl.forEach((p,i)=>{p.food=KC.elix.start;p.cds={};p.free=0;p.ups={};p.dis={};p.tac={};
     if(!p.boosts)p.boosts=i===0&&!p.bot?loadLoadout(p.cls):randomLoadout(p.cls);p.hand=[null,null,null];p.next=null;p.disLock=0;p.rerollT=0;dealHand(p,[0,1,2]);});
   R.bases.forEach((b,i)=>{b.max=b.hp=KC.nest*mods(M.pl[i]).nest;});
-  for(const p of M.pl)p.workers=KC.startWorkers;
+  for(const p of M.pl)p.workers=0;
   baked=null;show(null);renderDock();state="play";paused=false;aim=null;
   if(!preview)toast(`${map.name}: play one of your 3 choices (1-3). Matching knights merge into a stronger one. Destroy their nest!`);
 }
@@ -1229,7 +1229,6 @@ function botThink(team){
   const p=M.pl[team],e=1-team,cls=CLASSES[p.cls],mine=R.units.filter(u=>u.team===team&&!u.dead&&!isWorker(u)),theirs=R.units.filter(u=>u.team===e&&!u.dead&&!isWorker(u));
   const near=theirs.filter(u=>Math.abs(u.x-R.bases[team].x)<450).length,want={easy:3,normal:5,hard:6}[M.diff]||5;
   // the order: hold until the army is worth clearly more than theirs (or overtime), and always hold when they are at the door
-  if(workersOf(team)<Math.min(KC.workerMax,want)&&near===0&&!R.ot&&p.food>=KC.workerCost+1&&hireWorker(team))return; // workers while it is calm
   const hand=p.hand||[],can=i=>p.food>=playCost(team,i)&&(SP[hand[i]]?!capFull(team,hand[i],mergeN(hand,i)):disReady(team,hand[i]));
   if(theirs.length>=5||near>=3){const d=hand.findIndex((c,i)=>c.startsWith("dis:")&&can(i));if(d>=0){playCard(team,d);return;}} // a disaster on a real force
   const fc=[0,0,0];for(const u of theirs)fc["wfr".indexOf(roleOf(u.sp))]++;const dom=fc.some(Boolean)?"wfr"[fc.indexOf(Math.max(...fc))]:null;
@@ -2221,13 +2220,13 @@ function draw(){
     if(u.pupa>0){pod(u.x,y-12,8,13);continue;}
     if(u.cocoon>0){pod(u.x,y-14,9,15);continue;}
     const sh=spr.height/(spr.k||1)*px,hop=u.hop>0?-Math.sin(u.hop/20*Math.PI)*(u.hopH||40):0,
-      bob=calm||grounded?0:fl?(u.sp.cls==="butterflies"?Math.sin(clock*9*Math.PI/2+u.id)*3.5:Math.sin(clock*7+u.id)*1.8+Math.sin(clock*31+u.id)*.5):-Math.abs(Math.sin(ph*.8))*1.4,
+      bob=calm||grounded?0:fl?(u.sp.cls==="butterflies"?Math.sin(clock*9*Math.PI/2+u.id)*3.5:Math.sin(clock*7+u.id)*1.8+Math.sin(clock*31+u.id)*.5):-Math.abs(Math.sin((u.stride||0)*Math.PI*2))*3.2*(u.sp.size||1),
       kk=u.cd*(u.sp.rate||1),eng=R.t-(u.engT??-9)<.15,ranged=u.sp.range>40,
       lunge=calm||!eng?0:kk>.72&&kk<=1.01?Math.sin((1-kk)/.28*Math.PI):0, // snap out and back right after a strike
       wind=calm||!eng?0:kk<.22?(.22-kk)/.22:0, // rear back just before the next blow
       pose=calm||!eng?0:wind>0?1:lunge>.1?2:0,pspr=animPose(u,spr,eng&&!calm,kk,wind,lunge,clock)||(pose?bugSprite(u.sp,0,u.team,pose):spr), // wind-up and strike are drawn with the attacking body part
       jit=u.flash>0&&!calm?(Math.random()-.5)*3:0,yy=y-sh/2+hop+bob+2-wind*(ranged?0:1.5)-(u.toss>0?Math.sin(u.toss/16*Math.PI)*14:0),
-      tilt=(ranged?0:-u.dir*wind*.1+u.dir*lunge*.06)+(u.toss>0?-u.dir*Math.sin(u.toss/16*Math.PI)*.5:0)+(fl&&!grounded?u.dir*(u.pitch+.07):0)+(calm?0:(fl?Math.sin(clock*3+u.id)*.06:Math.sin(ph*.8)*.05)+(u.hop>0?u.dir*.35*Math.cos(u.hop/20*Math.PI):0));
+      tilt=(!fl&&u.stride>0&&!u.atk?u.dir*(.05+Math.sin((u.stride||0)*Math.PI*4)*.02):0)+(ranged?0:-u.dir*wind*.1+u.dir*lunge*.06)+(u.toss>0?-u.dir*Math.sin(u.toss/16*Math.PI)*.5:0)+(fl&&!grounded?u.dir*(u.pitch+.07):0)+(calm?0:(fl?Math.sin(clock*3+u.id)*.06:Math.sin((u.stride||0)*Math.PI*2)*.04)+(u.hop>0?u.dir*.35*Math.cos(u.hop/20*Math.PI):0));
     {const fk=frK(u.team);if(fk>0){const fl2=calm?0:Math.sin(clock*14+u.id);ctx.globalAlpha=fk*(.3+.12*fl2);ctx.fillStyle=EMBER;ctx.beginPath();ctx.ellipse(u.x,yy,(15+3*fl2)*(u.sp.size||1),12,0,0,7);ctx.fill(); // frenzy: a flickering ember glow and speed streaks, fading with the frenzy
       if(!calm&&!eng){ctx.globalAlpha=fk*.7;ctx.strokeStyle=EMBER;ctx.lineWidth=2;ctx.lineCap="round";for(const o of[-6,0,6]){const L=10+((clock*40+u.id*7+o)%12);ctx.beginPath();ctx.moveTo(u.x-u.dir*(16+L),yy+o);ctx.lineTo(u.x-u.dir*16,yy+o);ctx.stroke();}}ctx.globalAlpha=1;}}
     ctx.fillStyle="rgba(23,17,14,.2)";ctx.beginPath();{const hk=fl?Math.max(.3,1-altOf(u)/160):1;ctx.globalAlpha=hk;ctx.ellipse(u.x,groundY(u.x)-1,19*(u.sp.size||1)*hk,4*hk,0,0,7);}ctx.fill();ctx.globalAlpha=1;
@@ -2440,7 +2439,6 @@ function toast(t){const el=$("toast");el.textContent=t;el.hidden=false;clearTime
 const icon=sp=>bugSprite(sp,1).toDataURL();
 function renderDock(){
   for(const id of["standBtn","tugWrap","fzEdge","dis"])if($(id))$(id).style.display="none"; // the old clash-era controls
-  $("hireW").onclick=()=>hireWorker(0);
   $("clashBox").innerHTML=`<b id="ordT">Army</b><span id="ordF"></span>`;renderHand();
 }
 function renderHand(){ // your 3 dealt choices: cost, art, stats and what it does; matching knights show the merge
@@ -2491,8 +2489,7 @@ function hud(){
   $("pHpN").textContent=Math.ceil(R.bases[0].hp);$("eHpN").textContent=Math.ceil(R.bases[1].hp);
   {const left=Math.max(0,KC.round-R.t);$("rnd").textContent=R.t>KC.round?"The nests are crumbling":`${Math.floor(left/60)}:${String(Math.floor(left%60)).padStart(2,"0")}${R.ot?" · overtime":""}`;$("pips").innerHTML="";}
   $("food").textContent=Math.floor(p.food);$("inc").textContent=`+${elixRate(0).toFixed(1)}/s`;$("eBar").style.width=p.food/KC.elix.max*100+"%";
-  $("ordF").textContent=`${Math.ceil(armyLoad(0)-.01)} of ${KC.cap} slots · ${workersOf(0)} workers`;
-  {const hb=$("hireW"),n=workersOf(0),c=p.cds.worker||0;if(hb){hb.disabled=p.food<KC.workerCost||c>0||n>=KC.workerMax;$("hireN").textContent=n>=KC.workerMax?`${n} of ${KC.workerMax}`:`${KC.workerCost} food · ${n} of ${KC.workerMax}`;hb.style.setProperty("--p",Math.min(1,p.food/KC.workerCost).toFixed(3));hb.classList.toggle("poor",p.food<KC.workerCost);}}
+  $("ordF").textContent=`${Math.ceil(armyLoad(0)-.01)} of ${KC.cap} slots`;
   {const rb=$("hRe");if(rb){const left=Math.max(0,(p.rerollT||0)-R.t);rb.disabled=left>0||p.food<KC.reroll;rb.style.setProperty("--p",(1-left/KC.rerollCd).toFixed(3));rb.classList.toggle("poor",left>0);}}
   if(p.hand)p.hand.forEach((c,i)=>{const el=$("h_"+i);if(!el)return;const cost=playCost(0,i),full=!!SP[c]&&capFull(0,c,mergeN(p.hand,i)),busy=!disReady(0,c);el.disabled=p.food<cost||full||busy;el.classList.toggle("busy",busy);
     el.querySelector(".ec").textContent=cost;el.style.setProperty("--p",Math.min(1,p.food/cost).toFixed(3));el.classList.toggle("poor",p.food<cost);el.classList.toggle("full",full);});
@@ -3173,7 +3170,6 @@ addEventListener("keydown",e=>{
   if(e.key==="p"||e.key==="P"){pause();return;}
   if(e.key==="a"||e.key==="A"){setAuto(!autoOn);return;}
   if(e.key==="r"||e.key==="R"){refreshHand(0);return;}
-  if(e.key==="w"||e.key==="W"){hireWorker(0);return;}
   const i=+e.key-1;if(i>=0&&i<KC.hand){playCard(0,i);return;}
 });
 function pause(){if(state!=="play")return;if(M&&M.online){toast("An online match can't be paused");return;}state="pause";show("pause");}
