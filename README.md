@@ -40,4 +40,4 @@ Inside `versus.html` the script is split into sections by banner comments (`// =
 
 ## Status
 
-Prototype. No automated tests beyond the balance sim. See the developer guide (shared separately) for the code map, game systems, known issues and the improvement plan.
+Prototype. No automated tests beyond the balance sim. See the [developer guide](docs/DEVELOPER-GUIDE.md) for the code map, game systems, known issues and the improvement plan.
