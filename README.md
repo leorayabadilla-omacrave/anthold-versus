@@ -1,8 +1,8 @@
 # ANTHOLD Versus
 
-A 1v1 side-view lane battler: two colonies of armoured bug knights fight timed clashes in a tug of war over one meadow. Hatch units with food, gather them into a wave, and every 18 seconds both waves clash. The winner pushes the front one mark; a clash won at the enemy's door storms their nest. Best of three rounds.
+A 1v1 side-view lane battler (Knight Command rules): two colonies of armoured bug knights march on each other's nest. Food trickles in and workers add more; hatch knights up to a 12-slot army (cheap swarms take less than a slot, heavies more) and give one order, Advance or Hold. Every attack plays its full animation and lands on the impact frame; every 4th is the species' special. Destroy the enemy nest to win. One round: overtime at 3:00 doubles food, and from 4:00 both nests crumble.
 
-8 classes (Ants, Beetles, Butterflies, Flies, Crickets, Scorpions, Bees, Termites), 41 species, a bot with three difficulties, Auto mode, and online 1v1 when the game runs as a claude.ai artifact.
+8 classes (Ants, Beetles, Butterflies, Flies, Crickets, Scorpions, Bees, Termites), 41 species, a bot with three difficulties and Auto mode. Online play is hidden until it moves to the new rules.
 
 ## Run
 
@@ -14,7 +14,7 @@ The whole game is one file. Open `versus.html` in a browser, in landscape.
 node versus-sim.js 4
 ```
 
-Plays every class against every other with bots on both sides (4 matches per pairing) and prints class win rates and round lengths. It tests rules only, not drawing.
+Plays every class against every other with bots on both sides (4 matches per pairing) and prints class win rates and round lengths. It tests rules only, not drawing. Results swing a lot between runs, so average several. To try a tweak without editing the game, pass code to run after it loads: `SIMEXTRA="KC.cap=16" node versus-sim.js 2`. Species costs are computed from stats at load, so to test a stat change, point `SIMFILE` at an edited copy of `versus.html` instead.
 
 ## Build the phone app
 
@@ -40,4 +40,4 @@ Inside `versus.html` the script is split into sections by banner comments (`// =
 
 ## Status
 
-Prototype. No automated tests beyond the balance sim. See the [developer guide](docs/DEVELOPER-GUIDE.md) for the code map, game systems, known issues and the improvement plan.
+Prototype. No automated tests beyond the balance sim. See the [developer guide](docs/DEVELOPER-GUIDE.md) for the code map, game systems, known issues and the improvement plan. The guide still describes the old clash rules; the Knight Command section of `versus.html` (search for `Knight Command: the rules`) is current.
