@@ -1,0 +1,1405 @@
+<title>ANTHOLD</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&family=Press+Start+2P&display=swap">
+<style>
+/* field journal: paper pages, ink, washi tape and handwriting around a hand-drawn world; pixel icons and numbers for the colony's counts */
+:root{--paper:#f4ecd8;--ink:#2b2118;--pencil:#6b6358;--sepia:#8a5a34;--red:#c0392b;--tape:rgba(232,203,120,.78);--hi:#ffe066;--note:#fff2a8;
+  --hand:"Caveat","Segoe Print","Bradley Hand",cursive;--body:"Patrick Hand","Segoe Print",cursive;--pix:"Press Start 2P","Courier New",monospace;color-scheme:light}
+html,body{height:100%}
+[hidden]{display:none!important}
+body{margin:0;overflow:hidden;background:#d9ccb0;font:19px/1.3 var(--body);color:var(--ink)}
+canvas{display:block;width:100%;height:100%;cursor:crosshair;touch-action:none}
+.pix{image-rendering:pixelated;width:24px;height:16px;vertical-align:-2px}
+button{font:18px/1 var(--body);color:var(--ink);background:var(--paper);border:2px solid var(--ink);border-radius:255px 14px 225px 14px/14px 225px 14px 255px;padding:6px 12px;cursor:pointer;box-shadow:2px 3px 0 rgba(43,33,24,.35);transition:transform .1s}
+button:hover{background:#fff7e3}
+button:active{transform:translate(1px,2px);box-shadow:0 1px 0 rgba(43,33,24,.35)}
+button:focus-visible{outline:3px dashed var(--sepia);outline-offset:3px}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+button.on{background:var(--hi)}
+button.go{background:var(--hi);font:700 28px/1 var(--hand);padding:8px 24px}
+/* top strip: a torn paper band with the wave and the colony's counts */
+#top{position:absolute;top:0;left:0;right:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;
+  padding:calc(6px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px));background:var(--paper);
+  clip-path:polygon(0 0,100% 0,100% 80%,96% 100%,91% 84%,85% 100%,78% 86%,71% 100%,63% 85%,55% 100%,47% 84%,39% 100%,31% 86%,22% 100%,14% 84%,7% 100%,0 86%)}
+#lname{font:700 28px/1 var(--hand);margin-right:auto}
+.stat{display:flex;align-items:center;gap:6px;font-size:17px}
+.stat b{font:11px var(--pix);color:var(--sepia);font-variant-numeric:tabular-nums}
+.bar{display:inline-block;width:104px;height:12px;border:2px solid var(--ink);border-radius:6px 2px 7px 3px;overflow:hidden;background:#fffaf0}
+.bar i{display:block;height:100%;background:repeating-linear-gradient(-45deg,#6a9f45 0 4px,#86b85a 4px 8px);transition:width .2s}
+#focus{background:repeating-linear-gradient(-45deg,#b0567c 0 4px,#d27aa0 4px 8px)}
+/* sticky note: the clock and this wave's errand */
+#note{position:absolute;top:calc(70px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));background:var(--note);padding:10px 14px 10px;transform:rotate(1.5deg);box-shadow:2px 5px 10px rgba(43,33,24,.25);font:700 23px/1.05 var(--hand);max-width:230px}
+#note::before{content:"";position:absolute;top:-10px;left:32%;width:64px;height:18px;background:var(--tape);transform:rotate(-4deg)}
+#obj{font:16px/1.2 var(--body);color:var(--sepia);margin-top:4px}
+#obj:empty{display:none}
+#readyBtn{margin-top:8px;font-size:24px;padding:6px 18px}
+/* bottom dock: tabs for shapes and blueprints, and the colony's actions */
+#dock{pointer-events:none;position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px 16px;
+  padding:22px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:linear-gradient(rgba(244,236,216,0),rgba(244,236,216,.94) 34%)}
+.toolset{flex:1 1 360px;min-width:0}
+#dock>*{pointer-events:auto} /* only the controls catch clicks; the paper band behind them doesn't */
+.tabs{display:flex;gap:4px;margin-bottom:-2px}
+.tab{border-radius:12px 12px 0 0;font:700 21px/1 var(--hand);padding:6px 16px 4px;box-shadow:none}
+.tray{display:flex;flex-wrap:wrap;gap:6px;padding:8px;border:2px solid var(--ink);border-radius:2px 10px 6px 8px;background:#fffaf0}
+.tray button{font-size:16px;padding:5px 10px}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+/* overlays: a notebook page with a margin line, ruled lines and a strip of tape */
+.overlay{position:absolute;inset:0;background:rgba(60,45,25,.35);display:grid;place-items:center;padding:16px;overflow:auto}
+.page{position:relative;max-width:580px;width:100%;box-sizing:border-box;display:grid;gap:12px;padding:28px 24px 26px 56px;
+  background:var(--paper) repeating-linear-gradient(transparent 0 29px,rgba(80,120,170,.17) 29px 30px);box-shadow:3px 6px 0 rgba(43,33,24,.18),0 14px 40px rgba(43,33,24,.3);border-radius:3px}
+.page::before{content:"";position:absolute;top:0;bottom:0;left:40px;border-left:2px solid rgba(192,57,43,.45)}
+.page::after{content:"";position:absolute;top:-10px;right:28px;width:92px;height:22px;background:var(--tape);transform:rotate(5deg)}
+.page h1{margin:0;font:700 clamp(38px,8vw,58px)/1 var(--hand);text-wrap:balance}
+.page p{margin:0}
+.tag{font:700 22px/1 var(--hand);color:var(--red)}
+.hint{background:rgba(255,242,168,.75);padding:6px 10px;border-left:3px solid var(--sepia)}
+.arsenal{font-size:16px;color:var(--pencil)}
+.good{color:#2f7a3a}.bad{color:var(--red)}
+#cards,#modes{display:grid;gap:10px}
+#paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.skill{display:grid;gap:4px;text-align:left;padding:10px 12px;background:#fffdf6;border-radius:3px 6px 4px 7px;box-shadow:2px 4px 0 rgba(43,33,24,.22)}
+.skill:nth-child(odd){transform:rotate(-1deg)}.skill:nth-child(even){transform:rotate(1deg)}
+.skill:hover{background:#fff6d8}
+.skill b{font:700 24px/1 var(--hand)}
+.skill span{font-size:16px;line-height:1.25}
+.skill canvas{width:100%;height:60px;display:block}
+.route{font:700 18px/1 var(--hand);color:var(--red)}
+#shop{display:flex;flex-wrap:wrap;gap:6px}
+#shop button{font-size:15px}
+</style>
+
+<div id="hud" hidden>
+  <div id="top">
+    <span id="lname"></span>
+    <span class="stat" title="Free ants"><img id="iAnt" class="pix" alt="ants"><b id="ants"></b></span>
+    <span class="stat" title="Food"><img id="iSeed" class="pix" alt="food" style="width:16px"><b id="food"></b></span>
+    <span class="stat">nest <span class="bar"><i id="hp"></i></span></span>
+    <span class="stat">stamina <span class="bar"><i id="focus"></i></span></span>
+  </div>
+  <div id="note"><div id="status"></div><div id="obj"></div><button class="go" id="readyBtn" title="Enter">Ready!</button></div>
+  <div id="dock">
+    <div class="toolset">
+      <div class="tabs"><button id="tabS" class="tab on">Shapes</button><button id="tabB" class="tab">Blueprints</button></div>
+      <div class="tray" id="tools"></div><div class="tray" id="bps" hidden></div>
+    </div>
+    <div class="acts"><button id="rally" title="Space">Rally</button><button id="hazeBtn" title="H">Haze</button><button id="undo" title="Ctrl+Z">Undo</button><button id="menuBtn">Quit run</button></div>
+  </div>
+</div>
+
+<div id="menu" class="overlay"><div class="page">
+  <span class="tag">Field notes · the meadow colony</span>
+  <h1>ANTHOLD</h1>
+  <p>Storms, floods, boots and lawnmowers: the meadow is no safe place for a nest. Draw a shape and your ants build it out of their own bodies, from planks and curves to bridges, dams and rafts. Everything grows from the ground up, and falls if its support goes.</p>
+  <p>Survive each disaster to draft a skill, then pick your next route on the map. Damage to the nest carries over.</p>
+  <p class="hint" id="best"></p>
+  <span class="tag">How hard a season?</span>
+  <div id="modes"></div>
+</div></div>
+
+<div id="brief" class="overlay" hidden><div class="page">
+  <span class="tag" id="bforce"></span>
+  <h1 id="bname"></h1>
+  <p id="bstory"></p>
+  <p class="hint" id="bhint"></p>
+  <p class="hint" id="bobj"></p>
+  <p class="hint" id="bmuts"></p>
+  <p class="arsenal" id="barsenal"></p>
+  <div><button class="go" id="start">Start building</button></div>
+</div></div>
+
+<div id="draft" class="overlay" hidden><div class="page">
+  <span class="tag" id="dtag"></span>
+  <h1>Choose a skill</h1>
+  <p id="dmsg"></p>
+  <div id="cards"></div>
+  <p class="arsenal" id="dfood"></p>
+  <div id="shop"></div>
+</div></div>
+
+<div id="path" class="overlay" hidden><div class="page">
+  <span class="tag" id="ptag"></span>
+  <h1>Pick a route</h1>
+  <p>The map forks three ways. Storm paths pay more food; errands pay extra if you finish them.</p>
+  <div id="paths"></div>
+</div></div>
+
+<div id="end" class="overlay" hidden><div class="page">
+  <span class="tag">Last entry</span>
+  <h1 id="emsg"></h1>
+  <p id="esub"></p>
+  <p class="arsenal" id="earsenal"></p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="go" id="again">New run</button><button id="emenu">Title</button></div>
+</div></div>
+
+<canvas id="game"></canvas>
+
+<script>
+const $=id=>document.getElementById(id);
+const cv=$("game"),main=cv.getContext("2d");let ctx=main;
+const WW=1200,WH=700,G=0.3,T=5,SUB=3,BUILD=6; // world size, gravity, construct half-thickness, substeps, build px/frame
+const ANT=10; // px of construct per ant
+const KIND={
+  water:{mass:.006,r:4,dmg:1.3,e:1,soak:150,max:14,fr:0.985},
+  hail:{mass:.12,r:6,dmg:7,e:1.45,soak:200,max:16,fr:0.9},
+  icicle:{mass:.18,r:6,dmg:14,e:1,soak:90,max:16,fr:0.8},
+  debris:{mass:.6,r:8,dmg:9,e:1.15,soak:240,max:16,fr:0.97},
+  clip:{mass:.3,r:5,dmg:7,e:1.1,soak:110,max:16,fr:.9},
+  rock:{mass:2,r:14,dmg:30,e:1.2,soak:300,max:18,fr:0.93},
+  boulder:{mass:4,e:1.3,max:20}
+};
+const S=(kind,from,to,rate,x,y,vx,vy)=>({kind,from,to,rate,x,y,vx,vy});
+const LEVELS=[
+ {name:"Tipping Boulder",force:"Wind",sky:["#8fd3f4","#e6f7fd"],ants:40,hx:760,
+  story:"A breeze is rocking a boulder at the top of the hill. If it tips, it rolls straight down onto the entrance and seals the queen inside.",
+  hint:"Draw a line for an ant plank or a square for an ant block. A ramp in front of the entrance makes the boulder jump over it; a wall or a block on the slope stops it cold. Drag a block to push it.",
+  terrain:[[0,170],[140,180],[520,540],[620,565],[1200,565]],wind:[0.02,0.02],boulders:[{x:70,t:7,r:32}],spawns:[]},
+ {name:"Ice Storm",force:"Hail & icicles",sky:["#8c9aa8","#d5dde4"],ants:30,hx:620,
+  story:"A freezing storm. Hailstones pound the meadow and icicles snap off the branch hanging right above the nest.",
+  hint:"Build a roof over the entrance and prop it on a pillar. A floating roof cracks under the icicles; one anchored to the ground or another construct holds.",
+  terrain:[[0,520],[300,555],[900,555],[1200,520]],branch:[400,880,70],wind:[0,0],boulders:[],
+  spawns:[S("hail",5,22,14,[0,1200],[-20,-20],[-0.5,0.5],[2,4]),S("icicle",7,22,1.6,[540,700],[80,80],[0,0],[0,0])]},
+ {name:"Monsoon",force:"Rain & flood",sky:["#5d6b78","#a9b4bd"],ants:60,hx:600,
+  story:"Days of rain. Every drop that lands on the hillsides runs downhill, and the nest sits at the bottom of the bowl.",
+  hint:"Runoff pours in from both slopes. Wall in the entrance on both sides and cap it with a roof, so the water pools against the walls and soaks in.",
+  terrain:[[0,380],[540,565],[660,565],[1200,380]],wind:[0,0],boulders:[],
+  spawns:[S("water",5,23,45,[0,1200],[-10,-10],[0,0],[5,7])]},
+ {name:"Earthquake",force:"Earthquake",sky:["#d9a56b","#f3dcb8"],ants:60,hx:600,
+  story:"The ground is shaking. Rocks are breaking loose from the cliffs on both sides of the valley.",
+  hint:"Rocks come from both cliffs, one after another. Wall off each slope.",
+  terrain:[[0,250],[200,260],[460,565],[740,565],[1000,260],[1200,250]],quake:[5,18],wind:[0,0],
+  boulders:[{x:80,t:6,r:26},{x:1120,t:9,r:26},{x:150,t:13,r:22},{x:1050,t:15,r:30}],spawns:[]},
+ {name:"Hurricane",force:"Hurricane",sky:["#4c5a52","#93a199"],ants:50,hx:800,
+  story:"Hurricane winds are blowing in from the west, driving sheets of rain and flying debris across the ground.",
+  hint:"Build a windbreak on the windward (left) side of the entrance, and a roof over it.",
+  terrain:[[0,555],[1200,555]],wind:[0.14,0.08],boulders:[],
+  spawns:[S("water",5,24,40,[-200,1000],[-10,-10],[3,5],[4,6]),S("debris",6,24,2,[-20,-20],[200,520],[6,10],[-1,1])]},
+ {name:"Flash Flood",force:"Rising river",sky:["#6f8fa8","#c9dbe6"],ants:50,hx:520,
+  story:"Upstream storms burst the riverbank. The river is climbing out of its bed and spreading across the meadow toward the nest.",
+  hint:"Wall or dam the water between the river (right) and the entrance, taller than the flood will rise. An ant raft lets the colony ride it out if water gets in.",
+  terrain:[[0,430],[300,500],[520,545],[760,560],[950,600],[1200,615]],wind:[0,0],boulders:[],flood:{from:5,to:20,y0:640,y1:480,side:"right"},
+  spawns:[S("water",6,20,4,[0,1200],[-10,-10],[0,0],[5,7])]},
+ {name:"Tsunami",force:"Tsunami",sky:["#5f8f9c","#c3dfe3"],ants:50,hx:850,
+  story:"The sea pulled back, and now a wall of water is racing up the shore toward the colony.",
+  hint:"Raise a tall seawall between the sea (left) and the entrance. The wave arrives at about 8 seconds.",
+  terrain:[[0,600],[350,590],[700,565],[1200,545]],wind:[0,0],boulders:[],
+  spawns:[S("water",8,12,180,[-30,0],[360,590],[11,14],[-1,0])]},
+ {name:"Giant Footsteps",force:"Footsteps",sky:["#a9c8de","#efe6cf"],ants:45,hx:640,
+  story:"Someone is crossing the meadow, and their path runs right over the nest. Each footfall flattens everything beneath it, and they will walk back the same way.",
+  hint:"Watch for the shadow before each step. Anything under the boot is flattened, but a roof over the entrance softens the blow and a sponge pad soaks it up. Rebuild before the walk back.",
+  terrain:[[0,540],[400,555],[800,560],[1200,550]],wind:[0,0],boulders:[],spawns:[],special:{type:"steps",from:6}},
+ {name:"Lawnmower",force:"Lawnmower",sky:["#bcd9a4","#f2ead2"],ants:45,hx:760,
+  story:"The lawn is being mowed. The blade shreds anything taller than a blade of grass and hurls clippings ahead of it, there and back.",
+  hint:"Keep builds low, or set a ramp in its path: a ramp rising away from the mower bumps it up and over. A low roof shields the entrance from flying clippings.",
+  terrain:[[0,545],[300,550],[700,555],[1200,545]],wind:[0,0],boulders:[],spawns:[],special:{type:"mower",from:6}},
+ {name:"Magnifying Glass",force:"Sunbeam",sky:["#f6d58a","#f6efd8"],ants:40,hx:700,
+  story:"A curious kid has found a magnifying glass. A burning point of sunlight is creeping across the ground toward the nest.",
+  hint:"Shade the entrance: anything built above it takes the beam instead and slowly scorches. Keep the shade standing; a sponge, wet with dew, doesn't burn.",
+  terrain:[[0,520],[500,560],[900,560],[1200,530]],wind:[0,0],boulders:[],spawns:[],special:{type:"lens",from:5,to:23}},
+ {name:"Tornado",force:"Tornado",sky:["#8d8f96","#d9d4c7"],ants:50,hx:560,
+  story:"A twister is touching down. It drifts across the meadow, tearing at everything it passes and flinging debris back down.",
+  hint:"Roof or plug the entrance and anchor everything: the funnel tears at whatever it crosses, and loose blocks and balls get pulled in.",
+  terrain:[[0,540],[600,560],[1200,540]],wind:[.03,.03],boulders:[],spawns:[],special:{type:"tornado",from:5,to:25}}
+];
+
+const SKILLS=[
+ {id:"brood",name:"Big Brood",desc:"+12 ants every wave.",max:3},
+ {id:"jaws",name:"Quick Mandibles",desc:"Constructs build 60% faster.",max:2},
+ {id:"chain",name:"Long Chains",desc:"Constructs can reach 100 px farther.",max:2},
+ {id:"weave",name:"Tight Weave",desc:"Each ant covers more length, so constructs cost fewer ants.",max:2},
+ {id:"clay",name:"Packed Clay",desc:"The entrance takes 25% less damage.",max:2},
+ {id:"tunnels",name:"Deep Tunnels",desc:"+40 max entrance health, and heal 40 now.",max:2},
+ {id:"jelly",name:"Royal Jelly",desc:"Heal 20 more after every wave.",max:3},
+ {id:"crack",name:"Ice Crackers",desc:"Hail and icicles shatter on constructs.",max:1},
+ {id:"arch",name:"Arch Weavers",desc:"New shape ARCH: draw a hump (a curve bulging up) for a truss roof that sheds rain and ice.",max:1,tool:1},
+ {id:"net",name:"Net Spinners",desc:"New shape NET: draw a dip (a curve sagging down) for a hammock that catches boulders and debris.",max:1,tool:1},
+ {id:"springpad",name:"Spring Pads",desc:"New shape SPRING: draw a zigzag for a short pad that flings anything that hits it. Costs double.",max:1,tool:1},
+ {id:"spongemat",name:"Sponge Mats",desc:"New shape SPONGE: scribble for a clump that soaks up water, hail and debris. Costs 1.5x.",max:1,tool:1},
+ {id:"scout",name:"Scavengers",desc:"+4 food after every wave you survive.",max:2},
+ {id:"guard",name:"Guard Squad",desc:"A free ant roof forms over the entrance every wave.",max:1},
+ {id:"shift",name:"Second Shift",desc:"Gain 1 ant every 2 seconds during a wave.",max:2},
+ {id:"drums",name:"War Drums",desc:"+1 Rally charge per wave. Rally finishes and fully repairs every construct.",max:2},
+ {id:"wedge",name:"Wedge Builders",desc:"New shape WEDGE: draw a triangle for a solid ramp.",max:1,tool:1},
+ {id:"ballskill",name:"Rolling Brood",desc:"New shape BALL: draw a circle for a rolling ball of ants. Push it downhill to knock boulders aside.",max:1,tool:1},
+ {id:"focus",name:"Strong Backs",desc:"+50% stamina for pushing blocks and balls.",max:2},
+ {id:"bp_stairs",name:"Stair Masons",desc:"New blueprint STAIRS: drag up from the ground for a stepped ramp. Each step bleeds a rolling boulder's speed.",max:1,tool:1},
+ {id:"bp_dome",name:"Dome Weavers",desc:"New blueprint DOME: drag across the ground for a half-dome shelter, 60% sturdier than an arch.",max:1,tool:1},
+ {id:"bp_buttress",name:"Buttress Crew",desc:"New blueprint BUTTRESS: drag up from the ground for a wall braced on both sides.",max:1,tool:1},
+ {id:"bp_dam",name:"Dam Diggers",desc:"New blueprint DAM: drag along the ground for a thick mound that holds back floodwater.",max:1,tool:1},
+ {id:"bp_raft",name:"Raft Weavers",desc:"New blueprint RAFT: drag (or draw a long flat loop) for an ant raft that floats. If the nest floods while it floats, the colony shelters on it.",max:1,tool:1},
+ {id:"bp_plug",name:"Doorkeepers",desc:"New blueprint PLUG: click the entrance and ants seal it with their heads. Cuts damage until it breaks, and saves the nest from one boulder.",max:1,tool:1},
+ {id:"bp_bivouac",name:"Bivouac",desc:"New blueprint BIVOUAC: click near the entrance for a living mound of ants that slowly repairs the entrance.",max:1,tool:1},
+ {id:"grip",name:"Iron Grip",desc:"Constructs are 50% sturdier.",max:2},
+ {id:"haze",name:"Thick Haze",desc:"+1 Haze charge per wave. Haze slows the world for 4 seconds while ants build at full speed.",max:2},
+ {id:"forager",name:"Foragers",desc:"Seed crumbs appear twice as often and are worth 1 more food.",max:1},
+];
+const MODES={
+  seedling:{name:"Seedling",desc:"Slower escalation, +10 ants, softer hits.",grow:.08,dmg:.8,ants:10,haz:0},
+  colony:{name:"Colony",desc:"The intended challenge.",grow:.12,dmg:1,ants:0,haz:0},
+  tempest:{name:"Tempest",desc:"Fast escalation, twists from wave 2, 25% harder hits, fewer ants.",grow:.18,dmg:1.25,ants:-5,haz:1},
+};
+// twists layered on a wave's disaster; s.first..s.last is the storm window
+const MUTS={
+  gale:{name:"Gale",desc:"Strong wind blows from the west.",apply:s=>{s.windAdd+=.1;}},
+  hail:{name:"Hail Shower",desc:"Hail falls across the whole meadow.",apply:s=>s.spawns.push(S("hail",s.first,s.last,7,[0,1200],[-20,-20],[-.5,.5],[2,4]))},
+  rain:{name:"Downpour",desc:"Heavy rain on top of everything else.",apply:s=>s.spawns.push(S("water",s.first,s.last,28,[0,1200],[-10,-10],[0,0],[5,7]))},
+  rocks:{name:"Rockfall",desc:"Stones drop from the sky. Each one that lands in the entrance does heavy damage.",apply:s=>s.spawns.push(S("rock",s.first,s.last,.35,[60,1140],[-40,-40],[-1,1],[0,2]))},
+  quake:{name:"Aftershock",desc:"The ground shakes and loose stones tumble across the meadow.",apply:s=>{s.quake=[s.first,s.last];s.spawns.push(S("rock",s.first,s.last,.25,[-20,1220],[200,300],[-3,3],[-2,0]));}},
+  long:{name:"Long Storm",desc:"The disaster lasts 50% longer.",apply:s=>{for(const p of s.spawns)p.to+=(p.to-p.from)*.5;}},
+  lean:{name:"Lean Season",desc:"25% fewer ants this wave.",apply:s=>{s.ants=Math.round(s.ants*.75);}},
+  rich:{name:"Rich Soil",good:1,desc:"+15 ants this wave.",apply:s=>{s.ants+=15;}},
+  calm:{name:"Calm Before",good:1,desc:"The disaster hits 30% softer.",apply:s=>{for(const p of s.spawns)p.rate*=.7;s.dmg*=.85;}},
+  river:{name:"Rising River",desc:"A river floods in from the low edge of the meadow and climbs above the entrance.",apply:s=>{const side=floodSide(s.L);if(side)s.flood={from:s.first,to:s.last,y0:Math.max(groundY(0),groundY(WW))+30,y1:s.hy-40,side};}},
+  sturdy:{name:"Sturdy Earth",good:1,desc:"The entrance takes 30% less damage.",apply:s=>{s.dmg*=.7;}},
+};
+let s=null,state="menu",drag=null,scale=1,ox=0,oy=0,best=0;
+try{best=+localStorage.getItem("anthold-best")||0}catch(e){}
+const newRun=(mode="colony")=>({wave:1,hp:100,maxHp:100,sk:{},last:-1,tool:"auto",mode,food:0,bonus:0});
+let run=newRun();
+const lv=id=>run.sk[id]||0;
+const roman=n=>["","I","II","III"][n];
+function show(id){for(const o of["menu","brief","end","draft","path"])$(o).hidden=o!==id;$("hud").hidden=!!id;resize();}
+function arsenal(){
+  const l=SKILLS.filter(k=>lv(k.id)).map(k=>k.name+(k.max>1?" "+roman(lv(k.id)):""));
+  return "Arsenal: "+(l.length?l.join(", "):"none yet");
+}
+
+const rnd=([a,b])=>a+Math.random()*(b-a);
+function smooth(p,n){ // Chaikin corner cutting: round terrain so rocks roll instead of snag
+  for(let k=0;k<n;k++){const o=[p[0]];for(let i=0;i<p.length-1;i++){const[a,b]=[p[i],p[i+1]];o.push([.75*a[0]+.25*b[0],.75*a[1]+.25*b[1]],[.25*a[0]+.75*b[0],.25*a[1]+.75*b[1]]);}o.push(p[p.length-1]);p=o;}
+  return p;
+}
+function groundY(x,p=scene.ground){
+  if(x<=p[0][0])return p[0][1];
+  for(let i=1;i<p.length;i++)if(x<=p[i][0]){const[a,b]=[p[i-1],p[i]];return a[1]+(b[1]-a[1])*(x-a[0])/(b[0]-a[0]);}
+  return p[p.length-1][1];
+}
+
+function floodSide(L){ // which edge a river could reach the entrance from: every bit of ground between them sits below the flood line
+  const t=L.terrain,yAt=x=>{for(let i=1;i<t.length;i++)if(x<=t[i][0])return t[i-1][1]+(t[i][1]-t[i-1][1])*(x-t[i-1][0])/(t[i][0]-t[i-1][0]);return t[t.length-1][1];};
+  const line=yAt(L.hx)-40,ok=(a,b)=>{for(let x=a;x<=b;x+=10)if(yAt(x)<=line)return false;return true;};
+  return L.flood?null:ok(L.hx,WW)?"right":ok(0,L.hx)?"left":null;
+}
+function genWave(n,avoid,extra=0){
+  let i;do i=Math.random()*LEVELS.length|0;while(i===avoid);
+  const M=MODES[run.mode],boss=n%5===0;
+  const haz=Math.min(4,(n>=3)+(n>=7)+boss+(M.haz&&n>=2)+extra);
+  const keys=Object.keys(MUTS).filter(k=>k!=="river"||floodSide(LEVELS[i])).sort(()=>Math.random()-.5),muts=keys.filter(k=>!MUTS[k].good).slice(0,haz);
+  if(Math.random()<.35)muts.push(keys.find(k=>MUTS[k].good));
+  const obj=n>1&&Math.random()<.45?Object.keys(OBJECTIVES)[Math.random()*Object.keys(OBJECTIVES).length|0]:null;
+  return{i,muts,boss,obj,food:3+3*haz+(boss?6:0)+(obj?2:0)};
+}
+
+function startLevel(spec){
+  // wave n and the difficulty mode scale the disaster; skills scale the colony; twists reshape it
+  const{i,muts}=spec,L=LEVELS[i],M=MODES[run.mode],ground=smooth(L.terrain,3),n=run.wave,diff=1+M.grow*(n-1);
+  const spawns=L.spawns.map(p=>({...p,rate:p.rate*diff})),boulders=[...L.boulders];
+  for(const extra of[n>=4?5:0,n>=8?10:0])if(extra)for(const b of L.boulders)boulders.push({...b,t:b.t+extra});
+  s={i,L,spec,ground,spawns,t:0,ready:false,ants:Math.max(10,L.ants+12*lv("brood")+M.ants+run.bonus),hp:run.hp,bodies:[],cons:[],acc:[],over:false,
+     dmg:(1+0.06*(n-1))*M.dmg*0.75**lv("clay"),build:BUILD*1.6**lv("jaws"),antPx:ANT+4*lv("weave"),regen:0,
+     windAdd:0,quake:L.quake||null,crumbs:[],crumbT:4,slow:0,lost:0,fx:[],objs:[],nid:0,held:null,focus:1,flood:L.flood?{...L.flood}:null,wl:null,flooded:null,plug:null,shakeT:0,puffs:[],sp:null,spWin:null,walkers:null,sat:null,foraged:0,rescued:0,charges:{rally:1+lv("drums"),haze:1+lv("haze")}};
+  run.bonus=0;MAXLEN=260+100*lv("chain");
+  scene=s;s.hy=groundY(L.hx);
+  for(const b of boulders)s.bodies.push({kind:"boulder",r:b.r,x:b.x,y:groundY(b.x)-b.r-2,vx:0,vy:0,rot:0,wet:0,held:true,t:b.t,still:0,dead:false});
+  if(lv("guard"))s.cons.push({...mkCons("chain",arc(L.hx-70,groundY(L.hx-70),L.hx+70,groundY(L.hx+70),true),0),p:1,hp:200,maxHp:200,fixed:1});
+  initSpecial();initObjective();
+  const span=()=>{
+    s.first=Math.min(...(s.spWin?[s.spWin[0]]:[]),...(s.flood?[s.flood.from]:[]),...s.spawns.map(p=>p.from),...boulders.map(b=>b.t),...(s.quake?[s.quake[0]]:[]));
+    s.end=Math.max(...(s.spWin?[s.spWin[1]]:[]),...(s.flood?[s.flood.to]:[]),...s.spawns.map(p=>p.to),...boulders.map(b=>b.t),...(s.quake?[s.quake[1]]:[]));
+    s.last=Math.max(s.end,s.first+12); // twists on a short disaster (a single boulder) still get a real storm
+  };
+  span();
+  if(muts.includes("long")){MUTS.long.apply(s);span();} // first, so the other twists span the longer storm
+  for(const m of muts)if(m!=="long")MUTS[m].apply(s);
+  span();s.acc=s.spawns.map(()=>0);
+  $("lname").textContent=`Wave ${n}${spec.boss?" SUPERSTORM":""}: ${L.name}`;
+  if(!toolList().includes(run.tool))run.tool="auto";
+  renderTools();show(null);state="play";
+}
+
+function briefWave(spec){
+  const L=LEVELS[spec.i];s=null;scene=preview(spec.i);
+  $("bforce").textContent=`Wave ${run.wave} · ${L.force}${spec.boss?" · SUPERSTORM":""}`;$("bname").textContent=L.name;
+  $("bstory").textContent=L.story;$("bhint").textContent=L.hint;
+  $("bobj").hidden=!spec.obj;if(spec.obj)$("bobj").innerHTML=`<b>Errand · ${OBJECTIVES[spec.obj].name}</b>: ${OBJECTIVES[spec.obj].desc}`;
+  $("bmuts").hidden=!spec.muts.length;
+  $("bmuts").innerHTML=spec.muts.map(m=>`<b class="${MUTS[m].good?"good":"bad"}">${MUTS[m].name}</b>: ${MUTS[m].desc}`).join("<br>");
+  $("barsenal").textContent=`${arsenal()} · Entrance ${Math.round(run.hp)}/${run.maxHp} · Food ${run.food}`;
+  $("start").onclick=()=>startLevel(spec);
+  show("brief");state="brief";
+}
+
+function draft(msg){
+  const open=SKILLS.filter(k=>lv(k.id)<k.max).sort(()=>Math.random()-.5),tool=open.find(k=>k.tool);
+  const pool=(tool?[tool,...open.filter(k=>k!==tool)]:open).slice(0,3).sort(()=>Math.random()-.5);
+  $("dtag").textContent=`Wave ${run.wave-1} survived`;$("dmsg").textContent=msg;
+  const box=$("cards");box.innerHTML="";
+  for(const k of pool){
+    const b=document.createElement("button");b.className="skill";
+    b.innerHTML=`<b>${k.name}${k.max>1?" "+roman(lv(k.id)+1):""}</b><span>${k.desc}</span>`;
+    b.onclick=()=>{run.sk[k.id]=lv(k.id)+1;if(k.id==="tunnels"){run.maxHp+=40;run.hp+=40;}choosePath();};
+    box.appendChild(b);
+  }
+  if(!pool.length){const b=document.createElement("button");b.className="skill";b.innerHTML="<b>Arsenal complete</b><span>Continue</span>";b.onclick=choosePath;box.appendChild(b);}
+  renderShop(msg);
+  show("draft");state="draft";
+}
+
+function renderShop(msg){
+  $("dfood").textContent=`Shop · Food: ${run.food} · Entrance ${Math.round(run.hp)}/${run.maxHp}`;
+  const box=$("shop");box.innerHTML="";
+  for(const[label,price,act]of[
+    ["Reroll skills",3,()=>draft(msg)],
+    ["Patch entrance +25",5,()=>{run.hp=Math.min(run.maxHp,run.hp+25);}],
+    ["Stockpile +15 ants",4,()=>{run.bonus+=15;}],
+  ]){
+    const b=document.createElement("button");b.textContent=`${label} (${price})`;b.disabled=run.food<price;
+    b.onclick=()=>{run.food-=price;act();renderShop(msg);};box.appendChild(b);
+  }
+}
+
+function sketchRoute(cv,L){ // a tiny ink sketch of the route's terrain for the map
+  const w=cv.width=300,hh=cv.height=90,g=cv.getContext("2d"),t=L.terrain,ys=t.map(p=>p[1]),y0=Math.min(...ys)-40,y1=Math.max(...ys)+20,Y=y=>(y-y0)/(y1-y0)*(hh-10)+5;
+  g.fillStyle="rgba(160,112,63,.35)";g.beginPath();t.forEach(([x,y],i)=>i?g.lineTo(x/WW*w,Y(y)):g.moveTo(x/WW*w,Y(y)));g.lineTo(w,hh);g.lineTo(0,hh);g.fill();
+  g.strokeStyle="#2b2118";g.lineWidth=2;g.lineJoin="round";g.beginPath();t.forEach(([x,y],i)=>i?g.lineTo(x/WW*w,Y(y)):g.moveTo(x/WW*w,Y(y)));g.stroke();
+  const hy=preview(LEVELS.indexOf(L)).hy;g.fillStyle="#2b2118";g.beginPath();g.ellipse(L.hx/WW*w,Y(hy)+2,6,3,0,0,7);g.fill();
+}
+function choosePath(){
+  const quiet=genWave(run.wave,run.last),storm=genWave(run.wave,quiet.i,1),errand=genWave(run.wave,storm.i);
+  if(!errand.obj){errand.obj=Object.keys(OBJECTIVES)[Math.random()*Object.keys(OBJECTIVES).length|0];errand.food+=2;}
+  $("ptag").textContent=`Wave ${run.wave} ahead`;
+  const box=$("paths");box.innerHTML="";
+  for(const[tag,p]of[["Quiet trail",quiet],["Storm path",storm],["Errand",errand]]){
+    const L=LEVELS[p.i],b=document.createElement("button");b.className="skill";
+    b.innerHTML=`<span class="route">${tag}</span><canvas></canvas><b>${L.name}${p.boss?" · SUPERSTORM":""}</b><span>${p.muts.length?"Twists: "+p.muts.map(m=>MUTS[m].name).join(", "):"No twists"}</span>${p.obj?`<span>Errand: ${OBJECTIVES[p.obj].name}</span>`:""}<span>Reward: ${p.food} food</span>`;
+    sketchRoute(b.querySelector("canvas"),L);
+    b.onclick=()=>briefWave(p);box.appendChild(b);
+  }
+  show("path");state="path";
+}
+
+function menu(){
+  s=null;scene=preview(0);
+  $("best").textContent=best?`Best run: ${best} wave${best===1?"":"s"} survived.`:"No runs yet. How long can the colony hold?";
+  const box=$("modes");box.innerHTML="";
+  for(const[k,M]of Object.entries(MODES)){
+    const b=document.createElement("button");b.className="skill";b.innerHTML=`<b>${M.name}</b><span>${M.desc}</span>`;
+    b.onclick=()=>newGame(k);box.appendChild(b);
+  }
+  show("menu");state="menu";
+}
+function newGame(mode){run=newRun(mode);briefWave({i:0,muts:[],boss:false,food:3});}
+
+function finish(win,msg){
+  s.over=true;
+  if(win){
+    const earned=s.spec.food+Math.floor(s.ants/10);run.food+=earned;msg+=objectiveResult();
+    if(s.lost)msg+=` ${s.lost} ants fell from broken constructs.`;
+    run.food+=4*lv("scout");run.hp=Math.min(run.maxHp,s.hp+10+20*lv("jelly"));run.last=s.i;run.wave++;
+    return draft(`${msg} +${earned} food. The colony patches the entrance back to ${Math.round(run.hp)}/${run.maxHp}.`);
+  }
+  const waves=run.wave-1;
+  if(waves>best){best=waves;try{localStorage.setItem("anthold-best",best)}catch(e){}}
+  $("emsg").textContent="Colony lost";
+  $("esub").textContent=`${msg} You held out for ${waves} wave${waves===1?"":"s"} on ${MODES[run.mode].name}. Best: ${best}.`;
+  $("earsenal").textContent=arsenal();
+  show("end");state="end";
+}
+
+// ---------- ant blocks & balls: Trine-style physics objects the ants form in place, then let fall
+const OBJ={block:{mass:5,hp:150},ball:{mass:2,hp:110},raft:{mass:4,hp:140}};
+const massOf=o=>OBJ[o.kind].mass*(o.kind==="raft"?o.w/40:(o.r/25)**2);
+const isBox=o=>o.kind!=="ball";
+const mouse={x:0,y:0};
+function mkObj(kind,x,y,r,cost,w=r){const m=OBJ[kind].hp*1.5**lv("grip")*Math.max(.6,kind==="raft"?1:r/25);return{kind,x,y,r,w,vx:0,vy:0,rot:0,cost,hp:m,maxHp:m,ground:false,float:0,p:0,id:0};}
+const inObj=(o,x,y,m=0)=>isBox(o)?Math.abs(x-o.x)<o.w+m&&Math.abs(y-o.y)<o.r+m:Math.hypot(x-o.x,y-o.y)<o.r+m;
+function stepObjs(w,cs){
+  for(const o of s.objs){
+    if(o.p<1)continue;
+    o.vy+=G;if(o.kind==="ball")o.vx+=w*.5/o.r;
+    o.float=0;
+    if(s.wl!=null&&floodedAt(o.x)&&o.y+o.r>s.wl){ // ant rafts, blocks and balls float (fire ants really do); the current drags them
+      const sub=Math.min(1,(o.y+o.r-s.wl)/(2*o.r));o.float=sub;
+      o.vy-=G*sub*(o.kind==="raft"?3.2:1.8);o.vy*=1-.12*sub;o.vx+=(s.flood.side==="right"?-1:1)*.025*sub;
+    }
+    if(o===s.held&&o.ground){const f=Math.max(-.6,Math.min(.6,(mouse.x-o.x)*.02))*25/o.r;if(Math.sign(f)*o.vx<3)o.vx+=f;} // ants push along the ground at walking pace; they can't lift
+    const v=Math.hypot(o.vx,o.vy);if(v>18){o.vx*=18/v;o.vy*=18/v;}
+    o.x+=o.vx;o.y+=o.vy;
+    let hit=false;
+    if(o.kind==="ball")for(let j=1;j<s.ground.length;j++){const[a,c]=[s.ground[j-1],s.ground[j]];hit=collide(o,a[0],a[1],c[0],c[1],o.r,1.15)||hit;}
+    const gy=groundY(o.x);if(o.y+o.r>gy){o.y=gy-o.r;if(o.vy>0)o.vy=0;hit=true;}
+    for(const off of o.w>o.r?[-(o.w-o.r),0,o.w-o.r]:[0]){ // wide rafts probe along their length
+      const p={x:o.x+off,y:o.y,vx:o.vx,vy:o.vy};
+      for(const[c,sg]of cs)for(const[x1,y1,x2,y2]of sg)hit=collide(p,x1,y1,x2,y2,o.r+T,c.type==="spring"?2.2:1.1,c.type==="spring")||hit;
+      o.x=p.x-off;o.y=p.y;o.vx=p.vx;o.vy=p.vy;
+    }
+    if(hit)o.vx*=isBox(o)?.85:.995; // blocks grip, balls roll
+    if(hit&&isBox(o)&&!o.float&&o!==s.held&&Math.abs(o.vx)<.6)o.vx=0; // static friction: a resting block stays put
+    o.ground=hit;
+    if(o.kind==="ball")o.rot+=o.vx/o.r;
+    if(o.x<-200||o.x>WW+200||o.y>WH+200)o.hp=0;
+  }
+  const im=o=>o.p<1?0:1/massOf(o);
+  for(let i=0;i<s.objs.length;i++)for(let j=i+1;j<s.objs.length;j++){
+    const a=s.objs[i],b=s.objs[j],ia=im(a),ib=im(b);if(!ia&&!ib)continue;
+    let nx,ny,d;
+    if(isBox(a)&&isBox(b)){ // boxes stack: separate along the shallower axis
+      const dx=b.x-a.x,dy=b.y-a.y,ox=a.w+b.w-Math.abs(dx),oy=a.r+b.r-Math.abs(dy);if(ox<=0||oy<=0)continue;
+      if(oy<ox){nx=0;ny=Math.sign(dy)||1;d=oy;}else{nx=Math.sign(dx)||1;ny=0;d=ox;}
+    }else if(isBox(a)!==isBox(b)){ // ball against box: push out from the box's nearest point
+      const bx=isBox(a)?a:b,bl=isBox(a)?b:a,qx=Math.max(bx.x-bx.w,Math.min(bl.x,bx.x+bx.w)),qy=Math.max(bx.y-bx.r,Math.min(bl.y,bx.y+bx.r));
+      let ex=bl.x-qx,ey=bl.y-qy,l=Math.hypot(ex,ey);if(l>=bl.r)continue;if(l<1e-6){ex=0;ey=-1;l=1;}
+      d=bl.r-l;const sg=bl===b?1:-1;nx=ex/l*sg;ny=ey/l*sg;
+    }else{const dx=b.x-a.x,dy=b.y-a.y,l=Math.hypot(dx,dy)||1;d=a.r+b.r-l;if(d<=0)continue;nx=dx/l;ny=dy/l;}
+    const sh=d/(ia+ib);a.x-=nx*sh*ia;a.y-=ny*sh*ia;b.x+=nx*sh*ib;b.y+=ny*sh*ib;
+    const vn=(b.vx-a.vx)*nx+(b.vy-a.vy)*ny;
+    if(vn<0){const jn=-vn/(ia+ib);a.vx-=jn*ia*nx;a.vy-=jn*ia*ny;b.vx+=jn*ib*nx;b.vy+=jn*ib*ny;
+      if(isBox(a)&&isBox(b)){const tv=(b.vx-a.vx)*(1-Math.abs(nx));a.vx+=tv*.1*ia/(ia+ib||1);b.vx-=tv*.1*ib/(ia+ib||1);}}
+  }
+}
+function release(){s.held=null;}
+const FC=10,NC=WW/FC;
+const floodedAt=x=>!!(s.flooded&&s.flooded[Math.max(0,Math.min(NC-1,Math.floor(x/FC)))]);
+function floodStep(){
+  const f=s.flood;if(!f){s.wl=null;return;}
+  const t=s.t,k=t<f.from?0:t<f.to?(t-f.from)/(f.to-f.from):Math.max(0,1-(t-f.to)/8); // rise, then recede
+  const y=f.y0+(f.y1-f.y0)*k;s.wl=y;
+  const top=new Float32Array(NC),owner=new Array(NC).fill(null);
+  for(let i=0;i<NC;i++)top[i]=groundY(i*FC+FC/2);
+  for(const c of s.cons){ // only constructs standing on the ground hold water back
+    if(!c.pts.some(p=>Math.abs(p[1]-groundY(p[0]))<18))continue;
+    for(const[x1,y1,x2,y2]of built(c)){const a=Math.max(0,Math.floor(Math.min(x1,x2)/FC)),b=Math.min(NC-1,Math.floor(Math.max(x1,x2)/FC));
+      for(let i=a;i<=b;i++){const yy=Math.min(y1,y2)-T;if(yy<top[i]){top[i]=yy;owner[i]=c;}}}
+  }
+  for(const o of s.objs)if(o.p>=1&&o.kind!=="raft"&&o.ground&&!o.float){const a=Math.max(0,Math.floor((o.x-o.w)/FC)),b=Math.min(NC-1,Math.floor((o.x+o.w)/FC));for(let i=a;i<=b;i++)if(o.y-o.r<top[i]){top[i]=o.y-o.r;owner[i]=o;}}
+  const fl=new Uint8Array(NC),dir=f.side==="left"?1:-1;let i=f.side==="left"?0:NC-1;
+  for(;i>=0&&i<NC&&top[i]>y;i+=dir)fl[i]=1;
+  if(i>=0&&i<NC&&owner[i]&&fl[i-dir]){owner[i].hp-=Math.max(0,groundY((i-dir)*FC+FC/2)-y)*.002;} // water pressure on whatever holds it back
+  s.flooded=fl;
+}
+function floodDamage(){
+  if(s.wl!=null&&s.sat&&s.sat.alive&&floodedAt(s.sat.x)&&s.wl<s.sat.y)s.sat.hp-=(.1+(s.sat.y-s.wl)*.003)*s.dmg;
+  if(s.wl==null||!floodedAt(s.L.hx)||s.wl>=s.hy)return;
+  let d=(.15+(s.hy-s.wl)*.004)*s.dmg;
+  if(s.objs.some(o=>o.kind==="raft"&&o.float>0))d*=.4; // the colony shelters on its raft
+  if(s.plug){s.plug.hp-=d*1.5;d*=.2;}
+  s.hp-=d;
+}
+// ---- special disasters: a walker's boots, a lawnmower, a magnifying glass, a tornado
+function initSpecial(){
+  const sp=s.L.special;s.sp=null;s.spWin=null;if(!sp)return;
+  const n=run.wave,k=1+MODES[run.mode].grow*(n-1),hx=s.L.hx;
+  if(sp.type==="steps"){ // across and back; the stride is lined up so one footfall in each pass lands on the nest
+    const gap=135,steps=[],every=1.5/Math.sqrt(k),xs=[];for(let x=hx-gap*6;x<=hx+gap*6;x+=gap)if(x>-60&&x<WW+60)xs.push(x);
+    let t=sp.from;for(const pass of[xs,[...xs].reverse()]){for(const x of pass){steps.push({x:x+(Math.random()-.5)*24,t});t+=every;}t+=2.5;}
+    s.sp={type:"steps",steps,i:0};s.spWin=[sp.from-1.3,t];
+  }else if(sp.type==="mower"){
+    const speed=2.2*Math.sqrt(k);s.sp={type:"mower",x:-90,dir:1,bump:0,from:sp.from,speed,done:0,rate:9*k,acc:0,on:false};
+    s.spWin=[sp.from,sp.from+2*(WW+180)/speed/60];
+  }else if(sp.type==="lens"){s.sp={type:"lens",x:hx<600?1100:100,y:0,from:sp.from,to:sp.to,k,on:false};s.spWin=[sp.from,sp.to];}
+  else if(sp.type==="tornado"){s.sp={type:"tornado",x:-150,dir:1,from:sp.from,to:sp.to,k,acc:0,on:false};s.spWin=[sp.from,sp.to+4];}
+}
+function shieldOver(x0,x1){ // something built above this stretch of the entrance
+  return s.cons.some(c=>c.p>=1&&built(c).some(([a,b,c2,d])=>Math.max(a,c2)>x0&&Math.min(a,c2)<x1&&Math.min(b,d)<s.hy-6))||s.objs.some(o=>o.p>=1&&o.x+o.w>x0&&o.x-o.w<x1&&o.y<s.hy);
+}
+function hurtNest(d,where){
+  if(where==="sat"){if(s.sat&&s.sat.alive)s.sat.hp-=d;return;}
+  if(s.plug){s.plug.hp-=d*.8;d*=.3;}
+  s.hp-=d;
+}
+function stomp(x){
+  s.shakeT=12;const R=62,hx=s.L.hx;let shield=false,soft=false;
+  for(const c of s.cons)if(c.p>0&&c.pts.some(([px])=>Math.abs(px-x)<R)){
+    const over=c.pts.some(([px])=>Math.abs(px-hx)<40);
+    if(c.type==="sponge"){if(over)soft=true;continue;} // a sponge pad just squishes
+    c.hp-=220;if(over)shield=true;
+  }
+  for(const o of s.objs)if(Math.abs(o.x-x)<R+o.w){o.hp-=120;o.vy=-7;o.vx=(o.x<x?-1:1)*5;}
+  for(const b of s.bodies)if(Math.abs(b.x-x)<R){b.vy=-6;b.vx=(b.x<x?-1:1)*6;b.held=false;}
+  for(const a of s.walkers||[])if(Math.abs(a.x-x)<R)a.dead=1;
+  if(s.royal&&!s.royal.done&&Math.abs(s.royal.x-x)<R)s.royal.hp-=60;
+  const f=soft?.1:shield?.4:1;
+  if(Math.abs(x-hx)<R+8)hurtNest(55*s.dmg*f);
+  if(s.sat&&Math.abs(x-s.sat.x)<R+8)hurtNest(40*s.dmg,"sat");
+  for(let i=0;i<10;i++)s.puffs.push({x:x+(Math.random()-.5)*120,y:groundY(x)-4,vx:(Math.random()-.5)*2,vy:-Math.random()*1.5,life:40});
+}
+function stepSpecial(){
+  const p=s.sp;if(!p)return;const t=s.t,L=s.L,hx=L.hx;
+  if(p.type==="steps"){while(p.i<p.steps.length&&t>=p.steps[p.i].t)stomp(p.steps[p.i++].x);return;}
+  if(p.type==="mower"){
+    p.on=t>=p.from&&p.done<2;if(!p.on)return;
+    p.x+=p.dir*p.speed;if(p.bump>0)p.bump--;
+    const g=groundY(p.x),top=g-44,bot=g-14;
+    if(!p.bump)for(const c of s.cons){if(c.p<1)continue;for(const[x1,y1,x2,y2]of built(c)){
+      if(Math.max(x1,x2)<p.x-36||Math.min(x1,x2)>p.x+36||Math.min(y1,y2)>bot)continue;
+      const lowX=y1>y2?x1:x2,highX=y1>y2?x2:x1,rise=Math.abs(y2-y1),run_=Math.abs(x2-x1),footed=Math.max(y1,y2)>groundY(lowX)-18;
+      if(footed&&run_>rise*.7&&(highX-lowX)*p.dir>0){p.bump=45;c.hp-=10;break;} // a ramp facing the mower: up and over
+      if(Math.max(y1,y2)>top)c.hp-=4*s.dmg; // in the blade's band: shredded
+    }}
+    if(!p.bump){
+      for(const o of s.objs)if(Math.abs(o.x-p.x)<36+o.w&&o.y+o.r>top){o.hp-=3;o.vx+=p.dir*.6;}
+      for(p.acc+=p.rate/60;p.acc>=1;p.acc--)s.bodies.push({kind:"clip",r:5,x:p.x+p.dir*40,y:g-22,vx:p.dir*(7+Math.random()*4),vy:-2-Math.random()*3.5,rot:0,wet:0,held:false,t:0,still:0,dead:false});
+    }
+    if(p.dir>0&&p.x>WW+90){p.dir=-1;p.done++;}else if(p.dir<0&&p.x<-90){p.dir=1;p.done++;}
+    return;
+  }
+  if(p.type==="lens"){
+    p.on=t>=p.from&&t<=p.to;if(!p.on)return;
+    const tgt=s.sat&&s.sat.alive&&Math.sin(t*.35)>.55?s.sat.x:hx; // mostly hunts the nest
+    p.x+=Math.max(-1.1,Math.min(1.1,(tgt-p.x)*.02))+Math.sin(t*1.7)*.6;
+    let by=groundY(p.x),block=null; // the first thing in the beam from above takes the heat
+    for(const c of s.cons)for(const[x1,y1,x2,y2]of built(c))if((p.x-x1)*(p.x-x2)<=0&&x1!==x2){const yy=y1+(y2-y1)*(p.x-x1)/(x2-x1);if(yy<by){by=yy;block=c;}}
+    for(const o of s.objs)if(o.p>=1&&Math.abs(p.x-o.x)<o.w&&o.y-o.r<by){by=o.y-o.r;block=o;}
+    p.y=by;
+    if(block){if(block.type!=="sponge")block.hp-=.25*p.k;}
+    else{
+      if(Math.abs(p.x-hx)<26)hurtNest(.4*s.dmg);
+      if(s.sat&&Math.abs(p.x-s.sat.x)<20)hurtNest(.3*s.dmg,"sat");
+      for(const a of s.walkers||[])if(Math.abs(a.x-p.x)<10)a.dead=1;
+      if(s.royal&&!s.royal.done&&Math.abs(s.royal.x-p.x)<12)s.royal.hp-=.8*s.dmg;
+    }
+    if(Math.random()<.3)s.puffs.push({x:p.x+(Math.random()-.5)*8,y:p.y-4,vx:(Math.random()-.5)*.4,vy:-.6-Math.random()*.6,life:50});
+    return;
+  }
+  if(p.type==="tornado"){
+    p.on=t>=p.from&&t<=p.to+4;if(!p.on)return;
+    if(t>p.to)p.dir=p.x<hx?-1:1; // spent: it drifts off the way it is nearest to
+    const near=Math.abs(p.x-hx)<120&&t<=p.to;p.x+=p.dir*(near?.5:1.1)*Math.sqrt(p.k)+Math.sin(t*.9)*.4;
+    if(p.x>WW+150&&t<=p.to)p.dir=-1;if(p.x<-150&&t<=p.to)p.dir=1;
+    for(const b of s.bodies){const dx=p.x-b.x;if(Math.abs(dx)<110&&!b.held){b.vx+=Math.sign(dx)*.25;if(Math.abs(dx)<50)b.vy-=.5;}}
+    for(const o of s.objs){const dx=p.x-o.x,m=Math.max(1,massOf(o)/3);if(Math.abs(dx)<100){o.vx+=Math.sign(dx)*.15/m;if(Math.abs(dx)<45)o.vy-=.4/m;o.hp-=.15;}}
+    for(const c of s.cons)if(c.p>0&&c.pts.some(([x])=>Math.abs(x-p.x)<70))c.hp-=.5*s.dmg;
+    if(Math.abs(p.x-hx)<55)hurtNest(.6*s.dmg*(shieldOver(hx-30,hx+30)?.45:1));
+    if(s.sat&&Math.abs(p.x-s.sat.x)<45)hurtNest(.4*s.dmg,"sat");
+    for(const a of s.walkers||[])if(Math.abs(a.x-p.x)<50)a.dead=1;
+    if(s.royal&&!s.royal.done&&Math.abs(s.royal.x-p.x)<50)s.royal.hp-=.4*s.dmg;
+    for(p.acc+=2.5/60;p.acc>=1;p.acc--){const g=groundY(p.x);s.bodies.push({kind:"debris",r:8,x:p.x+(Math.random()-.5)*80,y:g-60-Math.random()*200,vx:(Math.random()-.5)*12,vy:-4+Math.random()*5,rot:0,wet:0,held:false,t:0,still:0,dead:false});}
+  }
+}
+// ---- errands: optional wave objectives with their own rewards and stakes
+const OBJECTIVES={
+  rescue:{name:"Rescue",desc:"Six foragers are stranded across the meadow. They head home when the disaster starts; shelter their path. Each one home: +2 ants next wave and +1 food."},
+  forage:{name:"Forage",desc:"Seed crumbs turn up twice as often. Collect 8 this wave for +8 food."},
+  royal:{name:"Royal Move",desc:"The queen must move to a new chamber across the meadow. Her bearers set off when the disaster starts and pass through your living walls; roof her route against what falls. She arrives: +10 food and the nest heals 20. If she falls, the colony falls."},
+  twin:{name:"Twin Nests",desc:"A satellite chamber opens a second entrance. Keep it standing for +6 food; if it falls, the nest's max health drops by 20."},
+};
+function initObjective(){
+  const o=s.spec.obj,hx=s.L.hx;
+  if(o==="rescue"){const far=x=>Math.min(1e9,...s.L.boulders.map(b=>Math.abs(b.x-x))),sx=[90,1110].sort((a,b)=>far(b)-far(a)||Math.abs(b-hx)-Math.abs(a-hx))[0],d=sx>hx?1:-1; // start clear of any boulder
+   s.walkers=Array.from({length:6},(_,i)=>({x:sx+d*i*16,y:0,dead:0,home:0,f:i}));for(const a of s.walkers)a.y=groundY(a.x)-5;}
+  if(o==="royal"){const far=x=>Math.min(1e9,...s.L.boulders.map(b=>Math.abs(b.x-x))),opts=[hx-420,hx+420].filter(x=>x>90&&x<1110).sort((a,b)=>far(b)-far(a)),tx=opts[0]??(hx<600?hx+380:hx-380);
+    s.royal={x:hx,y:s.hy-7,tx,hp:100,done:0,dead:0};}
+  if(o==="twin"){const xs=[];for(let x=140;x<=1060;x+=40)if(Math.abs(x-hx)>260)xs.push(x);const x=xs[Math.random()*xs.length|0];s.sat={x,y:groundY(x),hp:60,maxHp:60,alive:true};}
+}
+function stepObjective(){ // returns true when the run is lost
+  const r=s.royal;
+  if(r&&!r.done&&!r.dead&&s.t>s.first-1){
+    r.x+=Math.sign(r.tx-r.x)*.45;r.y=groundY(r.x)-7; // along the ground: the living walls part to let her through, so shelters stay overhead
+    if(Math.abs(r.x-r.tx)<6)r.done=1;
+    const raft=s.objs.find(o=>o.kind==="raft"&&o.float>0&&Math.abs(o.x-r.x)<o.w+10);
+    if(raft)r.y=raft.y-raft.r-7; // in a flood she rides the raft
+    else if(s.wl!=null&&floodedAt(r.x)&&r.y>s.wl)r.hp-=.5*s.dmg;
+    for(const b of s.bodies)if(b.kind!=="water"&&!b.held&&Math.hypot(b.x-r.x,b.y-r.y)<b.r+10){
+      if(Math.hypot(b.vx,b.vy)<2.5){b.vx+=Math.sign(b.x-r.x)*.8;continue;} // rolling slowly: the bearers shove it aside
+      if(b.kind==="boulder"){r.hp-=60;b.vy=-4;b.vx=-b.vx;}else{r.hp-=KIND[b.kind].dmg*1.5*s.dmg;b.dead=true;}}
+    if(r.hp<=0){r.hp=0;r.dead=1;finish(false,"The queen was lost on the move.");return true;}
+  }
+  if(s.walkers&&s.t>s.first-1)for(const a of s.walkers){
+    if(a.dead||a.home)continue;
+    a.x+=Math.sign(s.L.hx-a.x)*.7;a.y=groundY(a.x)-5; // along the ground, through the colony's living walls
+    if(Math.abs(a.x-s.L.hx)<8){a.home=1;s.rescued++;continue;}
+    if(s.wl!=null&&floodedAt(a.x)&&a.y>s.wl)a.dead=1;
+    for(const b of s.bodies)if(b.kind!=="water"&&!b.held&&Math.hypot(b.x-a.x,b.y-a.y)<b.r+5&&Math.hypot(b.vx,b.vy)>=2.5){a.dead=1;break;}
+    if(a.dead)s.fx.push({x:a.x,y:a.y,vx:(Math.random()-.5)*3,vy:-3,a:0,life:60});
+  }
+  if(s.sat&&s.sat.alive&&s.sat.hp<=0){s.sat.alive=false;run.maxHp=Math.max(40,run.maxHp-20);s.hp=Math.min(s.hp,run.maxHp);}
+}
+function objectiveText(){
+  const o=s.spec.obj;if(!o)return"";
+  if(o==="rescue"){const dead=s.walkers.filter(a=>a.dead).length;return`Rescue: ${s.rescued}/6 home${dead?", "+dead+" lost":""}`;}
+  if(o==="royal"){const r=s.royal;return r.done?"The queen is safe!":`Royal move: ${Math.round(Math.abs(r.tx-r.x))} to go · queen ${Math.ceil(r.hp)}%`;}
+  if(o==="forage")return`Forage: ${s.foraged}/8 seeds`;
+  return s.sat.alive?`Satellite: ${Math.ceil(s.sat.hp)}/${s.sat.maxHp}`:"Satellite fell";
+}
+function objectiveResult(){
+  const o=s.spec.obj;if(!o)return"";
+  if(o==="rescue"){run.bonus+=2*s.rescued;run.food+=s.rescued;return` ${s.rescued}/6 foragers made it home (+${2*s.rescued} ants next wave, +${s.rescued} food).`;}
+  if(o==="royal"){if(s.royal.done){run.food+=10;s.hp+=20;return" The queen reached her new chamber: +10 food, and the nest heals 20.";}return" The queen never reached her new chamber.";}
+  if(o==="forage"){if(s.foraged>=8){run.food+=8;return" Forage quota met: +8 food.";}return` Foraged ${s.foraged}/8; quota missed.`;}
+  if(s.sat.alive){run.food+=6;return" The satellite held: +6 food.";}
+  return" The satellite fell, and the nest's max health dropped by 20.";
+}
+function collapse(c){ // half the ants scramble home, half fall
+  s.ants+=Math.floor(c.cost/2);s.lost+=Math.ceil(c.cost/2);
+  for(let i=0;i<10;i++){const[x,y]=c.pts[Math.floor(i/10*c.pts.length)];s.fx.push({x,y,vx:rnd([-2.5,2.5]),vy:rnd([-5,-1]),a:rnd([0,6]),life:70});}
+}
+function windAt(t){const[w,a]=s.L.wind;return w+a*Math.sin(t*0.9)+s.windAdd;}
+const quaking=()=>s.quake&&s.t>=s.quake[0]&&s.t<s.quake[1];
+
+function collide(b,x1,y1,x2,y2,rad,e,springy){
+  if(b.x<Math.min(x1,x2)-rad||b.x>Math.max(x1,x2)+rad||b.y<Math.min(y1,y2)-rad||b.y>Math.max(y1,y2)+rad)return false; // cheap reject: hundreds of drops x every segment
+  const dx=x2-x1,dy=y2-y1,l2=dx*dx+dy*dy;
+  const t=l2?Math.max(0,Math.min(1,((b.x-x1)*dx+(b.y-y1)*dy)/l2)):0;
+  let nx=b.x-(x1+t*dx),ny=b.y-(y1+t*dy);const d=Math.sqrt(nx*nx+ny*ny);
+  if(d>=rad||d===0)return false;
+  nx/=d;ny/=d;b.x+=nx*(rad-d);b.y+=ny*(rad-d);
+  const vn=b.vx*nx+b.vy*ny;
+  if(vn<0){const k=vn<(springy?-0.5:-3)?e:1;b.vx-=k*vn*nx;b.vy-=k*vn*ny;b.vx*=0.999;} // bounce only on hard hits
+  return vn<0?1e-6-vn:1e-6; // impact speed, truthy on any contact
+}
+
+function update(){
+  if(!s.ready){ // planning: no clock; the world holds still while the ants finish building and blocks settle
+    const cs=s.cons.map(c=>[c,built(c)]);stepObjs(0,cs);
+    for(const c of s.cons)if(c.p<1)c.p=Math.min(1,c.p+s.build/c.len);
+    for(const o of s.objs)if(o.p<1)o.p=Math.min(1,o.p+s.build/(o.r*6));
+    for(const f of s.fx){f.vy+=.3;f.x+=f.vx;f.y+=f.vy;f.a+=.25;f.life--;}s.fx=s.fx.filter(f=>f.life>0);
+    s.focus=s.held?s.focus-.5/(100*1.5**lv("focus")):Math.min(1,s.focus+.2/(100*1.5**lv("focus")));if(s.focus<=0){s.focus=0;release();}
+    return;
+  }
+  s.t+=1/60;const t=s.t,L=s.L;
+  if(lv("shift")&&t>0&&(s.regen+=lv("shift")/120)>=1){s.regen--;s.ants++;}
+  if(t>0&&t<s.end&&(s.crumbT-=1/60)<=0){s.crumbT=(lv("forager")?3:6)/(s.spec.obj==="forage"?2:1);const x=rnd([80,1120]);s.crumbs.push({x,y:groundY(x)-8,life:8});}
+  for(const c of s.crumbs)c.life-=1/60;
+  s.crumbs=s.crumbs.filter(c=>c.life>0);
+  const crack=lv("crack")>0,cs=s.cons.map(c=>[c,built(c)]);
+  s.spawns.forEach((p,i)=>{
+    if(t<p.from||t>p.to)return;
+    for(s.acc[i]+=p.rate/60;s.acc[i]>=1;s.acc[i]--)
+      s.bodies.push({kind:p.kind,r:KIND[p.kind].r,x:rnd(p.x),y:rnd(p.y),vx:rnd(p.vx),vy:rnd(p.vy),rot:0,wet:0,held:false,t:0,still:0,dead:false}); // one object shape for all bodies keeps V8 fast
+  });
+  const w=windAt(t),q=quaking();
+  floodStep();floodDamage();stepSpecial();if(stepObjective())return;
+  stepObjs(w,cs);
+  for(const b of s.bodies){
+    if(b.held){if(t>=b.t){b.held=false;b.vx=b.x<L.hx?1.5:-1.5;}continue;}
+    const k=KIND[b.kind];let touch=false;
+    if(q&&b.kind==="boulder")b.vx+=(Math.random()-.5)*0.25;
+    for(let n=0;n<SUB;n++){
+      b.vy+=G/SUB;b.vx+=w*4/b.r/SUB;b.x+=b.vx/SUB;b.y+=b.vy/SUB;
+      for(let j=1;j<s.ground.length;j++){const[a,c]=[s.ground[j-1],s.ground[j]];touch=collide(b,a[0],a[1],c[0],c[1],b.r,k.e)||touch;}
+      for(const[c,sg]of cs)for(const[x1,y1,x2,y2]of sg){const imp=collide(b,x1,y1,x2,y2,b.r+T,c.type==="spring"?2.2:k.e,c.type==="spring");if(imp){touch=true;
+        if(c.type==="sponge"&&b.kind!=="boulder"||crack&&(b.kind==="hail"||b.kind==="icicle"))b.dead=true;
+        else c.hp-=Math.max(0,imp-1)*k.mass;}}
+      for(const o of s.objs){ // hazards hit ant blocks/balls, wear them and shove them
+        if(o.p<1)continue;const vx0=b.vx,vy0=b.vy;let imp=0;
+        if(isBox(o)){const r=o.r,w=o.w;for(const[x1,y1,x2,y2]of[[o.x-w,o.y-r,o.x+w,o.y-r],[o.x+w,o.y-r,o.x+w,o.y+r],[o.x+w,o.y+r,o.x-w,o.y+r],[o.x-w,o.y+r,o.x-w,o.y-r]])imp=Math.max(imp,collide(b,x1,y1,x2,y2,b.r,k.e)||0);}
+        else imp=collide(b,o.x,o.y,o.x,o.y,b.r+o.r,k.e)||0;
+        if(imp){touch=true;o.hp-=Math.max(0,imp-1)*k.mass;{const mr=k.mass/massOf(o);o.vx-=(b.vx-vx0)*mr;o.vy-=(b.vy-vy0)*mr;}}
+      }
+      const gy=groundY(b.x);if(b.y+b.r>gy+2){b.y=gy-b.r;if(b.vy>0)b.vy=0;touch=true;} // heightfield safety net vs tunneling
+    }
+    if(b.kind==="water"&&s.wl!=null&&b.y>s.wl&&floodedAt(b.x))b.dead=true; // raindrop joins the flood
+    if(b.dead)continue;
+    const v=Math.hypot(b.vx,b.vy);if(v>k.max){b.vx*=k.max/v;b.vy*=k.max/v;}
+    b.rot+=b.kind==="debris"?0.2:b.vx/b.r;
+    if(b.kind==="boulder"){
+      b.still=v<0.15?b.still+1:0;
+      if(Math.abs(b.x-L.hx)<22+b.r*0.4&&b.y+b.r>s.hy-4){
+        if(!s.plug)return finish(false,"A boulder crushed the entrance. The queen is sealed in.");
+        s.plug=null;s.lost+=6;b.vy=-7;b.vx=(Math.sign(b.vx)||1)*6;b.y-=8; // the doorkeepers take the blow and heave it onward, over the entrance
+      }
+      if(s.sat&&s.sat.alive&&Math.abs(b.x-s.sat.x)<18+b.r*.4&&b.y+b.r>s.sat.y-4)s.sat.hp=0; // a boulder seals the satellite
+    }else{
+      if(touch){b.wet++;b.vx*=k.fr;} // ground friction: small stuff stops instead of rolling forever
+      if(Math.abs(b.x-L.hx)<22&&b.y>s.hy-b.r-6){const d=k.dmg*s.dmg;if(s.plug){s.plug.hp-=d*.8;s.hp-=d*.25;}else s.hp-=d;b.dead=true;}
+      else if(s.sat&&s.sat.alive&&Math.abs(b.x-s.sat.x)<18&&b.y>s.sat.y-b.r-6){s.sat.hp-=k.dmg*s.dmg;b.dead=true;}
+      else if(b.wet>k.soak)b.dead=true; // soaked into the soil / melted / settled
+    }
+    if(b.x<-300||b.x>WW+300||b.y>WH+100)b.dead=true;
+  }
+  s.bodies=s.bodies.filter(b=>!b.dead);
+  if(s.cons.some(c=>c.hp<=0)){for(const c of s.cons)if(c.hp<=0)collapse(c);s.cons=s.cons.filter(c=>c.hp>0);restrength();}
+  if(s.objs.some(o=>o.hp<=0)){for(const o of s.objs)if(o.hp<=0){collapse({cost:o.cost,pts:[[o.x-o.r,o.y],[o.x,o.y-o.r],[o.x+o.r,o.y]]});if(s.held===o)s.held=null;}s.objs=s.objs.filter(o=>o.hp>0);restrength();}
+  for(const f of s.fx){f.vy+=.3;f.x+=f.vx;f.y+=f.vy;f.a+=.25;f.life--;}
+  s.fx=s.fx.filter(f=>f.life>0);
+  for(const f of s.puffs){f.x+=f.vx;f.y+=f.vy;f.life--;}s.puffs=s.puffs.filter(f=>f.life>0);if(s.shakeT>0)s.shakeT--;
+  for(const c of s.cons)if(c.p<1)c.p=Math.min(1,c.p+s.build/c.len);
+  for(const o of s.objs)if(o.p<1)o.p=Math.min(1,o.p+s.build/(o.r*6));
+  if(s.objs.length&&s.cons.length&&((t*60)|0)%15===0)restrength();
+  s.focus=s.held?s.focus-.5/(100*1.5**lv("focus")):Math.min(1,s.focus+.2/(100*1.5**lv("focus")));
+  if(s.focus<=0){s.focus=0;release();}
+  if(s.plug&&s.plug.hp<=0){s.plug=null;s.lost+=6;}
+  if(s.cons.some(c=>c.type==="bivouac"&&c.p>=1))s.hp=Math.min(run.maxHp,s.hp+.025); // the living mound tends the entrance
+  if(s.hp<=0){s.hp=0;return finish(false,s.wl!=null&&floodedAt(L.hx)?"The flood poured into the nest.":"The nest was overwhelmed.");}
+  const rocksSettled=s.bodies.every(b=>b.kind!=="boulder"||b.still>60);
+  const small=s.bodies.filter(b=>b.kind!=="boulder").length;
+  const walking=(s.walkers&&s.walkers.some(w=>!w.dead&&!w.home)||s.royal&&!s.royal.done)&&t<s.end+30; // a rescue waits for the foragers
+  if(t>s.end+1.5&&rocksSettled&&!walking&&(small<4||t>s.end+8))finish(true,`The entrance held at ${Math.round(s.hp)}% with ${s.ants} ants to spare.`);
+}
+
+// ---------- drawing ----------
+// look: a naturalist's field journal. The world is ink and watercolor on paper, baked once per level/resize;
+// everything alive or moving (ants, rocks, hail, drops, debris) is crisp pixel art drawn on top of it.
+const calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const PIX={K:"#291814",D:"#742F29",M:"#AB5236",L:"#FF6C24",Y:"#FFA300",W:"#FFF1E8",B:"#29ADFF",b:"#065AB5",s:"#7f9cb4",I:"#d6f0ff",w:"#ffffff",
+  n:"#6e4a26",N:"#9a6a3a",c:"#00B543",C:"#A8E72C",r:"#C2C3C7"};
+// 16x11 hand-placed ant facing +x: outlined, shaded abdomen with highlight, eye with pupil,
+// elbowed antenna, mandible, jointed legs (two walk frames). K outline, D dark, M mid, L light, Y shine, W eye
+const ANT_BODY=[
+  ".............KK.",
+  "............K..K",
+  "..KKKK......K...",
+  ".KMLLMK....KKKK.",
+  "KDMYLMMK..KMMMMK",
+  "KDMMMMMDKKKMWWMK",
+  "KDDMMMDKMMKMWKMK",
+  ".KDDDDKKDDKKMMKK",
+  "..KKKKK.KK..KKK.",
+];
+function sprite(rows){ // rows of palette letters -> crisp canvas
+  const c=document.createElement("canvas");c.width=rows[0].length;c.height=rows.length;const g=c.getContext("2d");
+  rows.forEach((row,y)=>[...row].forEach((ch,x)=>{if(PIX[ch]){g.fillStyle=PIX[ch];g.fillRect(x,y,1,1);}}));
+  return c;
+}
+const ANTS=[[".....K..K..K....","....K...K...K..."],["......K.K.K.....",".....K..K..K...."]].map(l=>sprite([...ANT_BODY.map(r=>r.slice(0,16)),...l]));
+const CROWN=sprite(["Y..Y..Y","YY.Y.YY","YLYLYLY","YYYYYYY"]);
+const SEED=sprite(["..K..",".KYK.","KYLYK","KYYYK",".KKK."]);
+const DROP=sprite(["..b..",".bBb.","bBwBb","bBBBb",".bbb."]);
+const HAIL=sprite([".sss.","sIIIs","sIwIs","sIIIs",".sss."]);
+const ICICLE=sprite(["sIIIs","sIwIs",".IwI.",".sIs.",".sIs.","..s..","..s.."]);
+const TWIG=sprite(["........cC..","........c...","nNNNNNNNNNNn","nnnnnnnnnnnn"]);
+const CLIP=sprite(["...cC","..cc.",".cc..","cC..."]);
+const LEAF=sprite([".cC","cCc","cc."]);
+const PUFF=sprite([".r.","rrr",".r."]);
+const SPOT=sprite(["..YY..",".YwwY.","YwwwwY","YwwwwY",".YwwY.","..YY.."]);
+const rockCache={};
+function rockSprite(rw){ // a shaded pixel stone of world radius rw, lit from the top-left, with a moss cap and a crack
+  const pr=Math.max(3,Math.round(rw/1.5));if(rockCache[pr])return rockCache[pr];
+  const n=pr*2+2,c=document.createElement("canvas");c.width=c.height=n;const g=c.getContext("2d"),sh=["#49333B","#5F574F","#A28879","#C2C3C7"];
+  for(let y=0;y<n;y++)for(let x=0;x<n;x++){
+    const dx=x-pr-.5,dy=y-pr-.5,d=Math.hypot(dx,dy);if(d>pr)continue;
+    let col="#291814";
+    if(d<=pr-1){col=sh[Math.max(0,Math.min(3,Math.floor(((-dx-dy)/(pr*1.6)+.35+((x*7+y*13)%5)*.03)*4)))];
+      if(dy<-pr*.55&&Math.abs(dx)<pr*.6&&(x+y)%3)col=(x+y)%2?"#008751":"#00B543";}
+    g.fillStyle=col;g.fillRect(x,y,1,1);
+  }
+  g.fillStyle="#291814";for(let i=0;i<pr*.8;i++)g.fillRect(pr-Math.floor(pr*.3)+i,pr+1+Math.round(Math.sin(i)*1.5),1,1);
+  return rockCache[pr]=c;
+}
+$("iAnt").src=ANTS[0].toDataURL();$("iSeed").src=SEED.toDataURL();
+// Sprites are queued and drawn after the world, crisp, on a grid finer than the illustration's brush.
+let antQ=[],shake=[0,0];
+function sprite2(img,x,y,a,px,flip){antQ.push({img,x,y,a,w:img.width*px,h:img.height*px,flip});}
+function ant(x,y,a,f=0,size=1){sprite2(ANTS[f&1],x,y,a,1.5*size,false);}
+function flushAnts(m){
+  for(const q of antQ){m.save();m.translate(q.x,q.y);m.rotate(q.a);if(q.flip)m.scale(-1,1);m.drawImage(q.img,-q.w/2,-q.h/2,q.w,q.h);m.restore();}
+  antQ=[];
+}
+
+let scene=null,baked=null;
+const preview=i=>{const L=LEVELS[i],ground=smooth(L.terrain,3);return{L,ground,hy:groundY(L.hx,ground)};};
+function surface(x,g){x.moveTo(-4000,g[0][1]);for(const[a,b]of g)x.lineTo(a,b);x.lineTo(5000,g[g.length-1][1]);}
+// ---- pen and brush: every illustrated line is drawn twice, slightly offset; every wash is layered translucent pigment
+const INK="#2b2118";
+function inkPath(x,path,w,R,a=.85,col=INK){
+  x.save();x.strokeStyle=col;x.lineCap="round";x.lineJoin="round";
+  for(const[k,al]of[[1,a],[.5,a*.6]]){x.save();x.translate((R()-.5)*1.6,(R()-.5)*1.6);x.globalAlpha=al;x.lineWidth=w*k;x.beginPath();path(x);x.stroke();x.restore();}
+  x.restore();
+}
+function wash(x,path,col,R,a=.32){
+  x.save();x.fillStyle=col;
+  for(let i=0;i<3;i++){x.save();x.globalAlpha=a*(1-i*.22);x.translate((R()-.5)*5,(R()-.5)*5);x.beginPath();path(x);x.fill();x.restore();}
+  x.globalAlpha=a*.55;x.strokeStyle=col;x.lineWidth=3;x.beginPath();path(x);x.stroke(); // pigment pools at the edge
+  x.restore();
+}
+function paper(x,W,H,R){
+  x.fillStyle="#f1e7d0";x.fillRect(0,0,W,H);
+  for(let i=0;i<W*H/700;i++){x.fillStyle=R()<.5?"rgba(120,90,50,.07)":"rgba(255,255,255,.22)";x.fillRect(R()*W,R()*H,1+R()*2,1+R()*2);}
+  x.strokeStyle="rgba(120,90,50,.06)";for(let i=0;i<40;i++){x.lineWidth=1;x.beginPath();const px=R()*W,py=R()*H;x.moveTo(px,py);x.lineTo(px+(R()-.5)*60,py+(R()-.5)*20);x.stroke();}
+}
+function bake(){
+  const W=ctx.canvas.width,H=ctx.canvas.height,L=scene.L,g=scene.ground,hx=L.hx,hy=scene.hy,cy=Math.max(hy+80,650);
+  let seed=LEVELS.indexOf(L)*7919+17;const R=()=>(seed=seed*16807%2147483647)/2147483647;
+  const mk=()=>{const c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");return[c,x];};
+  const world=x=>x.setTransform(scale,0,0,scale,ox,oy);
+
+  // back: paper, loose watercolor sky bands, an inked sun, a meadow of giant grass drawn in outline
+  const[back,b]=mk();paper(b,W,H,R);world(b);
+  for(let i=0;i<5;i++){const y0=-220+i*105;
+    wash(b,x=>{x.moveTo(-500,y0);for(let px=-500;px<=1700;px+=50)x.lineTo(px,y0+140+Math.sin(px*.007+i*1.7)*28+(R()-.5)*8);x.lineTo(1700,y0);x.closePath();},i<2?L.sky[0]:L.sky[1],R,.2);}
+  wash(b,x=>x.arc(1030,95,52,0,7),"#ffcf5a",R,.5);
+  inkPath(b,x=>x.arc(1030,95,55,.4,2.9),1.6,R,.7);
+  for(let i=0;i<9;i++){const a=i/9*Math.PI*2;inkPath(b,x=>{x.moveTo(1030+Math.cos(a)*68,95+Math.sin(a)*68);x.lineTo(1030+Math.cos(a)*84,95+Math.sin(a)*84);},1.4,R,.5);}
+  for(let i=0;i<13;i++){ // grass blades as tall as trees, seen from the ground
+    const x0=R()*1400-100,h=300+R()*360,w=24+R()*34,lean=(R()-.5)*220,tx=x0+lean,ty=720-h;
+    const path=x=>{x.moveTo(x0-w/2,720);x.quadraticCurveTo(x0-w/3,720-h*.6,tx,ty);x.quadraticCurveTo(x0+w/3,720-h*.6,x0+w/2,720);};
+    wash(b,path,i%3?"#a9c77a":"#8fb46a",R,.16);inkPath(b,path,1.5,R,.4);
+    inkPath(b,x=>{x.moveTo(x0,720);x.quadraticCurveTo(x0+lean*.2,720-h*.55,tx,ty);},.9,R,.25);
+  }
+  for(let i=0;i<3;i++){ // dandelions and daisies, sketched
+    const fx=120+R()*960,fy=140+R()*200,r=26+R()*22,daisy=R()<.5;
+    inkPath(b,x=>{x.moveTo(fx,fy);x.quadraticCurveTo(fx+(R()-.5)*60,fy+200,fx+(R()-.5)*40,720);},1.4,R,.45);
+    for(let p=0;p<11;p++){const a=p/11*Math.PI*2,path=x=>x.ellipse(fx+Math.cos(a)*r*.75,fy+Math.sin(a)*r*.75,r*.42,r*.16,a,0,7);
+      wash(b,path,daisy?"#ffffff":"#ffd23f",R,.35);inkPath(b,path,1,R,.45);}
+    wash(b,x=>x.arc(fx,fy,r*.32,0,7),daisy?"#ffcf3f":"#e3a21a",R,.6);inkPath(b,x=>x.arc(fx,fy,r*.32,0,7),1.2,R,.6);
+  }
+  if(L.branch){const[a,e,y]=L.branch;
+    const path=x=>{x.moveTo(e+260,y-62);x.quadraticCurveTo((a+e)/2,y-6,a,y-8);x.lineTo(a,y+8);x.quadraticCurveTo((a+e)/2,y+12,e+260,y-38);x.closePath();};
+    wash(b,path,"#8a5a34",R,.55);inkPath(b,path,2,R);wash(b,x=>{x.moveTo(e+260,y-64);x.quadraticCurveTo((a+e)/2,y-8,a,y-10);x.lineTo(a,y-5);x.quadraticCurveTo((a+e)/2,y-2,e+260,y-58);},"#ffffff",R,.7);
+    for(let px=a+40;px<e;px+=26){const l=14+(px*7%11),ip=x=>{x.moveTo(px-5,y+8);x.lineTo(px+5,y+8);x.lineTo(px,y+l+10);x.closePath();};wash(b,ip,"#bfe3f7",R,.5);inkPath(b,ip,1,R,.7);}
+  }
+
+  // ground: soil wash with darker depths, ink strata, pebbles and roots, a hatched base, the nest cutaway, an inked grass line
+  const[ground,x]=mk();world(x);
+  const soil=xx=>{surface(xx,g);xx.lineTo(5000,4000);xx.lineTo(-4000,4000);xx.closePath();};
+  wash(x,soil,"#c99a62",R,.6);wash(x,soil,"#a8703f",R,.28);
+  x.save();x.beginPath();soil(x);x.clip();
+  for(const d of[95,180])wash(x,xx=>{xx.moveTo(-4000,g[0][1]+d);for(let px=-100;px<=1300;px+=40)xx.lineTo(px,groundY(px,g)+d+Math.sin(px*.013+d)*10);xx.lineTo(5000,g[g.length-1][1]+d);xx.lineTo(5000,4000);xx.lineTo(-4000,4000);xx.closePath();},"#7e4f2b",R,.2);
+  x.setLineDash([10,7]);for(const d of[55,130]){inkPath(x,xx=>{for(let i=0;i<=60;i++){const px=-100+i*24;xx.lineTo(px,groundY(px,g)+d+Math.sin(px*.02+d)*7);}},1,R,.3);}x.setLineDash([]);
+  for(let i=0;i<16;i++){const rx=R()*1200,ry=groundY(rx,g)+6,c1=(R()-.5)*60,c2=(R()-.5)*80,ex=(R()-.5)*90,ey=60+R()*50;
+    inkPath(x,xx=>{xx.moveTo(rx,ry);xx.bezierCurveTo(rx+c1,ry+30,rx+c2,ry+50,rx+ex,ry+ey);},1.1,R,.5);}
+  for(let i=0;i<60;i++){const px=R()*1250-25,py=groundY(px,g)+20+R()*170,r=3+R()*8,rot=R()*3,path=xx=>xx.ellipse(px,py,r*1.3,r,rot,0,7);
+    wash(x,path,R()<.5?"#9a9086":"#b9ab98",R,.5);inkPath(x,path,1,R,.6);}
+  x.globalAlpha=.13;x.strokeStyle=INK;x.lineWidth=1;for(let i=-80;i<220;i++){x.beginPath();x.moveTo(i*8,720);x.lineTo(i*8+50,650);x.stroke();}x.globalAlpha=1;
+  const tun=xx=>{xx.moveTo(hx,hy+4);xx.quadraticCurveTo(hx-50,(hy+cy)/2,hx+30,cy);};
+  x.lineCap="round";x.strokeStyle=INK;x.lineWidth=31;x.beginPath();tun(x);x.stroke();x.strokeStyle="#5a3418";x.lineWidth=26;x.beginPath();tun(x);x.stroke();
+  const ch=xx=>xx.ellipse(hx+50,cy,74,29,0,0,7);
+  x.fillStyle="#5a3418";x.beginPath();ch(x);x.fill();inkPath(x,ch,2.6,R);
+  wash(x,xx=>xx.ellipse(hx+30,cy+2,46,20,0,0,7),"#ffcf6a",R,.35);
+  const lamp=xx=>{xx.moveTo(hx-9,cy+4);xx.quadraticCurveTo(hx,cy-6,hx+9,cy+4);xx.closePath();};
+  wash(x,lamp,"#ffd23f",R,.8);inkPath(x,lamp,1.2,R);inkPath(x,xx=>{xx.moveTo(hx,cy+4);xx.lineTo(hx,cy+16);},2,R,.7);
+  x.restore();
+  x.font="24px Caveat, 'Segoe Print', cursive";x.fillStyle=INK;x.globalAlpha=.8;x.fillText("queen's chamber",hx+128,cy+38);x.globalAlpha=1;
+  inkPath(x,xx=>{xx.moveTo(hx+126,cy+28);xx.quadraticCurveTo(hx+120,cy+14,hx+112,cy+10);xx.moveTo(hx+112,cy+10);xx.lineTo(hx+120,cy+8);xx.moveTo(hx+112,cy+10);xx.lineTo(hx+116,cy+17);},1.2,R,.7);
+  wash(x,xx=>{surface(xx,g);for(let i=g.length-1;i>=0;i--)xx.lineTo(g[i][0],g[i][1]+12);xx.closePath();},"#7fae4c",R,.45);
+  inkPath(x,xx=>surface(xx,g),2.4,R);
+  const frost=/Hail|Ice/.test(L.force);
+  for(let px=-40;px<1240;px+=5+R()*7){
+    if(Math.abs(px-hx)<34)continue;
+    const py=groundY(px,g),h=6+R()*14,lean=(R()-.5)*8;
+    inkPath(x,xx=>{xx.moveTo(px,py);xx.quadraticCurveTo(px+lean*.3,py-h*.6,px+lean,py-h);},1,R,.55,"#3c5a24");
+    if(frost&&R()<.4)wash(x,xx=>xx.arc(px+lean,py-h,1.8,0,7),"#ffffff",R,.9);
+    if(R()<.03){const fc=R()<.5?"#ffffff":"#ffb3c7";for(let p=0;p<5;p++){const a=p/5*Math.PI*2;wash(x,xx=>xx.arc(px+lean+Math.cos(a)*3,py-h+Math.sin(a)*3,2.2,0,7),fc,R,.8);}
+      wash(x,xx=>xx.arc(px+lean,py-h,1.6,0,7),"#ffc93c",R,.9);}
+  }
+  const ent=xx=>xx.ellipse(hx,hy+2,27,9,0,0,7);
+  x.fillStyle="#24130a";x.beginPath();ent(x);x.fill();inkPath(x,ent,2,R);
+
+  // front: sketched foreground blades in the corners and the darker edges of an old page
+  const[front,f]=mk();world(f);
+  for(const[x0,dir]of[[-40,1],[40,1],[1120,-1],[1210,-1]]){const h=200+R()*110,path=xx=>{xx.moveTo(x0-22,790);xx.quadraticCurveTo(x0,790-h*.6,x0+dir*(50+R()*30),790-h);xx.quadraticCurveTo(x0+16,790-h*.5,x0+26,790);};
+    wash(f,path,"#5f8a3a",R,.5);inkPath(f,path,2,R,.8);}
+  f.setTransform(1,0,0,1,0,0);
+  const gr=f.createRadialGradient(W/2,H/2,Math.min(W,H)*.42,W/2,H/2,Math.max(W,H)*.72);gr.addColorStop(0,"rgba(110,80,40,0)");gr.addColorStop(1,"rgba(110,80,40,.38)");
+  f.fillStyle=gr;f.fillRect(0,0,W,H);
+  return{back,ground,front};
+}
+
+// ---- man-made disasters and the tornado: big things, drawn in ink like the world
+function drawBoot(x,yb,a){ // a: 0..1 opacity
+  ctx.save();ctx.globalAlpha=a;const R=Math.random;
+  const sole=k=>{k.moveTo(x-62,yb);k.lineTo(x+70,yb);k.quadraticCurveTo(x+86,yb-14,x+66,yb-30);k.lineTo(x-40,yb-34);k.quadraticCurveTo(x-70,yb-30,x-62,yb);};
+  const up=k=>{k.moveTo(x-38,yb-32);k.lineTo(x-30,yb-420);k.lineTo(x+40,yb-420);k.lineTo(x+52,yb-30);};
+  wash(ctx,up,"#6d4c35",R,.75);wash(ctx,sole,"#3a2a20",R,.9);inkPath(ctx,up,3,R);inkPath(ctx,sole,3,R);
+  for(let i=0;i<6;i++){const yy=yb-70-i*26;inkPath(ctx,k=>{k.moveTo(x-22,yy);k.lineTo(x+30,yy-14);k.moveTo(x-22,yy-14);k.lineTo(x+30,yy);},1.5,R,.7,"#f1e7d0");}
+  ctx.restore();
+}
+function drawMower(x,g,dir,lift){
+  const R=Math.random,b=g-34-lift;ctx.save();
+  const body=k=>{k.moveTo(x-46,b+18);k.lineTo(x-40,b-14);k.lineTo(x+40,b-14);k.lineTo(x+46,b+18);k.closePath();};
+  wash(ctx,body,"#c0392b",R,.75);inkPath(ctx,body,2.4,R);
+  for(const wx of[x-32,x+32]){const wh=k=>k.arc(wx,g-12-lift,12,0,7);wash(ctx,wh,"#3a3a3a",R,.8);inkPath(ctx,wh,2,R);}
+  inkPath(ctx,k=>{k.moveTo(x-dir*40,b-12);k.lineTo(x-dir*110,b-150);k.lineTo(x-dir*130,b-150);},3,R);
+  if(!lift)for(let i=0;i<4;i++)inkPath(ctx,k=>{const yy=g-18-i*7;k.moveTo(x+dir*52,yy);k.lineTo(x+dir*(70+i*6),yy-2);},1.2,R,.5);
+  ctx.restore();
+}
+function drawLens(p){
+  const R=Math.random,lx=p.x+120,ly=70;ctx.save();
+  wash(ctx,k=>{k.moveTo(lx-46,ly+8);k.lineTo(lx+46,ly-8);k.lineTo(p.x+4,p.y);k.lineTo(p.x-4,p.y);k.closePath();},"#ffe27a",R,.28);
+  const lens=k=>k.arc(lx,ly,48,0,7);wash(ctx,lens,"#d8f0ff",R,.35);inkPath(ctx,lens,3.4,R);inkPath(ctx,k=>k.arc(lx-10,ly-12,22,3.6,4.6),2,R,.5,"#ffffff");
+  inkPath(ctx,k=>{k.moveTo(lx+34,ly+34);k.lineTo(lx+100,ly+110);},10,R,.85,"#6d4c35");
+  ctx.restore();
+}
+function drawTornado(p,g,clock){
+  const R=Math.random;ctx.save();
+  for(let k=0;k<12;k++){const y=g-k*36,rx=18+k*13,ry=5+k*2,dx=Math.sin(clock*3+k*.7)*k*3,el=c=>c.ellipse(p.x+dx,y,rx,ry,0,0,7);
+    wash(ctx,el,"#8d8f96",R,.12);inkPath(ctx,c=>c.ellipse(p.x+dx,y,rx,ry,0,clock*4+k,clock*4+k+4),1.6,R,.6);}
+  ctx.restore();
+}
+
+function draw(){
+  const W=ctx.canvas.width,H=ctx.canvas.height;ctx.setTransform(1,0,0,1,0,0);
+  if(!scene){ctx.fillStyle="#f1e7d0";ctx.fillRect(0,0,W,H);return;}
+  const key=W+"x"+H+"@"+scale.toFixed(4)+","+oy.toFixed(1); // re-bake when the world moves inside the canvas
+  if(!baked||baked.scene!==scene||baked.key!==key)baked={...bake(),scene,key};
+  const clock=performance.now()/1000,q=s&&!calm&&(quaking()||s.shakeT>0),amp=s&&s.shakeT>0?14:8;
+  const sx=q?(Math.random()-.5)*amp*scale:0,sy=q?(Math.random()-.5)*amp*.6*scale:0;shake=[sx/scale,sy/scale];
+  ctx.drawImage(baked.back,0,0);ctx.drawImage(baked.ground,sx,sy);
+  ctx.setTransform(scale,0,0,scale,ox+sx,oy+sy);
+  const L=scene.L,hx=L.hx,hy=scene.hy,cy=Math.max(hy+80,650),Rn=Math.random;
+
+  // the queen, crowned, bobbing; water creeps into the chamber as the entrance takes damage
+  const qy=cy+2+Math.sin(clock*2)*1.2;
+  const away=s&&s.royal&&(s.royal.done||s.royal.dead||s.ready&&s.t>s.first-1); // on a royal move the chamber empties
+  if(!away){sprite2(ANTS[0],hx+62,qy,0,2.4,true);sprite2(CROWN,hx+62-11,qy-12,0,2.4,false);}
+  const flood=s?1-s.hp/run.maxHp:0;
+  if(flood>0){ctx.save();ctx.beginPath();ctx.ellipse(hx+50,cy,72,27,0,0,7);ctx.clip();
+    wash(ctx,c=>c.rect(hx-30,cy+27-54*flood+Math.sin(clock*3)*1.5,170,60),"#5aa0d8",Rn,.45);ctx.restore();}
+  const idle=s?Math.min(8,Math.ceil(s.ants/5)):6;
+  for(let i=0;i<idle;i++){const p=(clock*20+i*31)%160,x=hx-80+p;ant(x,groundY(x)-5,0,(clock*8+i)|0,.9);}
+  if(!s)return;
+
+  const t=s.t,w=windAt(t),sp=s.sp;
+  if(s.wl!=null&&s.flooded){ // floodwater: a blue wash with an inked surface line
+    for(let i=0;i<NC;i++)if(s.flooded[i]){const x=i*FC,g=groundY(x+FC/2),y=s.wl+Math.sin(clock*2+i*.5)*1.5;if(g>y){ctx.fillStyle="rgba(90,160,216,.42)";ctx.fillRect(x,y,FC+.5,g-y+4);}}
+    ctx.strokeStyle=INK;ctx.globalAlpha=.6;ctx.lineWidth=1.4;ctx.beginPath();let on=false;
+    for(let i=0;i<NC;i++){const x=i*FC+FC/2,y=s.wl+Math.sin(clock*2+i*.5)*1.5;if(s.flooded[i]&&groundY(x)>s.wl){on?ctx.lineTo(x,y):ctx.moveTo(x,y);on=true;}else on=false;}
+    ctx.stroke();ctx.globalAlpha=1;
+  }
+  if(Math.abs(w)>0.01){ctx.strokeStyle=INK;ctx.globalAlpha=.35;ctx.lineWidth=1.3;ctx.lineCap="round";
+    for(let i=0;i<14;i++){const x=((i*173+t*w*5000)%1500+1500)%1500-150,y=(i*97)%460+30,l=40+w*260;
+      ctx.beginPath();ctx.moveTo(x-l,y);ctx.quadraticCurveTo(x-l/2,y-8,x,y);ctx.arc(x,y-7,7,Math.PI/2,-Math.PI/2*.2,true);ctx.stroke();}ctx.globalAlpha=1;}
+  if(sp&&sp.type==="steps")for(const st of sp.steps){const d=st.t-t;if(d>0&&d<1.3){const k=1-d/1.3,g=groundY(st.x);
+    wash(ctx,c=>c.ellipse(st.x,g-2,40+50*k,6+5*k,0,0,7),"#3a2a20",Rn,.15+.3*k);}}
+  if(sp&&sp.type==="lens"&&sp.on)drawLens(sp);
+  if(sp&&sp.type==="tornado"&&sp.on)drawTornado(sp,groundY(sp.x),clock);
+  if(s.royal){ // the route, dashed in ink, and a flag over the new chamber
+    const r=s.royal,a=Math.min(hx,r.tx),b=Math.max(hx,r.tx);
+    ctx.setLineDash([6,8]);ctx.strokeStyle=INK;ctx.globalAlpha=.45;ctx.lineWidth=1.6;ctx.beginPath();for(let x=a;x<=b;x+=10)ctx.lineTo(x,groundY(x)-3);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
+    const g=groundY(r.tx),flag=c=>{c.moveTo(r.tx,g-50);c.lineTo(r.tx+26,g-42);c.lineTo(r.tx,g-34);c.closePath();};
+    inkPath(ctx,c=>{c.moveTo(r.tx,g);c.lineTo(r.tx,g-52);},2,Rn);wash(ctx,flag,"#c0392b",Rn,.7);inkPath(ctx,flag,1.2,Rn,.8);
+    const e=c=>c.ellipse(r.tx,g+2,18,6,0,0,7);ctx.fillStyle=r.done?"#24130a":"rgba(36,19,10,.45)";ctx.beginPath();e(ctx);ctx.fill();
+    ctx.font="20px Caveat, cursive";ctx.fillStyle=INK;ctx.globalAlpha=.8;ctx.fillText("new chamber",r.tx-38,g-58);ctx.globalAlpha=1;
+  }
+  if(s.sat){ // a satellite chamber: a second entrance with its own little pip bar
+    const sa=s.sat,e=c=>c.ellipse(sa.x,sa.y+2,20,7,0,0,7);ctx.fillStyle=sa.alive?"#24130a":"#7a6a58";ctx.beginPath();e(ctx);ctx.fill();inkPath(ctx,e,1.6,Rn,.8);
+    if(sa.alive)for(let i=0;i<6;i++){ctx.fillStyle=i<Math.ceil(sa.hp/sa.maxHp*6)?"#c0392b":"rgba(43,33,24,.2)";ctx.fillRect(sa.x-18+i*6,sa.y-26,5,5);}
+    ctx.font="18px Caveat, cursive";ctx.fillStyle=INK;ctx.globalAlpha=.75;ctx.fillText(sa.alive?"satellite":"fallen",sa.x-24,sa.y-32);ctx.globalAlpha=1;
+  }
+
+  // living constructs: a pencil strand marks each one's shape; the ants that form it are pixel sprites
+  const COL={chain:"#6b6358",arch:"#6b6358",cup:"#6b6358",spring:"#e0b020",sponge:"#3a8fd0",bridge:"#6b6358",dome:"#6b6358",dam:"#6b6358",bivouac:"#a0603a"},st=ANT/2;
+  const stroke2=(pts,w,col,dx=0,dy=0)=>{ctx.strokeStyle=col;ctx.lineWidth=w;ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x+dx,y+dy):ctx.moveTo(x+dx,y+dy));ctx.stroke();};
+  for(const c of s.cons){
+    const sg=built(c),pts=sg.length?[[sg[0][0],sg[0][1]],...sg.map(q=>[q[2],q[3]])]:[c.pts[0]];
+    ctx.lineCap="round";ctx.lineJoin="round";
+    const hurt=1-c.hp/c.maxHp,col=hurt>.5&&((clock*(4+hurt*8))|0)%2?"#c0392b":COL[c.type];
+    const glow=c.type==="spring"||c.type==="sponge";
+    ctx.globalAlpha=.6;stroke2(pts,glow?T*2+8:3,col);ctx.globalAlpha=1;
+    const tot=sg.reduce((n,q)=>n+Math.hypot(q[2]-q[0],q[3]-q[1]),0);
+    const at=D=>{let q=sg[sg.length-1];for(const gg of sg){const l=Math.hypot(gg[2]-gg[0],gg[3]-gg[1]);if(D<=l){q=gg;break;}D-=l;}
+      const l=Math.hypot(q[2]-q[0],q[3]-q[1])||1,f=Math.min(1,Math.max(0,D/l)),a=Math.atan2(q[3]-q[1],q[2]-q[0]);
+      return[q[0]+(q[2]-q[0])*f,q[1]+(q[3]-q[1])*f,a,-Math.sin(a),Math.cos(a)];};
+    const put=(D,v,rot,i,size=.8)=>{const[x,y,a,px,py]=at(D);ant(x+px*v,y+py*v,a+rot+Math.sin(clock*7+i)*(0.2+hurt*.8),(clock*6+i)|0,size);};
+    const hs=i=>{const v=Math.sin(i*12.9898)*43758.5453;return v-Math.floor(v);};
+    const ft={dome:"arch",bridge:"cup",dam:"sponge",bivouac:"sponge"}[c.type]||c.type;
+    if(c.type==="dam"&&c.p>=1){const poly=k=>{c.pts.forEach(([x,y],i)=>i?k.lineTo(x,y):k.moveTo(x,y));k.closePath();};wash(ctx,poly,"#8a5a34",Rn,.35);inkPath(ctx,poly,1.4,Rn,.6);
+      for(let i=0;i<40;i++){const u=hs(i+c.id),v=hs(i+c.id+9),[x0,g0]=c.pts[0],[x3]=c.pts[3],tp=c.pts[1][1];ant(x0+(x3-x0)*(.1+.8*u),tp+(g0-tp)*(.15+.75*v),hs(i)*6.28,(clock*6+i)|0,.65);}}
+    if(!sg.length){}
+    else if(ft==="arch"){for(let D=0,i=0;D<=tot;D+=8,i++){put(D,-6,0,i);put(D,6,Math.PI,i+50);}for(let D=8,i=0;D<=tot;D+=16,i++)put(D,0,i%2?.9:-.9,i+100,.7);}
+    else if(ft==="cup"){for(let D=0,i=0;D<=tot;D+=7,i++)put(D,0,i%2?Math.PI:0,i);
+      for(let D=10,i=0;D<=tot;D+=20,i++){const[x,y]=at(D),sw=Math.sin(clock*2+i)*.25;for(let k=1;k<=2;k++)ant(x+Math.sin(sw)*9*k,y+9*k,Math.PI/2+sw,(clock*6+i+k)|0,.7);}}
+    else if(ft==="spring"){for(let D=0,i=0;D<=tot;D+=4,i++){const ph=D*.55+clock*3;put(D,6*Math.sin(ph),Math.atan(3.3*Math.cos(ph)),i,.7);}}
+    else if(ft==="sponge"){for(let D=0,i=0;D<=tot;D+=3.5,i++)put(D,(hs(i)-.5)*14,hs(i+7)*6.28,i,.65+hs(i+3)*.25);}
+    else{for(let D=0,i=0;D<=tot;D+=st,i++)put(D,(i%2?1:-1)*3,i%2?Math.PI:0,i);}
+    if(c.p<1){
+      ctx.setLineDash([3,7]);ctx.globalAlpha=.7;stroke2(c.pts,2,"#6b6358");ctx.globalAlpha=1;ctx.setLineDash([]);
+      const[ex,ey]=pts[pts.length-1],m=Math.atan2(ey-hy,ex-hx);
+      for(let i=0;i<6;i++){const f=(clock*0.9+i/6)%1;ant(hx+(ex-hx)*f,hy+(ey-hy)*f,m,(clock*10+i)|0,.9);}
+    }
+  }
+
+  // hazards: all pixel sprites
+  for(const b of s.bodies){
+    if(b.kind==="water")sprite2(DROP,b.x,b.y,0,1.5);
+    else if(b.kind==="hail")sprite2(HAIL,b.x,b.y,b.rot,1.6);
+    else if(b.kind==="icicle")sprite2(ICICLE,b.x,b.y,Math.atan2(b.vy,b.vx)-Math.PI/2,1.8);
+    else if(b.kind==="debris")sprite2(TWIG,b.x,b.y,b.rot,1.8);
+    else if(b.kind==="clip")sprite2(CLIP,b.x,b.y,b.rot,1.6);
+    else{const gy=groundY(b.x),lift=gy-b.y-b.r;
+      ctx.fillStyle=`rgba(43,33,24,${Math.max(0,.25-lift/500)})`;ctx.beginPath();ctx.ellipse(b.x,gy-1,b.r*(1+lift/500),b.r*.22,0,0,7);ctx.fill();
+      sprite2(rockSprite(b.r),b.x,b.y,b.held?Math.sin(clock*5)*0.06:b.rot,1.5);}
+  }
+
+  // ant blocks, balls and rafts: a sepia wash body, ink outline, ants on top
+  for(const o of s.objs){
+    const hurt=1-o.hp/o.maxHp,col=hurt>.5&&((clock*(4+hurt*8))|0)%2?"#c0392b":"#8a5a34",r=o.r,i0=o.id*37;
+    if(o.kind==="raft"){
+      const w=o.w,bob=Math.sin(clock*2+o.id)*(o.float?1.5:0),hull=c=>{c.moveTo(o.x-w,o.y-r+bob);c.lineTo(o.x+w,o.y-r+bob);c.lineTo(o.x+w*.8,o.y+r+bob);c.lineTo(o.x-w*.8,o.y+r+bob);c.closePath();};
+      wash(ctx,hull,col,Rn,.55);inkPath(ctx,hull,1.6,Rn,.8);
+      const n=Math.max(3,Math.round(2*w*o.p/7));
+      for(let j=0;j<n;j++){ant(o.x-w+7*(j+.5),o.y-r+bob,(j%2?Math.PI:0)+Math.sin(clock*7+j)*(.15+hurt*.8),(clock*6+i0+j)|0,.6);if(j%2)ant(o.x-w*.8+7*(j+.5)*.8,o.y+r*.4+bob,Math.PI,(clock*6+i0+j+50)|0,.55);}
+      if(o.p>=1){inkPath(ctx,c=>{c.moveTo(o.x,o.y-r+bob);c.lineTo(o.x,o.y-r-34+bob);},2,Rn);
+        const sail=c=>{c.moveTo(o.x+2,o.y-r-32+bob);c.quadraticCurveTo(o.x+26,o.y-r-20+bob,o.x+2,o.y-r-6+bob);c.closePath();};wash(ctx,sail,"#7fae4c",Rn,.7);inkPath(ctx,sail,1.2,Rn,.8);}
+    }else if(o.kind==="block"){
+      const n=Math.max(2,Math.round(2*r/7)),rows=Math.ceil(n*o.p),cell=2*r/n,box=c=>c.rect(o.x-r,o.y+r-rows*cell,2*r,rows*cell);
+      wash(ctx,box,col,Rn,.5);inkPath(ctx,box,1.4,Rn,.7);
+      for(let k=0;k<rows;k++)for(let j=0;j<n;j++){const id=i0+k*n+j;ant(o.x-r+cell*(j+.5),o.y+r-cell*(k+.5),(k%2?Math.PI:0)+Math.sin(clock*7+id)*(0.15+hurt*.8),(clock*6+id)|0,.6);}
+    }else{
+      const ball=c=>c.arc(o.x,o.y,r*Math.max(.2,o.p),0,7);wash(ctx,ball,col,Rn,.5);inkPath(ctx,ball,1.4,Rn,.7);
+      for(const[f,rr]of[[1,r*.72],[.6,r*.38]])if(o.p>=f*.6){const m=Math.max(3,Math.round(2*Math.PI*rr/8));
+        for(let j=0;j<m;j++){const a=o.rot+j/m*Math.PI*2;ant(o.x+Math.cos(a)*rr,o.y+Math.sin(a)*rr,a+Math.PI/2+Math.sin(clock*7+j)*(0.15+hurt*.8),(clock*6+i0+j)|0,.6);}}
+    }
+    if(o===s.held){ctx.strokeStyle=o.ground?"#b0567c":"#8a7a9a";ctx.lineWidth=2;ctx.setLineDash([4,6]);ctx.lineDashOffset=-clock*20;
+      if(isBox(o))ctx.strokeRect(o.x-o.w-6,o.y-r-6,2*o.w+12,2*r+12);else{ctx.beginPath();ctx.arc(o.x,o.y,r+6+Math.sin(clock*8)*2,0,7);ctx.stroke();}ctx.setLineDash([]);}
+    if(o.p<1){const m=Math.atan2(o.y-hy,o.x-hx);for(let i=0;i<6;i++){const f=(clock*0.9+i/6)%1;ant(hx+(o.x-hx)*f,hy+(o.y-hy)*f,m,(clock*10+i)|0,.9);}}
+  }
+  if(s.plug){const hurt=1-s.plug.hp/s.plug.maxHp,e=c=>c.ellipse(hx,hy+1,26,9,0,0,7);
+    wash(ctx,e,hurt>.5&&((clock*8)|0)%2?"#c0392b":"#8a5a34",Rn,.7);inkPath(ctx,e,1.6,Rn,.8);
+    for(let i=0;i<6;i++)ant(hx-20+i*8,hy+2+Math.sin(clock*6+i)*.8,-Math.PI/2,(clock*4+i)|0,.6);}
+  if(s.walkers)for(const a of s.walkers)if(!a.dead&&!a.home){const dir=Math.sign(hx-a.x)||1,moving=s.t>s.first-1;
+    sprite2(ANTS[moving?((clock*8+a.f)|0)&1:0],a.x,a.y,0,1.5,dir<0);sprite2(LEAF,a.x-dir*2,a.y-8,0,1.6,dir<0);}
+  if(s.royal&&!s.royal.dead){ // the queen riding on her bearers, crown on, with her health in pips
+    const r=s.royal,dir=Math.sign(r.tx-r.x)||1,moving=!r.done&&s.ready&&s.t>s.first-1,fr=moving?((clock*8)|0)&1:0;
+    for(let i=0;i<5;i++)ant(r.x-14+i*7,r.y+5,0,moving?((clock*8+i)|0):0,.55);
+    sprite2(ANTS[fr],r.x,r.y-6,0,2,dir<0);sprite2(CROWN,r.x-dir*9,r.y-16,0,2,false);
+    if(!r.done)for(let i=0;i<5;i++){ctx.fillStyle=i<Math.ceil(r.hp/20)?"#c0392b":"rgba(43,33,24,.2)";ctx.fillRect(r.x-14+i*6,r.y-30,5,5);}
+  }
+  for(const f of s.fx)ant(f.x,f.y,f.a,0,.8);
+  for(const f of s.puffs)sprite2(PUFF,f.x,f.y,0,1.5+(50-f.life)*.03);
+  for(const c of s.crumbs)if(c.life>2||((clock*6)|0)%2)sprite2(SEED,c.x,c.y+Math.sin(clock*4+c.x)*1.5,0,2.4,false);
+  if(sp&&sp.type==="lens"&&sp.on)sprite2(SPOT,sp.x,sp.y-2,0,1.5+Math.sin(clock*20)*.2);
+  if(sp&&sp.type==="steps")for(const st of sp.steps){const d=t-st.t;if(d>-.25&&d<.6){const g=groundY(st.x),k=d<0?1+d/.25:0;drawBoot(st.x,g-(d<0?-d*900:d*d*1400),d<.4?1:1-(d-.4)/.2);}}
+  if(sp&&sp.type==="mower"&&sp.on)drawMower(sp.x,groundY(sp.x),sp.dir,sp.bump?Math.min(60,sp.bump*3):0);
+  if(s.slow>0){ctx.fillStyle="rgba(131,118,156,.15)";ctx.fillRect(-4000,-4000,9000,9000);}
+
+  if(stroke&&stroke.length>1){ // pencil stroke, plus a blue-pencil ghost of what the ants will form and a handwritten label
+    const pl=planBuild(stroke),ok=pl&&!pl.why&&pl.cost<=s.ants;
+    ctx.lineCap="round";ctx.lineJoin="round";ctx.setLineDash([3,7]);ctx.globalAlpha=.8;stroke2(stroke,2,"#6b6358");ctx.globalAlpha=1;ctx.setLineDash([]);
+    if(pl){
+      const gc=ok?"rgba(58,110,165,.55)":"rgba(192,57,43,.55)";let lx,ly;
+      if(pl.plug){ctx.strokeStyle=gc;ctx.lineWidth=4;ctx.beginPath();ctx.ellipse(pl.x,pl.y,30,12,0,0,7);ctx.stroke();lx=pl.x+30;ly=pl.y-20;}
+      else if(pl.parts){for(const q of pl.parts)stroke2(q.pts,T*2+4,gc);const e=pl.parts[0].pts;[lx,ly]=e[e.length-1];}
+      else if(pl.obj){ctx.strokeStyle=gc;ctx.lineWidth=4;if(pl.raft)ctx.strokeRect(pl.x-pl.w,pl.y-pl.r,2*pl.w,2*pl.r);else if(pl.kind==="block")ctx.strokeRect(pl.x-pl.r,pl.y-pl.r,2*pl.r,2*pl.r);else{ctx.beginPath();ctx.arc(pl.x,pl.y,pl.r,0,7);ctx.stroke();}lx=pl.x+(pl.w||pl.r);ly=pl.y-pl.r;}
+      else{stroke2(pl.poly,T*2+4,gc);[lx,ly]=pl.poly[pl.poly.length-1];
+        for(const p of[pl.poly[0],pl.poly[pl.poly.length-1]]){ctx.fillStyle=anchoredPt(p)?"#2f7a3a":"#c0392b";ctx.beginPath();ctx.arc(p[0],p[1],5,0,7);ctx.fill();}}
+      const lbl=pl.why||(pl.kind.startsWith("bp:")?`${BP[pl.kind.slice(3)].name} · ${pl.cost} ants`:null)||`${pl.label||TOOLS[pl.kind].name} · ${pl.cost} ants${pl.obj?"":" · "+STRENGTH[[pl.poly[0],pl.poly[pl.poly.length-1]].filter(p=>anchoredPt(p)).length]}${pl.note?" ("+pl.note+")":""}`;
+      ctx.font="700 30px Caveat, 'Segoe Print', cursive";ctx.textAlign="left";ctx.lineWidth=5;ctx.strokeStyle="#f1e7d0";ctx.fillStyle=ok?INK:"#c0392b";
+      ctx.strokeText(lbl,lx+12,ly-12);ctx.fillText(lbl,lx+12,ly-12);
+    }
+  }
+}
+
+function hud(){
+  if(!s)return;
+  $("ants").textContent=s.ants;$("food").textContent=run.food;
+  $("rally").textContent=`Rally ×${s.charges.rally}`;$("rally").disabled=!s.charges.rally;
+  $("hazeBtn").textContent=s.slow>0?"Haze…":`Haze ×${s.charges.haze}`;$("hazeBtn").disabled=!s.charges.haze||s.slow>0||!s.ready;$("readyBtn").hidden=s.ready;
+  $("hp").style.width=s.hp/run.maxHp*100+"%";$("focus").style.width=s.focus*100+"%";
+  const t=s.t;
+  $("status").textContent=!s.ready?"Build your defences, then press Ready":t<s.first?`${s.L.force}: here it comes!`:t<s.end?"Hold on!":"Settling…";
+  $("obj").textContent=objectiveText();
+}
+
+// ---------- input ----------
+// Draw a shape and the ants form it. Auto reads the gesture; the other buttons force a shape.
+let MAXLEN=260,stroke=null,lastTap={o:null,t:0};
+const TOOLS={
+  auto:{name:"Draw"},
+  chain:{name:"Plank",mult:1},
+  block:{name:"Block"},
+  arch:{name:"Arch",mult:1,unlock:"arch"},
+  cup:{name:"Net",mult:1,unlock:"net"},
+  wedge:{name:"Wedge",mult:.8,unlock:"wedge"},
+  ball:{name:"Ball",unlock:"ballskill"},
+  spring:{name:"Spring",mult:2,max:110,unlock:"springpad"},
+  sponge:{name:"Sponge",mult:1.5,unlock:"spongemat"},
+  recall:{name:"Recall"},
+};
+const BP={ // complex constructs: each is several ant parts built together, all standing on something
+  bridge:{name:"Bridge",how:"drag between two supports"},
+  tower:{name:"Tower",how:"drag up from the ground"},
+  stairs:{name:"Stairs",unlock:"bp_stairs",how:"drag up from the ground"},
+  dome:{name:"Dome",unlock:"bp_dome",how:"drag across the ground"},
+  buttress:{name:"Buttress",unlock:"bp_buttress",how:"drag up from the ground"},
+  dam:{name:"Dam",unlock:"bp_dam",how:"drag along the ground"},
+  raft:{name:"Raft",unlock:"bp_raft",how:"drag on water or ground"},
+  plug:{name:"Plug",unlock:"bp_plug",how:"click the entrance"},
+  bivouac:{name:"Bivouac",unlock:"bp_bivouac",how:"click near the entrance"},
+};
+const bpList=()=>Object.keys(BP).filter(k=>!BP[k].unlock||lv(BP[k].unlock));
+let tab="s";
+function setTab(t){tab=t;$("tools").hidden=t!=="s";$("bps").hidden=t!=="b";$("tabS").className="tab"+(t==="s"?" on":"");$("tabB").className="tab"+(t==="b"?" on":"");}
+$("tabS").onclick=()=>setTab("s");$("tabB").onclick=()=>setTab("b");
+function renderBps(){
+  const box=$("bps");box.innerHTML="";
+  for(const k of bpList()){const b=document.createElement("button");b.textContent=BP[k].name;b.title=BP[k].how;
+    b.className=run.tool==="bp:"+k?"on":"";b.onclick=()=>{run.tool="bp:"+k;renderTools();setTab("b");};box.appendChild(b);}
+}
+function semi(cx,base,r,n=12){const p=[];for(let i=0;i<=n;i++){const a=Math.PI-i/n*Math.PI;p.push([cx+Math.cos(a)*r,base-Math.sin(a)*r]);}return p;}
+function planBlueprint(k,a,b){
+  const parts=[],P=(type,pts,bonus)=>parts.push({type,pts,bonus});
+  const cl=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+  let why="",mult=1;
+  if(k==="plug"){
+    if(Math.hypot(a[0]-s.L.hx,a[1]-s.hy)>80)why="Click the entrance";else if(s.plug)why="Already plugged";
+    return{kind:"bp:plug",plug:1,cost:12,why,x:s.L.hx,y:s.hy};
+  }
+  if(k==="raft"){
+    const x=(a[0]+b[0])/2,w=cl(Math.abs(b[0]-a[0])/2,30,90),y=(s.wl!=null&&floodedAt(x)?s.wl:surfaceBelow(x,Math.min(a[1],b[1])))-10;
+    return{kind:"bp:raft",obj:1,raft:1,x,y,r:10,w,cost:Math.ceil(2*w/7),why};
+  }
+  if(k==="bridge"){ // a deck between two supports, with ants hanging underneath as a truss
+    let[x1,y1]=a,[x2,y2]=b;const l=Math.hypot(x2-x1,y2-y1);if(l>340){x2=x1+(x2-x1)*340/l;y2=y1+(y2-y1)*340/l;}
+    if(l<40)return null;
+    if(!anchoredPt([x1,y1])||!anchoredPt([x2,y2]))why="A bridge needs support at both ends";
+    P("bridge",[[x1,y1],[x2,y2]],1.8);
+  }else if(k==="tower"||k==="buttress"){
+    const x=a[0],g=surfaceBelow(x,a[1]),top=cl(Math.min(a[1],b[1]),g-(k==="tower"?260:220),g-40),hh=g-top;
+    if(k==="tower"){ // two rails, a cap, and zigzag bracing between them
+      P("chain",[[x-9,g],[x-9,top]],1.5);P("chain",[[x+9,g],[x+9,top]],1.5);P("chain",[[x-9,top],[x+9,top]],1.5);
+      const z=[];for(let yy=g,i=0;yy>top;yy-=22,i++)z.push([i%2?x+9:x-9,yy]);z.push([z.length%2?x+9:x-9,top]);P("arch",z,1.5);
+    }else{ // a wall with a brace leaning in from each side
+      P("chain",[[x,g],[x,top]],1.4);
+      for(const sd of[-1,1]){const bx=x+sd*hh*.5;P("chain",[[bx,surfaceBelow(bx,top)],[x,top+hh*.4]],1.4);}
+    }
+  }else if(k==="stairs"){ // steps climbing from the footing toward the pointer
+    const x1=a[0],g=surfaceBelow(x1,a[1]),dx=cl(b[0]-x1,-300,300),rise=cl(g-b[1],30,240),n=Math.max(2,Math.round(Math.abs(dx)/32)),sx=dx/n,sy=rise/n,z=[[x1,g]];
+    for(let i=0;i<n;i++){const[px,py]=z[z.length-1];z.push([px,py-sy],[px+sx,py-sy]);}
+    P("chain",z,1.2);
+  }else if(k==="dome"||k==="bivouac"){
+    if(k==="bivouac"&&Math.abs(a[0]-s.L.hx)>160)why="Build it near the entrance";
+    if(k==="bivouac"&&s.cons.some(c=>c.type==="bivouac"))why="One bivouac at a time";
+    const x0=Math.min(a[0],b[0]),x1=Math.max(a[0],b[0]),r=k==="bivouac"?30:cl((x1-x0)/2,45,150),cx=k==="bivouac"?a[0]:(x0+x1)/2;
+    const base=Math.min(surfaceBelow(cx-r,a[1]-r),surfaceBelow(cx+r,a[1]-r));
+    P(k,semi(cx,base,r),k==="dome"?1.6:1.3);mult=k==="dome"?1.2:1.5;
+  }else if(k==="dam"){ // a thick trapezoid mound along the ground
+    const x0=Math.min(a[0],b[0]),x1=Math.max(x0+60,Math.min(x0+240,Math.max(a[0],b[0]))),g0=surfaceBelow(x0,a[1]),g1=surfaceBelow(x1,a[1]),top=Math.min(g0,g1)-75;
+    P("dam",[[x0,g0],[x0+24,top],[x1-24,top],[x1,g1]],2.5);mult=1.6;
+  }
+  const len=parts.reduce((n,p)=>n+plen(p.pts),0);
+  return{kind:"bp:"+k,parts,why,cost:Math.max(2,Math.ceil(len/s.antPx*mult))};
+}
+const unlockedKind=k=>!TOOLS[k].unlock||lv(TOOLS[k].unlock);
+const toolList=()=>Object.keys(TOOLS).filter(unlockedKind);
+function renderTools(){
+  renderBps();
+  const box=$("tools");box.innerHTML="";
+  toolList().forEach((k,i)=>{const b=document.createElement("button");b.textContent=(i+1)+" "+TOOLS[k].name;
+    b.className=run.tool===k?"on":"";b.onclick=()=>{run.tool=k;renderTools();};box.appendChild(b);});
+}
+addEventListener("keydown",e=>{
+  if(state!=="play")return;
+  if(e.code==="Space"){e.preventDefault();return rally();}
+  if(e.key==="Enter"){e.preventDefault();return ready();}
+  if(e.key==="h"||e.key==="H")return haze();
+  if(e.key==="z"&&(e.ctrlKey||e.metaKey))return undo();
+  const k=toolList()[+e.key-1];if(k){run.tool=k;renderTools();}
+});
+function rally(){if(state==="play"&&s.charges.rally>0){s.charges.rally--;for(const c of[...s.cons,...s.objs]){c.p=1;c.hp=c.maxHp;}if(s.plug)s.plug.hp=s.plug.maxHp;}}
+function ready(){if(state==="play"&&!s.ready){s.ready=true;s.t=Math.max(s.t,s.first-2);}} // a two-second heads-up, then the disaster
+$("readyBtn").onclick=ready;
+function haze(){if(state==="play"&&s.charges.haze>0&&!s.slow){s.charges.haze--;s.slow=240;}}
+function segDist(px,py,x1,y1,x2,y2){const dx=x2-x1,dy=y2-y1,l2=dx*dx+dy*dy||1,t=Math.max(0,Math.min(1,((px-x1)*dx+(py-y1)*dy)/l2));return Math.hypot(px-x1-t*dx,py-y1-t*dy);}
+function recall(x,y){ // dissolve the construct or object under the pointer; 75% of its ants come home
+  const o=s.objs.find(o=>inObj(o,x,y,8));
+  if(o){s.objs.splice(s.objs.indexOf(o),1);if(s.held===o)s.held=null;s.ants+=Math.floor(o.cost*.75);restrength();return;}
+  let hit=null,bd=24;
+  for(const c of s.cons)for(let i=1;i<c.pts.length;i++){const d=segDist(x,y,...c.pts[i-1],...c.pts[i]);if(d<bd){bd=d;hit=c;}}
+  if(hit){const grp=hit.id?s.cons.filter(c=>c.id===hit.id):[hit];s.cons=s.cons.filter(c=>!grp.includes(c));s.ants+=Math.floor(grp.reduce((n,c)=>n+c.cost,0)*.75);restrength();return;}
+  if(s.plug&&Math.hypot(x-s.L.hx,y-s.hy)<40){s.ants+=Math.floor(s.plug.cost*.75);s.plug=null;}
+}
+function undo(){ // the most recent build of either kind, full refund
+  if(!s)return;const all=[...s.cons,...s.objs].filter(c=>c.id);if(!all.length)return;
+  const c=all.reduce((a,b)=>b.id>a.id?b:a);
+  if(s.cons.includes(c)){const grp=s.cons.filter(x=>x.id===c.id);s.cons=s.cons.filter(x=>x.id!==c.id);s.ants+=grp.reduce((n,x)=>n+x.cost,0)-c.cost;}else{s.objs.splice(s.objs.indexOf(c),1);if(s.held===c)s.held=null;}
+  s.ants+=c.cost;restrength();
+}
+function arc(ax,ay,bx,by,up){ // parabolic bulge: up = arch, down = net
+  const len=Math.hypot(bx-ax,by-ay)||1;let nx=-(by-ay)/len,ny=(bx-ax)/len;
+  if(up===(ny>0)){nx=-nx;ny=-ny;}
+  const pts=[];for(let i=0;i<=10;i++){const u=i/10,b=4*u*(1-u)*len*.35;pts.push([ax+(bx-ax)*u+nx*b,ay+(by-ay)*u+ny*b]);}
+  return pts;
+}
+const plen=p=>p.slice(1).reduce((n,q,i)=>n+Math.hypot(q[0]-p[i][0],q[1]-p[i][1]),0);
+const mkCons=(type,pts,cost)=>({type,pts,len:plen(pts),p:0,cost,hp:1,maxHp:1,fixed:0,id:0});
+const nearCons=(x,y,skip)=>s.cons.some(o=>o!==skip&&o.pts.some((q,i)=>i&&segDist(x,y,...o.pts[i-1],...q)<14));
+const anchoredPt=([x,y],skip)=>Math.abs(y-groundY(x))<16||nearCons(x,y,skip)||s.objs.some(o=>o.p>=1&&inObj(o,x,y,14));
+const STRENGTH=["Unsupported","Braced","Sturdy"];
+function anchors(c){
+  let n=[c.pts[0],c.pts[c.pts.length-1]].filter(p=>anchoredPt(p,c)).length;
+  for(const o of s.cons)if(o!==c)for(const e of[o.pts[0],o.pts[o.pts.length-1]])if(c.pts.some((q,i)=>i&&segDist(e[0],e[1],...c.pts[i-1],...q)<14))n++;
+  return Math.min(2,n);
+}
+function grounded(){ // constructs reachable from the ground or a resting block/ball through touching constructs
+  const ends=c=>[c.pts[0],c.pts[c.pts.length-1]];
+  const onBase=([x,y])=>Math.abs(y-groundY(x))<16||s.objs.some(o=>o.p>=1&&inObj(o,x,y,14));
+  const touch=(a,b)=>ends(a).some(([x,y])=>b.pts.some((q,i)=>i&&segDist(x,y,...b.pts[i-1],...q)<14));
+  const ok=new Set(s.cons.filter(c=>c.fixed||ends(c).some(onBase)));let grew=true;
+  while(grew){grew=false;for(const c of s.cons)if(!ok.has(c)&&[...ok].some(o=>touch(c,o)||touch(o,c))){ok.add(c);grew=true;}}
+  return ok;
+}
+function restrength(){ // rerun whenever constructs appear, vanish or lose a support; keeps each one's damage fraction
+  const ok=grounded();
+  if(ok.size<s.cons.length){for(const c of s.cons)if(!ok.has(c))collapse(c);s.cons=s.cons.filter(c=>ok.has(c));}
+  for(const c of s.cons){
+    if(c.fixed)continue;
+    const m=120*[.4,1,1.6][anchors(c)]*1.5**lv("grip")*Math.max(.6,Math.min(1.5,200/c.len))*(c.bonus||1);
+    c.hp=c.hp/c.maxHp*m;c.maxHp=m;
+  }
+}
+function built(c){ // segments the ants have finished so far
+  let left=c.len*c.p;const out=[];
+  for(let i=1;i<c.pts.length&&left>0;i++){
+    const[a,b]=[c.pts[i-1],c.pts[i]],l=Math.hypot(b[0]-a[0],b[1]-a[1]),f=Math.min(1,left/l);
+    out.push([a[0],a[1],a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f]);left-=l;
+  }
+  return out;
+}
+
+// ---- gesture recognizer: resample the stroke, count sharp turns, measure roundness and wobble
+function resample(p,n){
+  const L=plen(p),step=L/(n-1),out=[p[0]];let acc=0;
+  for(let i=1;i<p.length;i++){
+    let[a,b]=[p[i-1],p[i]],d=Math.hypot(b[0]-a[0],b[1]-a[1]);
+    while(acc+d>=step&&out.length<n){const t=(step-acc)/d,q=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];out.push(q);a=q;d=Math.hypot(b[0]-a[0],b[1]-a[1]);acc=0;}
+    acc+=d;
+  }
+  while(out.length<n)out.push(p[p.length-1]);
+  return out;
+}
+function corners(rs,closed){ // groups of sharp turning, measured over a short window
+  const n=rs.length,ang=(a,b)=>Math.atan2(b[1]-a[1],b[0]-a[0]),turn=[];
+  for(let i=0;i<n;i++){
+    if(!closed&&(i<2||i>n-3)){turn.push(0);continue;}
+    const p=rs[(i-2+n)%n],q=rs[i],r=rs[(i+2)%n];let d=ang(q,r)-ang(p,q);
+    d=Math.atan2(Math.sin(d),Math.cos(d));turn.push(Math.abs(d));
+  }
+  let groups=0,inG=false;
+  for(let i=0;i<n;i++){const hot=turn[i]>.75;if(hot&&!inG)groups++;inG=hot;}
+  if(closed&&inG&&turn[0]>.75&&groups>1)groups--; // a corner spanning the seam counts once
+  return groups;
+}
+function classify(p){
+  const L=plen(p);if(L<15)return null;
+  const a=p[0],b=p[p.length-1],chord=Math.hypot(b[0]-a[0],b[1]-a[1]);
+  const xs=p.map(q=>q[0]),ys=p.map(q=>q[1]),size=Math.max(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys));
+  if(chord<Math.max(28,L*.2)&&L>70){ // closed loop: circle, triangle, square, or a scribble
+    const rs=resample(p,40).slice(0,39),cx=rs.reduce((n,q)=>n+q[0],0)/rs.length,cy=rs.reduce((n,q)=>n+q[1],0)/rs.length;
+    const rad=rs.map(q=>Math.hypot(q[0]-cx,q[1]-cy)),m=rad.reduce((n,v)=>n+v,0)/rad.length,sd=Math.sqrt(rad.reduce((n,v)=>n+(v-m)**2,0)/rad.length)/m;
+    if(L>size*4.6)return"sponge";
+    const bw=Math.max(...xs)-Math.min(...xs),bh=Math.max(...ys)-Math.min(...ys);
+    if(bw>bh*2.6&&bw>70)return"raft"; // long and flat: a boat
+    const k=corners(rs,true);
+    if(k<=2&&sd<.16)return"ball";
+    if(k===3)return"wedge";
+    if(k>=4)return"block";
+    return sd<.22?"ball":"block";
+  }
+  if(L>chord*2.3)return"sponge"; // open scribble
+  const rs=resample(p,32),nx=-(b[1]-a[1])/chord,ny=(b[0]-a[0])/chord;
+  const dev=rs.map(q=>(q[0]-a[0])*nx+(q[1]-a[1])*ny),mean=dev.reduce((n,d)=>n+d,0)/dev.length;
+  let flips=0,sign=0;for(const d of dev)if(Math.abs(d-mean)>Math.max(7,chord*.06)){const sg=Math.sign(d-mean);if(sign&&sg!==sign)flips++;sign=sg;} // wobble around the stroke's own midline
+  if(flips>=4)return"spring"; // two full zigzags; a single S is just a curve
+  const mi=dev.reduce((bi,d,i)=>Math.abs(d)>Math.abs(dev[bi])?i:bi,0);
+  if(Math.abs(dev[mi])>Math.max(8,chord*.07))return rs[mi][1]<(a[1]+b[1])/2?"arch":"cup";
+  return"chain";
+}
+const FALLBACK={spring:"chain",sponge:"chain",wedge:"block",ball:"block"};
+function followPath(p,M){ // the drawn path, started from its supported end, trimmed to M and smoothed into a few joints
+  let q=p;if(anchoredPt(q[q.length-1])&&!anchoredPt(q[0]))q=[...q].reverse();
+  const out=[q[0]];let acc=0;
+  for(let i=1;i<q.length;i++){
+    const d=Math.hypot(q[i][0]-q[i-1][0],q[i][1]-q[i-1][1]);
+    if(acc+d>=M){const t=(M-acc)/d;out.push([q[i-1][0]+(q[i][0]-q[i-1][0])*t,q[i-1][1]+(q[i][1]-q[i-1][1])*t]);break;}
+    acc+=d;out.push(q[i]);
+  }
+  return resample(out,Math.max(3,Math.min(16,Math.round(plen(out)/22))));
+}
+function surfaceBelow(x,y){ // the first thing under (x,y) that ants could stand on: ground, a built construct, a resting block or ball
+  let best=groundY(x);
+  for(const c of s.cons)for(const[x1,y1,x2,y2]of built(c))if((x-x1)*(x-x2)<=0&&x1!==x2){const sy=y1+(y2-y1)*(x-x1)/(x2-x1)-T;if(sy>=y-2&&sy<best)best=sy;}
+  for(const o of s.objs)if(o.p>=1&&Math.abs(x-o.x)<o.w){const top=isBox(o)?o.y-o.r:o.y-Math.sqrt(Math.max(0,o.r*o.r-(x-o.x)**2));if(top>=y-2&&top<best)best=top;}
+  return best;
+}
+function planBuild(p){
+  if(run.tool.startsWith("bp:"))return planBlueprint(run.tool.slice(3),p[0],p[p.length-1]);
+  let kind=run.tool==="auto"?classify(p):run.tool,note="";
+  if(!kind||kind==="recall"||kind==="auto")return null;
+  if(kind==="raft"){ // a long flat loop reads as a boat
+    const xs=p.map(q=>q[0]),ys=p.map(q=>q[1]),cy=(Math.min(...ys)+Math.max(...ys))/2;
+    if(lv("bp_raft"))return planBlueprint("raft",[Math.min(...xs),cy],[Math.max(...xs),cy]);
+    kind="block";note="Raft locked";
+  }
+  const bentKind=kind==="chain"||kind==="arch"||kind==="cup"||kind==="spring"&&!unlockedKind("spring");
+  if(bentKind&&!unlockedKind(kind))kind="chain"; // no skill yet: still a curve, just without the truss or net
+  else if(!unlockedKind(kind)){note=TOOLS[kind].name+" locked";kind=FALLBACK[kind];}
+  const xs=p.map(q=>q[0]),ys=p.map(q=>q[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const a=p[0],b=p[p.length-1],cx=(x0+x1)/2,cy=(y0+y1)/2,size=Math.max(x1-x0,y1-y0,Math.hypot(b[0]-a[0],b[1]-a[1]));
+  if(kind==="block"){const r=Math.max(12,Math.min(42,size/2));return{kind,obj:1,x:cx,y:surfaceBelow(cx,cy)-r,r,cost:Math.max(2,Math.ceil(4*r*r/220)),note};}
+  if(kind==="ball"){const r=Math.max(10,Math.min(40,size/2));return{kind,obj:1,x:cx,y:surfaceBelow(cx,cy)-r,r,cost:Math.max(2,Math.ceil(Math.PI*r*r/220)),note};}
+  if(kind==="wedge"){ // right-triangle ramp rising toward the side where the stroke peaked
+    const w=Math.min(200,Math.max(30,x1-x0)),hh=Math.min(160,Math.max(20,y1-y0)),top=p.reduce((q,r)=>r[1]<q[1]?r:q),L0=cx-w/2,R0=cx+w/2,B=surfaceBelow(cx,cy);
+    const poly=top[0]>cx?[[L0,B],[R0,B],[R0,B-hh],[L0,B]]:[[R0,B],[L0,B],[L0,B-hh],[R0,B]];
+    return{kind,poly,cost:Math.max(1,Math.ceil(plen(poly)/s.antPx*TOOLS.wedge.mult)),note};
+  }
+  if(bentKind&&p.length>2){ // follow the stroke when it bends noticeably
+    const ch=Math.hypot(b[0]-a[0],b[1]-a[1])||1,nx=-(b[1]-a[1])/ch,ny=(b[0]-a[0])/ch;
+    if(Math.max(...p.map(q=>Math.abs((q[0]-a[0])*nx+(q[1]-a[1])*ny)))>Math.max(8,ch*.07)){
+      const poly=followPath(p,MAXLEN*1.4),sa=anchoredPt(poly[0]);
+      const why=sa?"":"Start on the ground or a construct";
+      const label=kind==="chain"?"Curve":TOOLS[kind].name;
+      return{kind,poly,why,label,cost:Math.max(1,Math.ceil(plen(poly)/s.antPx*TOOLS[kind].mult)),note};
+    }
+  }
+  let[ax,ay,bx,by]=kind==="sponge"?[x0,cy,x1,cy]:[a[0],a[1],b[0],b[1]];
+  const M=Math.min(MAXLEN,TOOLS[kind].max||1e9),l=Math.hypot(bx-ax,by-ay);
+  if(l<15)return null;
+  if(anchoredPt([bx,by])&&!anchoredPt([ax,ay]))[ax,ay,bx,by]=[bx,by,ax,ay]; // too long? trim the unsupported end, keep the footing
+  if(l>M){bx=ax+(bx-ax)*M/l;by=ay+(by-ay)*M/l;}
+  let poly=kind==="arch"||kind==="cup"?arc(ax,ay,bx,by,kind==="arch"):[[ax,ay],[bx,by]];
+  const sa=anchoredPt(poly[0]),sb=anchoredPt(poly[poly.length-1]);
+  if(!sa&&sb)poly=poly.reverse(); // ants climb out from whichever end is supported
+  const why=sa||sb?"":"Start on the ground or a construct";
+  return{kind,poly,why,cost:Math.max(1,Math.ceil(plen(poly)/s.antPx*TOOLS[kind].mult)),note};
+}
+function buildFrom(p){
+  const pl=planBuild(p);if(!pl||pl.why||pl.cost>s.ants)return;
+  s.ants-=pl.cost;
+  if(pl.plug){s.plug={hp:120*1.5**lv("grip"),maxHp:120*1.5**lv("grip"),cost:pl.cost};return;}
+  if(pl.raft){s.objs.push({...mkObj("raft",pl.x,pl.y,10,pl.cost,pl.w),id:++s.nid});return;}
+  if(pl.parts){const id=++s.nid,tot=pl.parts.reduce((n,q)=>n+plen(q.pts),0);let left=pl.cost;
+    pl.parts.forEach((q,i)=>{const c=i===pl.parts.length-1?left:Math.round(pl.cost*plen(q.pts)/tot);left-=c;s.cons.push({...mkCons(q.type,q.pts,c),id,bonus:q.bonus});});
+    restrength();return;}
+  if(pl.obj)s.objs.push({...mkObj(pl.kind,pl.x,pl.y,pl.r,pl.cost),id:++s.nid});
+  else s.cons.push({...mkCons(pl.kind,pl.poly,pl.cost),id:++s.nid});
+  restrength();
+}
+function world(e){const r=cv.getBoundingClientRect();return[(e.clientX-r.left-ox)/scale,(e.clientY-r.top-oy)/scale];}
+cv.addEventListener("contextmenu",e=>{e.preventDefault();if(state==="play")recall(...world(e));}); // right-click recalls
+cv.addEventListener("pointerdown",e=>{
+  if(state!=="play"||e.button===2)return;const[x,y]=world(e);mouse.x=x;mouse.y=y;
+  const crumb=s.crumbs.find(c=>Math.hypot(c.x-x,c.y-y)<28);
+  if(crumb){crumb.life=0;run.food+=1+lv("forager");s.foraged++;return;}
+  if(run.tool==="recall")return recall(x,y);
+  const o=s.objs.find(o=>o.p>=1&&inObj(o,x,y,6));
+  if(o){
+        if(s.focus>.05){s.held=o;cv.setPointerCapture(e.pointerId);}
+    return;
+  }
+  stroke=[[x,y]];cv.setPointerCapture(e.pointerId);
+});
+cv.addEventListener("pointermove",e=>{
+  const[x,y]=world(e);mouse.x=x;mouse.y=y;
+  if(stroke){const q=stroke[stroke.length-1];if(Math.hypot(x-q[0],y-q[1])>4)stroke.push([x,y]);}
+});
+cv.addEventListener("pointerup",()=>{
+  if(state!=="play"){stroke=null;return;}
+  if(s.held)release();
+  if(stroke){const p=stroke;stroke=null;if(p.length>1||run.tool==="bp:plug"||run.tool==="bp:bivouac")buildFrom(p.length>1?p:[p[0],p[0]]);}
+});
+$("undo").onclick=undo;
+$("menuBtn").onclick=menu;$("emenu").onclick=menu;
+$("again").onclick=()=>newGame(run.mode);
+$("rally").onclick=rally;$("hazeBtn").onclick=haze;
+
+function resize(){
+  cv.width=cv.clientWidth*devicePixelRatio;cv.height=cv.clientHeight*devicePixelRatio;
+  const hudOn=!$("hud").hidden,top=hudOn?$("top").offsetHeight:0,bot=hudOn?$("dock").offsetHeight:0; // fit the world between the HUD bands
+  const room=Math.max(120,cv.clientHeight-top-bot);
+  scale=Math.min(cv.clientWidth/WW,room/WH);ox=(cv.clientWidth-WW*scale)/2;oy=top+(room-WH*scale)/2; // pointer math in CSS px
+}
+function frame(){
+  if(state==="play"){ // Haze: the world steps every other frame, ants keep building every frame
+    if(s.slow>0&&s.slow--%2)for(const c of s.cons)c.p=Math.min(1,c.p+s.build/c.len);else update();
+  }
+  const d=devicePixelRatio,S=scale,O=ox,P=oy;scale*=d;ox*=d;oy*=d;
+  ctx=main;main.imageSmoothingEnabled=true;draw();
+  main.setTransform(scale,0,0,scale,ox+shake[0]*scale,oy+shake[1]*scale);main.imageSmoothingEnabled=false;flushAnts(main); // pixel actors stay crisp
+  if(baked){main.setTransform(1,0,0,1,0,0);main.imageSmoothingEnabled=true;main.drawImage(baked.front,0,0);}
+  scale=S;ox=O;oy=P;
+  hud();requestAnimationFrame(frame);
+}
+addEventListener("resize",resize);
+resize();menu();frame();
+</script>

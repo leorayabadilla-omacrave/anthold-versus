@@ -1,0 +1,191 @@
+<title>ANTHOLD Art Directions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&family=Press+Start+2P&family=Caveat:wght@700&display=swap">
+<style>
+/* a design board: one identical battle scene rendered five ways, each with what it means for the game */
+:root{--bg:#f3efe6;--fg:#231d16;--muted:#6b6257;--card:#fffdf8;--line:#ddd3c2;--accent:#8a4b22;
+  --display:"DM Serif Display",Georgia,serif;--body:"Inter",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1915;--fg:#efe8dc;--muted:#a89f92;--card:#26221c;--line:#3a342c;--accent:#e0a36c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1c1915;--fg:#efe8dc;--muted:#a89f92;--card:#26221c;--line:#3a342c;--accent:#e0a36c;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+main{max-width:1180px;margin:0 auto;display:grid;gap:28px}
+header h1{font:400 clamp(34px,6vw,56px)/1.05 var(--display);margin:0 0 8px;text-wrap:balance}
+header p{margin:0;max-width:68ch;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:22px}
+.opt{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:grid}
+.opt canvas{width:100%;height:auto;aspect-ratio:16/9;display:block;max-width:100%}
+.body{padding:16px 18px 18px;display:grid;gap:8px;min-width:0}
+.body h2{margin:0;font:400 26px/1.1 var(--display)}
+.tag{font:600 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.body p{margin:0}
+.body ul{margin:0;padding-left:18px;color:var(--muted)}
+.body li b{color:var(--fg);font-weight:600}
+</style>
+
+<main>
+  <header>
+    <span class="tag">ANTHOLD Versus · pick a look</span>
+    <h1>Five art directions, one battle</h1>
+    <p>Each panel draws the same moment: your nest on the left, an ant squad marching out, a living ant ladder reaching a butterfly, a rhino beetle advancing, and the enemy nest on the right. Tell me the letter you like, or mix them (say, B's world with D's bugs).</p>
+  </header>
+  <div class="grid">
+    <section class="opt"><canvas id="cA" width="960" height="540"></canvas><div class="body"><span class="tag">A · current</span><h2>Field Journal</h2>
+      <p>Ink and watercolor on paper, with crisp pixel bugs living inside the drawing.</p>
+      <ul><li><b>Strength:</b> distinctive; the world feels handmade and the bugs stay readable.</li><li><b>Watch for:</b> two styles at once can look mismatched at small sizes.</li></ul></div></section>
+    <section class="opt"><canvas id="cB" width="960" height="540"></canvas><div class="body"><span class="tag">B</span><h2>16-bit Pixel World</h2>
+      <p>Everything in pixels: dithered sky, layered pixel hills, pixel nests and bugs on one grid.</p>
+      <ul><li><b>Strength:</b> one consistent look, crisp on any screen, classic strategy-game feel.</li><li><b>Watch for:</b> less unique; detail is limited by the grid.</li></ul></div></section>
+    <section class="opt"><canvas id="cC" width="960" height="540"></canvas><div class="body"><span class="tag">C</span><h2>Papercraft Diorama</h2>
+      <p>Layered cut-paper scenery with soft shadows; bugs are little paper cutouts with white edges.</p>
+      <ul><li><b>Strength:</b> warm and tactile, reads like a tabletop war in miniature.</li><li><b>Watch for:</b> soft shading needs care so units pop from the background.</li></ul></div></section>
+    <section class="opt"><canvas id="cD" width="960" height="540"></canvas><div class="body"><span class="tag">D</span><h2>Bold Toon</h2>
+      <p>Thick outlines, flat bright colors and cel shadows; big-eyed, expressive bugs.</p>
+      <ul><li><b>Strength:</b> best readability in busy fights; each class gets a loud color identity.</li><li><b>Watch for:</b> loses the naturalist charm of the current look.</li></ul></div></section>
+    <section class="opt"><canvas id="cE" width="960" height="540"></canvas><div class="body"><span class="tag">E</span><h2>Natural History Plate</h2>
+      <p>Victorian engraving: sepia line-work, fine hatching, Latin labels, a plate border.</p>
+      <ul><li><b>Strength:</b> the most elegant and unusual; fits the field-notes theme.</li><li><b>Watch for:</b> monochrome makes the two armies harder to tell apart, so it needs team color accents.</li></ul></div></section>
+  </div>
+</main>
+
+<script>
+// ---------- shared scene: the same layout drawn in every style (world is 960 x 540)
+const W=960,H=540,GY=x=>392+Math.sin(x*.006)*10+(x>380&&x<620?-14*Math.sin((x-380)/240*Math.PI):0);
+const ANTS_X=[200,226,252,278],LADDER_X=470,FLY=[470,206],BEETLE_X=650,NEST=[[92,"you"],[868,"enemy"]];
+let seed=7;const R=()=>(seed=seed*16807%2147483647)/2147483647;
+function ground(c){c.moveTo(-20,GY(-20));for(let x=0;x<=980;x+=8)c.lineTo(x,GY(x));}
+
+// ---------- pixel sprites (A and B)
+const PIX={K:"#291814",D:"#742F29",M:"#AB5236",L:"#FF6C24",Y:"#FFA300",W:"#FFF1E8",b:"#1D2B53",B:"#29ADFF",o:"#FF6C24",g:"#3d2b1f",G:"#6e4a26",h:"#a0703a",w:"#d6f0ff"};
+const SPR={
+  ant:[".............KK.","............K..K","..KKKK......K...",".KMLLMK....KKKK.","KDMYLMMK..KMMMMK","KDMMMMMDKKKMWWMK","KDDMMMDKMMKMWKMK",".KDDDDKKDDKKMMKK","..KKKKK.KK..KKK.",".....K..K..K....","....K...K...K..."],
+  beetle:["..........K.......","..........KK......","....KKKKKK.K......","..KKhGGGGGKK......",".KhGGGGGGGGGK.....","KhGGGGGGGGGGGKKK..","KGGGGGGGGGGGGKggK.","KgGGGGGGGGGGGKgggK",".KggggggggggKKKKK.","..KKKKKKKKKKK.....","..K..K...K...K....",".K..K...K...K....."],
+  fly:["....KKKK...KKKK.....","...KoooYK.KoooYK....","..KooKooYKooKooYK...","..KoooooYKoooooYK...","...KoooYKKKooooK....","....KKKKbbbbKKK.KK..","......KbbbbbbbbbbK..","....KoooKKKKKoooK...","...KooYK.....KooK...","....KKK.......KK...."]};
+function pix(c,name,x,y,s,flip){const rows=SPR[name];for(let j=0;j<rows.length;j++)for(let i=0;i<rows[j].length;i++){const ch=rows[j][i];if(ch==="."||!PIX[ch])continue;c.fillStyle=PIX[ch];const ii=flip?rows[j].length-1-i:i;c.fillRect(Math.round(x+ii*s),Math.round(y+j*s),s,s);}}
+
+// ---------- vector bugs (C, D, E) drawn with a style object
+function vAnt(c,x,y,s,st,a=0){c.save();c.translate(x,y);c.rotate(a);c.scale(s,s);c.lineWidth=st.lw;c.strokeStyle=st.line;c.lineCap="round";
+  for(const lx of[-6,0,6]){c.beginPath();c.moveTo(lx,0);c.lineTo(lx-5,9);c.stroke();}
+  c.beginPath();c.moveTo(14,-6);c.quadraticCurveTo(18,-14,23,-12);c.stroke();
+  for(const[ex,ey,rx,ry]of[[-10,-2,9,7],[2,-1,5,4],[12,-4,6,5.5]]){c.beginPath();c.ellipse(ex,ey,rx,ry,0,0,7);c.fillStyle=st.ant;c.fill();c.stroke();if(st.shade)st.shade(c,ex,ey,rx,ry);}
+  if(st.eyes){c.fillStyle="#fff";c.beginPath();c.arc(15,-6,2.6,0,7);c.fill();c.stroke();c.fillStyle="#111";c.beginPath();c.arc(15.8,-5.8,1.2,0,7);c.fill();}
+  c.restore();}
+function vBeetle(c,x,y,s,st,flip){c.save();c.translate(x,y);c.scale(flip?-s:s,s);c.lineWidth=st.lw;c.strokeStyle=st.line;c.lineCap="round";
+  for(const lx of[-12,0,12]){c.beginPath();c.moveTo(lx,4);c.lineTo(lx-6,16);c.stroke();}
+  c.beginPath();c.ellipse(0,-6,24,15,0,0,7);c.fillStyle=st.beetle;c.fill();c.stroke();if(st.shade)st.shade(c,0,-6,24,15);
+  c.beginPath();c.moveTo(-20,-6);c.lineTo(20,-6);c.stroke();
+  c.beginPath();c.ellipse(27,0,8,6,0,0,7);c.fillStyle=st.beetle;c.fill();c.stroke();
+  c.beginPath();c.moveTo(31,-4);c.quadraticCurveTo(40,-14,37,-24);c.lineWidth=st.lw*1.6;c.stroke();
+  if(st.eyes){c.lineWidth=st.lw;c.fillStyle="#fff";c.beginPath();c.arc(29,-2,3,0,7);c.fill();c.stroke();c.fillStyle="#111";c.beginPath();c.arc(30,-1.8,1.4,0,7);c.fill();}
+  c.restore();}
+function vFly(c,x,y,s,st){c.save();c.translate(x,y);c.scale(s,s);c.lineWidth=st.lw;c.strokeStyle=st.line;
+  for(const[sx,rot]of[[-1,-.5],[1,.5]]){c.save();c.scale(sx,1);c.beginPath();c.ellipse(14,-12,16,12,rot,0,7);c.fillStyle=st.wing;c.fill();c.stroke();
+    c.beginPath();c.ellipse(11,8,10,8,-rot,0,7);c.fill();c.stroke();if(st.wingMark)st.wingMark(c);c.restore();}
+  c.beginPath();c.ellipse(0,0,4,14,0,0,7);c.fillStyle=st.body;c.fill();c.stroke();
+  c.beginPath();c.moveTo(-2,-13);c.quadraticCurveTo(-6,-24,-10,-26);c.moveTo(2,-13);c.quadraticCurveTo(6,-24,10,-26);c.stroke();
+  c.restore();}
+
+// ---------- A: field journal (current)
+function drawA(c){seed=11;
+  c.fillStyle="#f1e7d0";c.fillRect(0,0,W,H);for(let i=0;i<3000;i++){c.fillStyle=R()<.5?"rgba(120,90,50,.07)":"rgba(255,255,255,.2)";c.fillRect(R()*W,R()*H,2,2);}
+  const wash=(path,col,a)=>{c.save();c.fillStyle=col;for(let i=0;i<3;i++){c.globalAlpha=a*(1-i*.22);c.save();c.translate((R()-.5)*6,(R()-.5)*6);c.beginPath();path();c.fill();c.restore();}c.restore();};
+  const ink=(path,w,a=.85)=>{c.save();c.strokeStyle="#2b2118";c.lineCap="round";c.lineJoin="round";for(const[k,al]of[[1,a],[.5,a*.6]]){c.save();c.translate((R()-.5)*1.6,(R()-.5)*1.6);c.globalAlpha=al;c.lineWidth=w*k;c.beginPath();path();c.stroke();c.restore();}c.restore();};
+  for(let i=0;i<3;i++)wash(()=>{c.moveTo(0,-40+i*90);for(let x=0;x<=W;x+=40)c.lineTo(x,60+i*90+Math.sin(x*.01+i)*18);c.lineTo(W,-40+i*90);},"#a9c8de",.22);
+  for(let i=0;i<8;i++){const x0=R()*W,h=200+R()*170,l=(R()-.5)*120;const p=()=>{c.moveTo(x0-12,H);c.quadraticCurveTo(x0,H-h*.6,x0+l,H-h);c.quadraticCurveTo(x0+8,H-h*.6,x0+12,H);};wash(p,"#a9c77a",.18);ink(p,1.2,.35);}
+  wash(()=>{ground(c);c.lineTo(W,H);c.lineTo(0,H);},"#c99a62",.6);ink(()=>ground(c),2.4);
+  for(let x=0;x<W;x+=9){const y=GY(x);ink(()=>{c.moveTo(x,y);c.lineTo(x+(R()-.5)*6,y-6-R()*8);},1,.5);}
+  for(const[nx,who]of NEST){const g=GY(nx),p=()=>{c.moveTo(nx-62,g);c.quadraticCurveTo(nx,g-130,nx+62,g);};wash(p,who==="you"?"#AB5236":"#3a6b4f",.55);ink(p,2.2);
+    ink(()=>{c.moveTo(nx-30,g-60);c.lineTo(nx-30,g-120);},2);wash(()=>{c.moveTo(nx-30,g-120);c.lineTo(nx+(who==="you"?2:-58),g-110);c.lineTo(nx-30,g-100);},who==="you"?"#2f5f8f":"#c0392b",.8);}
+  c.imageSmoothingEnabled=false;
+  for(const x of ANTS_X)pix(c,"ant",x,GY(x)-30,3);
+  for(let k=0;k<4;k++){c.save();c.translate(LADDER_X,GY(LADDER_X)-14-k*30);c.rotate(-Math.PI/2);pix(c,"ant",-24,-16,3);c.restore();}
+  pix(c,"fly",FLY[0]-30,FLY[1]-22,3);pix(c,"beetle",BEETLE_X-36,GY(BEETLE_X)-36,3,true);
+  c.font="28px Caveat, cursive";c.fillStyle="#2b2118";c.globalAlpha=.75;c.fillText("ant ladder!",LADDER_X+34,GY(LADDER_X)-112);c.globalAlpha=1;
+}
+
+// ---------- B: 16-bit pixel world (drawn at 1/4 size, scaled up)
+function drawB(c){seed=21;const S=4,w=W/S,h=H/S,o=document.createElement("canvas");o.width=w;o.height=h;const p=o.getContext("2d");
+  const BAY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const t=y/h+(BAY[(y&3)*4+(x&3)]/16-.5)*.12;p.fillStyle=t<.25?"#29ADFF":t<.45?"#5fc4ff":t<.65?"#a5dcff":"#d6f0ff";p.fillRect(x,y,1,1);}
+  p.fillStyle="#FFEC27";p.fillRect(196,14,12,12);p.fillStyle="#FFA300";p.fillRect(198,24,8,2);
+  for(const[col,base,amp,fr]of[["#83b98a",70,10,.04],["#3e8f5a",84,7,.07]])for(let x=0;x<w;x++){const top=Math.round(base-Math.abs(Math.sin(x*fr+base))*amp);p.fillStyle=col;p.fillRect(x,top,1,h-top);}
+  for(let x=0;x<w;x++){const g=Math.round(GY(x*S)/S);p.fillStyle="#AB5236";p.fillRect(x,g,1,h-g);p.fillStyle="#742F29";for(let y=g+6;y<h;y+=5)if((x+y)%7===0)p.fillRect(x,y,1,1);
+    p.fillStyle="#00B543";p.fillRect(x,g-1,1,2);if(x%3===0){p.fillStyle="#008751";p.fillRect(x,g-2-(x%2),1,1);}}
+  for(const[nx,who]of NEST){const cx=Math.round(nx/S),g=Math.round(GY(nx)/S);for(let y=0;y<26;y++){const half=Math.round(Math.sqrt(Math.max(0,1-(y/26)**2))*15);p.fillStyle=y===25?"#291814":who==="you"?(y%4?"#AB5236":"#742F29"):(y%4?"#3a6b4f":"#2a4f3a");p.fillRect(cx-half,g-y,half*2,1);}
+    p.fillStyle="#291814";p.fillRect(cx-3,g-4,6,4);p.fillStyle=who==="you"?"#29ADFF":"#FF004D";p.fillRect(cx-8,g-36,7,4);p.fillStyle="#291814";p.fillRect(cx-8,g-36,1,12);}
+  for(const x of ANTS_X)pix(p,"ant",Math.round(x/S),Math.round(GY(x)/S)-11,1);
+  for(let k=0;k<4;k++){p.save();p.translate(Math.round(LADDER_X/S),Math.round(GY(LADDER_X)/S)-4-k*8);p.rotate(-Math.PI/2);pix(p,"ant",-8,-5,1);p.restore();}
+  pix(p,"fly",Math.round(FLY[0]/S)-10,Math.round(FLY[1]/S)-6,1);pix(p,"beetle",Math.round(BEETLE_X/S)-9,Math.round(GY(BEETLE_X)/S)-12,1,true);
+  c.imageSmoothingEnabled=false;c.drawImage(o,0,0,W,H);
+  c.fillStyle="#1D2B53";c.fillRect(0,0,W,34);c.fillStyle="#29ADFF";c.fillRect(12,10,200,14);c.fillStyle="#FF004D";c.fillRect(W-212,10,200,14);
+  c.font="14px 'Press Start 2P', monospace";c.fillStyle="#FFF1E8";c.fillText("ROUND 1",W/2-50,24);
+}
+
+// ---------- C: papercraft diorama
+function drawC(c){seed=31;
+  const paperNoise=()=>{for(let i=0;i<2600;i++){c.fillStyle=R()<.5?"rgba(0,0,0,.035)":"rgba(255,255,255,.05)";c.fillRect(R()*W,R()*H,2,2);}};
+  const layer=(path,col,sh=10)=>{c.save();c.shadowColor="rgba(40,30,20,.35)";c.shadowBlur=sh;c.shadowOffsetY=sh*.5;c.fillStyle=col;c.beginPath();path();c.fill();c.restore();
+    c.save();c.strokeStyle="rgba(255,255,255,.55)";c.lineWidth=2;c.beginPath();path();c.stroke();c.restore();};
+  c.fillStyle="#bcd8e6";c.fillRect(0,0,W,H);
+  layer(()=>c.arc(800,90,48,0,7),"#f6c453",14);
+  for(const[y,col]of[[250,"#9cc0a8"],[300,"#7fae86"],[340,"#5f9469"]])layer(()=>{c.moveTo(0,H);for(let x=0;x<=W;x+=60)c.lineTo(x,y+Math.sin(x*.012+y)*24);c.lineTo(W,H);c.closePath();},col,12);
+  layer(()=>{ground(c);c.lineTo(W,H);c.lineTo(0,H);c.closePath();},"#b98a5a",16);
+  for(let x=0;x<W;x+=26)layer(()=>{const g=GY(x);c.moveTo(x-6,g+2);c.lineTo(x,g-14-R()*10);c.lineTo(x+6,g+2);c.closePath();},"#6a9e4f",4);
+  for(const[nx,who]of NEST){const g=GY(nx);layer(()=>{c.moveTo(nx-66,g+4);c.quadraticCurveTo(nx,g-136,nx+66,g+4);c.closePath();},who==="you"?"#c9784a":"#5d8f6a",16);
+    layer(()=>c.ellipse(nx+(who==="you"?16:-16),g-12,14,10,0,Math.PI,0),"#3a2618",3);
+    layer(()=>{c.rect(nx-34,g-150,4,96);},"#6b4a2f",4);layer(()=>{c.moveTo(nx-30,g-150);c.lineTo(nx+(who==="you"?10:-70),g-138);c.lineTo(nx-30,g-126);c.closePath();},who==="you"?"#4f7fb0":"#cf5a48",6);}
+  const st={lw:1.4,line:"#fffaf0",ant:"#8c3b1e",beetle:"#3c5e44",wing:"#f29c46",body:"#3a2a1e",wingMark:c=>{c.fillStyle="#fffaf0";c.beginPath();c.arc(16,-14,3,0,7);c.fill();}};
+  const cut=f=>{c.save();c.shadowColor="rgba(40,30,20,.45)";c.shadowBlur=6;c.shadowOffsetY=4;f();c.restore();};
+  for(const x of ANTS_X)cut(()=>vAnt(c,x,GY(x)-10,1.3,st));
+  for(let k=0;k<4;k++)cut(()=>vAnt(c,LADDER_X,GY(LADDER_X)-16-k*30,1.15,st,-Math.PI/2));
+  cut(()=>vFly(c,FLY[0],FLY[1],1.5,st));cut(()=>vBeetle(c,BEETLE_X,GY(BEETLE_X)-16,1.5,st,true));
+  paperNoise();
+}
+
+// ---------- D: bold toon
+function drawD(c){seed=41;
+  const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,"#5ec8ff");g.addColorStop(1,"#c9f1ff");c.fillStyle=g;c.fillRect(0,0,W,H);
+  const toon=(path,fill,shadow)=>{c.save();c.fillStyle=fill;c.beginPath();path();c.fill();if(shadow){c.save();c.clip();c.fillStyle=shadow;c.translate(10,8);c.beginPath();path();c.fill();c.restore();}c.lineWidth=5;c.strokeStyle="#151515";c.lineJoin="round";c.beginPath();path();c.stroke();c.restore();};
+  toon(()=>c.arc(800,90,46,0,7),"#ffe14d");
+  for(const[cx,cy]of[[180,90],[520,60]])toon(()=>{c.arc(cx,cy,26,Math.PI,0);c.arc(cx+36,cy-8,30,Math.PI,0);c.arc(cx+74,cy,24,Math.PI,0);c.closePath();},"#ffffff");
+  toon(()=>{c.moveTo(0,H);for(let x=0;x<=W;x+=40)c.lineTo(x,300+Math.sin(x*.01)*30);c.lineTo(W,H);c.closePath();},"#7ed957","#5fb63d");
+  toon(()=>{ground(c);c.lineTo(W,H);c.lineTo(0,H);c.closePath();},"#e0a15a","#c9813c");
+  for(const[nx,who]of NEST){const g0=GY(nx);toon(()=>{c.moveTo(nx-64,g0);c.quadraticCurveTo(nx,g0-140,nx+64,g0);c.closePath();},who==="you"?"#ff8a4c":"#4cc38a",who==="you"?"#e06a2c":"#2fa36c");
+    toon(()=>c.ellipse(nx+(who==="you"?16:-16),g0-10,14,11,0,Math.PI,0),"#2a1a10");
+    toon(()=>{c.moveTo(nx-30,g0-120);c.lineTo(nx+(who==="you"?14:-74),g0-108);c.lineTo(nx-30,g0-96);c.closePath();},who==="you"?"#3d7cff":"#ff4d4d");}
+  const st={lw:3.2,line:"#151515",ant:"#ff6a3d",beetle:"#7a4cff",wing:"#ffcf33",body:"#151515",eyes:1,
+    shade:(c,x,y,rx,ry)=>{c.save();c.beginPath();c.ellipse(x,y,rx,ry,0,0,7);c.clip();c.fillStyle="rgba(0,0,0,.18)";c.beginPath();c.ellipse(x+rx*.4,y+ry*.5,rx,ry,0,0,7);c.fill();c.restore();},
+    wingMark:c=>{c.fillStyle="#151515";c.beginPath();c.arc(18,-14,4,0,7);c.fill();}};
+  for(const x of ANTS_X)vAnt(c,x,GY(x)-11,1.35,st);
+  for(let k=0;k<4;k++)vAnt(c,LADDER_X,GY(LADDER_X)-16-k*30,1.2,st,-Math.PI/2);
+  vFly(c,FLY[0],FLY[1],1.6,st);vBeetle(c,BEETLE_X,GY(BEETLE_X)-17,1.55,st,true);
+  c.font="900 34px Inter, sans-serif";c.lineWidth=6;c.strokeStyle="#151515";c.fillStyle="#ffe14d";c.strokeText("POW!",LADDER_X+30,FLY[1]-10);c.fillText("POW!",LADDER_X+30,FLY[1]-10);
+}
+
+// ---------- E: natural history plate
+function drawE(c){seed=51;
+  c.fillStyle="#efe4cc";c.fillRect(0,0,W,H);for(let i=0;i<2400;i++){c.fillStyle="rgba(110,80,40,.06)";c.fillRect(R()*W,R()*H,2,2);}
+  c.strokeStyle="#4a3424";c.lineWidth=2;c.strokeRect(18,18,W-36,H-36);c.lineWidth=.8;c.strokeRect(26,26,W-52,H-52);
+  const hatch=(path,step,ang,a=.5)=>{c.save();c.beginPath();path();c.clip();c.strokeStyle="#4a3424";c.globalAlpha=a;c.lineWidth=.8;c.beginPath();
+    for(let i=-H*2;i<W*2;i+=step){c.moveTo(i,0);c.lineTo(i+Math.cos(ang)*H*2,Math.sin(ang)*H*2);}c.stroke();c.restore();};
+  const line=(path,w=1.4)=>{c.save();c.strokeStyle="#3b2a1c";c.lineWidth=w;c.lineCap="round";c.beginPath();path();c.stroke();c.restore();};
+  hatch(()=>{c.rect(26,26,W-52,170);},11,1.2,.18);
+  const soil=()=>{ground(c);c.lineTo(W,H-26);c.lineTo(0,H-26);c.closePath();};hatch(soil,5,.9,.45);hatch(soil,8,2.2,.25);line(()=>ground(c),2);
+  for(let x=40;x<W-40;x+=7){const g=GY(x);line(()=>{c.moveTo(x,g);c.quadraticCurveTo(x+2,g-8,x+(R()-.5)*8,g-12-R()*14);},.8);}
+  for(const[nx,who]of NEST){const g=GY(nx),m=()=>{c.moveTo(nx-62,g);c.quadraticCurveTo(nx,g-130,nx+62,g);};hatch(()=>{m();c.closePath();},4,who==="you"?.8:2.3,.55);line(m,1.8);
+    line(()=>{c.moveTo(nx-30,g-60);c.lineTo(nx-30,g-118);},1.4);c.fillStyle=who==="you"?"#2f5f8f":"#a8322a";c.beginPath();c.moveTo(nx-30,g-118);c.lineTo(nx+(who==="you"?6:-66),g-108);c.lineTo(nx-30,g-98);c.fill();}
+  const st={lw:1.3,line:"#2e2014",ant:"rgba(239,228,204,1)",beetle:"rgba(239,228,204,1)",wing:"rgba(239,228,204,1)",body:"#3b2a1c",
+    shade:(cx,x,y,rx,ry)=>{c.save();c.beginPath();c.ellipse(x,y,rx,ry,0,0,7);c.clip();c.strokeStyle="#3b2a1c";c.lineWidth=.6;c.beginPath();for(let i=-30;i<30;i+=2.2){c.moveTo(x+i,y-ry);c.lineTo(x+i+ry,y+ry);}c.stroke();c.restore();},
+    wingMark:cx=>{cx.strokeStyle="#3b2a1c";cx.lineWidth=.6;cx.beginPath();for(let i=0;i<5;i++){cx.moveTo(2,-4);cx.lineTo(26,-20+i*6);}cx.stroke();}};
+  for(const x of ANTS_X)vAnt(c,x,GY(x)-11,1.35,st);
+  for(let k=0;k<4;k++)vAnt(c,LADDER_X,GY(LADDER_X)-16-k*30,1.2,st,-Math.PI/2);
+  vFly(c,FLY[0],FLY[1],1.6,st);vBeetle(c,BEETLE_X,GY(BEETLE_X)-17,1.55,st,true);
+  c.fillStyle="#3b2a1c";c.font="italic 20px 'DM Serif Display', Georgia, serif";
+  c.fillText("Formica rufa",ANTS_X[0]-10,GY(ANTS_X[0])+44);c.fillText("Danaus plexippus",FLY[0]+40,FLY[1]-20);c.fillText("Dynastes hercules",BEETLE_X-70,GY(BEETLE_X)+48);
+  c.font="22px 'DM Serif Display', Georgia, serif";c.fillText("Pl. IV",W/2-30,58);
+  c.fillStyle="#2f5f8f";c.fillRect(ANTS_X[0]-12,GY(ANTS_X[0])+4,110,3);c.fillStyle="#a8322a";c.fillRect(BEETLE_X-34,GY(BEETLE_X)+4,70,3);
+}
+const draws={cA:drawA,cB:drawB,cC:drawC,cD:drawD,cE:drawE};
+function render(){for(const id in draws){const c=document.getElementById(id).getContext("2d");c.save();draws[id](c);c.restore();}}
+document.fonts&&document.fonts.ready?document.fonts.ready.then(render):render();
+render();
+</script>

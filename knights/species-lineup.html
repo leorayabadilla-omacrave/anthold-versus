@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Species lineup</title>
+<style>body{margin:0;background:#f4f1e8;font:13px sans-serif;color:#17110e;padding:12px}.bar{display:flex;gap:6px;margin-bottom:10px}button{font:inherit;padding:5px 12px;border:1.5px solid #17110e;background:#ebe2c0;border-radius:6px;cursor:pointer}button[aria-pressed=true]{background:#17110e;color:#f6eed3}h3{margin:12px 0 4px;font-size:14px}canvas{width:100%;display:block;background:#ebe2c0;border:1.5px solid #17110e;border-radius:10px}</style></head><body>
+<div class="bar"><button data-c="idle" aria-pressed="true">Idle</button><button data-c="walk">Walk</button><button id="bones" aria-pressed="false">Show skeleton</button></div>
+<div id="rows"></div>
+<script src="knight-rig.js"></script>
+<script>
+const R=window.KnightRig,rows=document.getElementById("rows"),list=[];let clip="idle",bones=false;
+for(const cls in R.SKINS){const ids=Object.keys(R.SPECIES).filter(i=>R.SPECIES[i].cls===cls);
+  const h=document.createElement("h3");h.textContent=R.SKINS[cls].name+"s";rows.appendChild(h);
+  const c=document.createElement("canvas");c.width=1400;c.height=380;rows.appendChild(c);list.push({g:c.getContext("2d"),ids});}
+document.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{clip=b.dataset.c;document.querySelectorAll("[data-c]").forEach(x=>x.setAttribute("aria-pressed",x===b));});
+document.getElementById("bones").onclick=e=>{bones=!bones;e.target.setAttribute("aria-pressed",bones);};
+function frame(ms){const t=ms/1000;
+  for(const {g,ids} of list){g.setTransform(1,0,0,1,0,0);g.fillStyle="#ebe2c0";g.fillRect(0,0,1400,380);
+    g.strokeStyle="rgba(23,17,14,.35)";g.lineWidth=2;g.beginPath();g.moveTo(0,330);g.lineTo(1400,330);g.stroke();
+    ids.forEach((id,i)=>{const sp=R.SPECIES[id],w=1400/ids.length,x=w/2+i*w;
+      g.setTransform(1,0,0,1,x,328);R.draw(g,id,clip,t+i*.13,{scale:1.5,showBones:bones,t});
+      g.setTransform(1,0,0,1,0,0);g.fillStyle="#17110e";g.textAlign="center";g.font="bold 17px sans-serif";g.fillText(id,x,352);
+      g.font="14px sans-serif";g.fillText(`${sp.mm} mm · ×${sp.scale}`,x,370);});}
+  requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+</script></body></html>

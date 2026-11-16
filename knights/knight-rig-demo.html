@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Knight rig</title>
+<style>body{margin:0;background:#f4f1e8;font:14px sans-serif;color:#17110e;padding:12px}.bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}button{font:inherit;padding:5px 12px;border:1.5px solid #17110e;background:#ebe2c0;border-radius:6px;cursor:pointer}button[aria-pressed=true]{background:#17110e;color:#f6eed3}.row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.cell{background:#ebe2c0;border:1.5px solid #17110e;border-radius:12px;padding:4px;text-align:center}canvas{width:100%;aspect-ratio:3/4;display:block}</style></head><body>
+<div class="bar"><button data-c="walk" aria-pressed="true">Walk</button><button data-c="idle">Idle</button><button data-c="attack">Wind-up + strike</button><button id="bones" aria-pressed="false">Show skeleton</button><button id="names" aria-pressed="false">Bone names</button></div>
+<div class="row" id="row"></div>
+<script src="knight-rig.js"></script>
+<script>
+const R=window.KnightRig,row=document.getElementById("row"),cells=[];let clip="walk",bones=false,names=false;
+for(const id in R.SKINS){const d=document.createElement("div");d.className="cell";d.innerHTML=`<canvas width="300" height="400"></canvas><b>${R.SKINS[id].name}</b>`;row.appendChild(d);cells.push({id,g:d.querySelector("canvas").getContext("2d")});}
+document.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{clip=b.dataset.c;document.querySelectorAll("[data-c]").forEach(x=>x.setAttribute("aria-pressed",x===b));});
+document.getElementById("bones").onclick=e=>{bones=!bones;e.target.setAttribute("aria-pressed",bones);};
+document.getElementById("names").onclick=e=>{names=!names;bones=bones||names;e.target.setAttribute("aria-pressed",names);document.getElementById("bones").setAttribute("aria-pressed",bones);};
+function frame(ms){const t=ms/1000;for(const c of cells){const g=c.g;g.setTransform(1,0,0,1,0,0);g.fillStyle="#ebe2c0";g.fillRect(0,0,300,400);g.strokeStyle="rgba(23,17,14,.35)";g.lineWidth=2;g.beginPath();g.moveTo(0,364);g.lineTo(300,364);g.stroke();g.translate(150,362);
+  let name=clip,ct=t;if(clip==="attack"){const u=t%1.4;name=u<.6?"idle":u<.95?"windup":"strike";ct=u<.6?t:u<.95?u-.6:u-.95;}
+  R.draw(g,c.id,name,ct,{scale:2.1,showBones:bones,showNames:names,t});}
+  requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+</script></body></html>

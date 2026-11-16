@@ -1,0 +1,8 @@
+# reference photos the scene art was traced from, design mockups, old snapshots and superseded Canva concepts stay local
+references/
+mockups/
+old-versions/
+knights/canva/
+.claude/
+node_modules/
+*.tmp

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ANTHOLD Prototype</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+    background:#87CEEB;
+}
+
+#ui{
+    position:absolute;
+    top:10px;
+    left:10px;
+    padding:10px;
+    background:rgba(255,255,255,.9);
+    border-radius:10px;
+}
+
+button{
+    padding:8px;
+    cursor:pointer;
+}
+
+canvas{
+    display:block;
+}
+</style>
+</head>
+
+<body>
+
+<div id="ui">
+    <div id="status"></div>
+    <button onclick="location.reload()">Restart</button>
+</div>
+
+<canvas id="game"></canvas>
+
+<script>
+
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+}
+resize();
+window.addEventListener("resize",resize);
+
+let gameOver=false;
+let win=false;
+
+let dirt=40;
+
+const colony={
+    x:canvas.width-180,
+    y:canvas.height-120,
+    radius:40
+};
+
+const queen={
+    x:colony.x,
+    y:colony.y
+};
+
+const boulder={
+    x:150,
+    y:120,
+    radius:35,
+    vx:0,
+    vy:0,
+    active:false
+};
+
+let wind=0;
+
+const ramps=[];
+
+const ants=[];
+
+for(let i=0;i<15;i++){
+    ants.push({
+        angle:Math.random()*Math.PI*2
+    });
+}
+
+canvas.addEventListener("click",(e)=>{
+
+    if(gameOver) return;
+
+    if(dirt < 5) return;
+
+    dirt -= 5;
+
+    ramps.push({
+        x:e.offsetX,
+        y:e.offsetY,
+        w:120,
+        h:30
+    });
+});
+
+function drawGround(){
+
+    ctx.fillStyle="#55aa33";
+
+    ctx.fillRect(
+        0,
+        canvas.height-100,
+        canvas.width,
+        100
+    );
+}
+
+function drawHill(){
+
+    ctx.fillStyle="#886644";
+
+    ctx.beginPath();
+
+    ctx.moveTo(0,canvas.height-100);
+    ctx.lineTo(0,160);
+    ctx.lineTo(450,canvas.height-100);
+
+    ctx.closePath();
+    ctx.fill();
+}
+
+function updateBoulder(){
+
+    wind += 0.003;
+
+    if(wind > 5){
+        boulder.active=true;
+    }
+
+    if(boulder.active){
+
+        boulder.vx += 0.03;
+
+        boulder.x += boulder.vx;
+    }
+
+    ramps.forEach(r=>{
+
+        if(
+            boulder.x+boulder.radius > r.x &&
+            boulder.x-boulder.radius < r.x+r.w &&
+            boulder.y+boulder.radius > r.y-r.h &&
+            boulder.y-boulder.radius < r.y
+        ){
+
+            boulder.y -= 3;
+            boulder.vy =
