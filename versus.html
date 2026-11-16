@@ -1613,10 +1613,14 @@ function animPose(u,spr,eng,kk,wind,lunge,clock){ // which frame an animated kni
   if(u.atk)return animSprite(u.sp,u.atk.sp?4:1,Math.min(7,u.atk.p*8|0)); // the attack as it plays: the special row for every 4th
   if(hi<8)return animSprite(u.sp,2,hi|0); // flinch: 8 frames at 20 fps
   return eng?animSprite(u.sp,1,0):spr;} // in a fight between blows: the ready stance
+// rows the draft sheets draw facing left (reviewed by eye, knight by knight): mirrored here so every knight walks and strikes toward the enemy.
+// Rows: 0 walk, 1 attack, 2 hit, 3 death, 4 special. Whole sheet left-facing, or only the walk.
+const ANIM_FLIP={fire:[0,1,2,3,4],stag:[0,1,2,3,4],katydid:[0,1,2,3,4],vinegaroon:[0,1,2,3,4],nasute:[0,1,2,3,4],major:[0,1,2,3,4],
+  worker:[0],leafcutter:[0],rhino:[0],dung:[0],weta:[0],pseudo:[0],kamikaze:[0]};
 function animSprite(sp,row,i){ // one frame as a canvas whose bottom edge is the feet; null until the sheet has decoded
   if(!hasAnim(sp))return null;const key=sp.id+"|"+row+"|"+i;if(AN_FR[key])return AN_FR[key];
   const a=ANIM_PNG[sp.id],C=144,CH=112,foot=Math.min(CH,a.y+2),s=KC.size*Math.pow(sp.size||1,.6)/a.h,c=document.createElement("canvas");
-  c.width=C;c.height=foot;c.getContext("2d").drawImage(AN_IMG[sp.id],i*C,row*CH,C,foot,0,0,C,foot);c.k=2.4/s;return AN_FR[key]=c;}
+  c.width=C;c.height=foot;{const g=c.getContext("2d");if((ANIM_FLIP[sp.id]||[]).includes(row)){g.translate(C,0);g.scale(-1,1);}g.drawImage(AN_IMG[sp.id],i*C,row*CH,C,foot,0,0,C,foot);}c.k=2.4/s;return AN_FR[key]=c;}
 function knightSprite(sp,frame,pose){ // null until the sheet has decoded, so the bug model stands in for a moment
   const own=ready(SP_IMG[sp.id])&&SP_IMG[sp.id],im=own||isKnight(sp)&&KNIGHT_IMG[sp.cls.toLowerCase()];if(!ready(im))return null;
   const C=own?128:160,foot=own?125:158,fh=own?SPECIES_PNG[sp.id].h:112, // class sheets: 160px cells, the figure ~112px tall
