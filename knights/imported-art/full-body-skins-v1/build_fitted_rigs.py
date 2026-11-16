@@ -12,11 +12,18 @@ from PIL import Image, ImageOps
 from scipy.ndimage import binary_dilation
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(Path(__file__).parent))
-from seamless_walk import RIGS
+HERE = Path(__file__).parent
+sys.path.insert(0, str(HERE))
+try:
+    from seamless_walk import RIGS
+except ImportError:  # seamless_walk.py is not in the game repo: take the knight order from the catalog (it matches smooth-2d-v1's manifest)
+    RIGS = [r['id'] for r in json.loads((HERE/'catalog.json').read_text())]
 
 CELL, SOLE, CX = 384, 352, 192
 SWING = 0.6  # source frames already hold a stride; full clip swing over-extends
+# Knights whose source pose has the legs close together shuffle at the base swing: give them a longer stride.
+LEG_W = int(__import__('os').environ.get('LEG_W', 17))  # half-width of the band that cuts a leg out; wider catches broad boots and knee pads
+STRIDE = {'dung': 2.6, 'bumble': 2.4, 'camel': 1.8, 'robberfly': 2.4, 'pseudo': 1.8, 'katydid': 1.7, 'emperor': 1.8}
 SEGS = [('thigh','hip','knee'), ('shin','knee','ankle'), ('foot','ankle','toe')]
 
 
@@ -107,6 +114,24 @@ def motion_deltas(motion):
     return [{s: (-SWING*(r[s][0]-mean[s][0]), -SWING*(r[s][1]-mean[s][1])) for s in ('l','r')} for r in out]
 
 
+def procedural_deltas(n=8, thigh=.30, knee=.55):
+    """Used when the Mesh2Motion clip is missing: a plain walk cycle. Each thigh swings sin(t) (half a cycle apart; + swings it back, so the planted foot slides back as the body walks forward);
+    the knee folds while that leg swings forward, so the foot lifts instead of dragging. Same shape as motion_deltas."""
+    out = []
+    for f in range(n):
+        t = 2*math.pi*f/n; row = {}
+        for side, ph in (('l', 0), ('r', math.pi)):
+            th = thigh*math.sin(t+ph)
+            sh = knee*max(0.0, -math.cos(t+ph))  # fold only while the leg swings forward (+ thigh angle = back, so forward is when it falls)
+            row[side] = (th, sh)
+        out.append(row)
+    return out
+
+
+def scaled(delta, k):
+    return {s: (delta[s][0]*k, delta[s][1]*min(k, 1.3)) for s in delta} if delta else delta
+
+
 def rot(p, c, t):
     x, y = p[0]-c[0], p[1]-c[1]
     return [c[0] + x*math.cos(t) - y*math.sin(t), c[1] + x*math.sin(t) + y*math.cos(t)]
@@ -160,18 +185,20 @@ def render(parts, lm, delta):
 def build(source, output):
     output = Path(output); output.mkdir(parents=True, exist_ok=True)
     items = dict(zip(RIGS, json.loads((Path(source)/'manifest.json').read_text())['knights']))
-    L = json.loads((Path(__file__).parent/'rig-landmarks/landmarks-512.json').read_text())
-    cues = {s['id']: s for s in json.loads((Path(__file__).parent/'animation-cues.json').read_text())['species']}
-    motion = json.loads((ROOT/'src/assets/shared-rig/mesh2motion-motion.json').read_text())
-    deltas = motion_deltas(motion)
+    first = lambda *ps: next(p for p in ps if p.exists())
+    L = json.loads(first(HERE/'rig-landmarks/landmarks-512.json', HERE/'landmarks-512.json').read_text())
+    cues = {s['id']: s for s in json.loads(first(HERE/'animation-cues.json', HERE.parent/'art-v3-cues-v1/animation-cues.json').read_text())['species']}
+    clip = ROOT/'src/assets/shared-rig/mesh2motion-motion.json'
+    deltas = motion_deltas(json.loads(clip.read_text())) if clip.exists() else procedural_deltas()
     records = []
     for key in RIGS:
         src = Image.open(Path(source)/items[key]['sheet']).convert('RGBA').crop((0, 0, 256, 256))
         src, lm, face = normalize(src, L[key])
-        parts = split(src, lm)
+        parts = split(src, lm, LEG_W)
         assets = {}
         for action in ('idle', 'walk'):
-            cells = [render(parts, lm, deltas[int(f/8*len(deltas))] if action == 'walk' else None)[0] for f in range(8)]
+            k = STRIDE.get(key, 1.0)
+            cells = [render(parts, lm, scaled(deltas[int(f/8*len(deltas))], k) if action == 'walk' else None)[0] for f in range(8)]
             for d in ('right', 'left'):
                 strip = Image.new('RGBA', (CELL*8, CELL))
                 for f, c in enumerate(cells): strip.alpha_composite(c if d == 'right' else ImageOps.mirror(c), (f*CELL, 0))
