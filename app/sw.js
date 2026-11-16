@@ -1,4 +1,4 @@
-const C="anthold-1794809425";
+const C="anthold-1794820443";
 self.oninstall=e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(["./","index.html","manifest.webmanifest","icon-192.png","icon-512.png"])));};
 self.onactivate=e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
 self.onfetch=e=>{if(e.request.method!=="GET")return;
