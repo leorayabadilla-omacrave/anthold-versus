@@ -1,0 +1,322 @@
+[
+ {
+  "knight": "05-flying-ant",
+  "class": "ant",
+  "sheet": "ant/05-flying-ant/05-flying-ant-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "02-killer-bee",
+  "class": "bee",
+  "sheet": "bee/02-killer-bee/02-killer-bee-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "03-forager",
+  "class": "bee",
+  "sheet": "bee/03-forager/03-forager-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "04-carpenter-bee",
+  "class": "bee",
+  "sheet": "bee/04-carpenter-bee/04-carpenter-bee-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "05-bumblebee",
+  "class": "bee",
+  "sheet": "bee/05-bumblebee/05-bumblebee-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "07-bee-knight",
+  "class": "bee",
+  "sheet": "bee/07-bee-knight/07-bee-knight-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "01-monarch",
+  "class": "butterfly",
+  "sheet": "butterfly/01-monarch/01-monarch-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "03-blue-morpho",
+  "class": "butterfly",
+  "sheet": "butterfly/03-blue-morpho/03-blue-morpho-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "03-butterfly-knight",
+  "class": "butterfly",
+  "sheet": "butterfly/03-butterfly-knight/03-butterfly-knight-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "05-atlas-moth",
+  "class": "butterfly",
+  "sheet": "butterfly/05-atlas-moth/05-atlas-moth-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "01-fruit-fly",
+  "class": "fly",
+  "sheet": "fly/01-fruit-fly/01-fruit-fly-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "03-horsefly",
+  "class": "fly",
+  "sheet": "fly/03-horsefly/03-horsefly-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "04-botfly",
+  "class": "fly",
+  "sheet": "fly/04-botfly/04-botfly-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "04-fly-knight",
+  "class": "fly",
+  "sheet": "fly/04-fly-knight/04-fly-knight-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "05-robber-fly",
+  "class": "fly",
+  "sheet": "fly/05-robber-fly/05-robber-fly-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ },
+ {
+  "knight": "01-alate",
+  "class": "termite",
+  "sheet": "termite/01-alate/01-alate-flying-sheet.png",
+  "cell": 256,
+  "cols": 8,
+  "rows": [
+   "takeoff",
+   "fly",
+   "land",
+   "death"
+  ],
+  "fps": 12,
+  "loop": {
+   "takeoff": false,
+   "fly": true,
+   "land": false,
+   "death": false
+  }
+ }
+]
