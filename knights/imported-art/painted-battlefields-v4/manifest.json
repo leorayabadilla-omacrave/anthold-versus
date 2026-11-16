@@ -1,0 +1,107 @@
+{
+  "worldBounds": [
+    -500,
+    -400,
+    1900,
+    1100
+  ],
+  "pixelsPerWorldUnit": 1.5,
+  "arenas": [
+    {
+      "id": "meadow",
+      "background": "arena-01-meadow-back.png",
+      "ground": "arena-01-meadow-ground.png",
+      "size": [
+        3600,
+        2250
+      ],
+      "laneY": 1440,
+      "nestCentersX": [
+        945,
+        2655
+      ],
+      "nestFlatHalfWidth": 250,
+      "terrain": "flat foreground; central terrain props are background scenery"
+    },
+    {
+      "id": "garden-bed",
+      "background": "arena-02-garden-bed-back.png",
+      "ground": "arena-02-garden-bed-ground.png",
+      "size": [
+        3600,
+        2250
+      ],
+      "laneY": 1440,
+      "nestCentersX": [
+        945,
+        2655
+      ],
+      "nestFlatHalfWidth": 250,
+      "terrain": "flat foreground; central terrain props are background scenery"
+    },
+    {
+      "id": "creek",
+      "background": "arena-03-creek-back.png",
+      "ground": "arena-03-creek-ground.png",
+      "size": [
+        3600,
+        2250
+      ],
+      "laneY": 1440,
+      "nestCentersX": [
+        945,
+        2655
+      ],
+      "nestFlatHalfWidth": 250,
+      "terrain": "flat foreground; central terrain props are background scenery"
+    },
+    {
+      "id": "log-hollow",
+      "background": "arena-04-log-hollow-back.png",
+      "ground": "arena-04-log-hollow-ground.png",
+      "size": [
+        3600,
+        2250
+      ],
+      "laneY": 1440,
+      "nestCentersX": [
+        945,
+        2655
+      ],
+      "nestFlatHalfWidth": 250,
+      "terrain": "flat foreground; central terrain props are background scenery"
+    },
+    {
+      "id": "sandpit",
+      "background": "arena-05-sandpit-back.png",
+      "ground": "arena-05-sandpit-ground.png",
+      "size": [
+        3600,
+        2250
+      ],
+      "laneY": 1440,
+      "nestCentersX": [
+        945,
+        2655
+      ],
+      "nestFlatHalfWidth": 250,
+      "terrain": "flat foreground; central terrain props are background scenery"
+    },
+    {
+      "id": "night-porch",
+      "background": "arena-06-night-porch-back.png",
+      "ground": "arena-06-night-porch-ground.png",
+      "size": [
+        3600,
+        2250
+      ],
+      "laneY": 1440,
+      "nestCentersX": [
+        945,
+        2655
+      ],
+      "nestFlatHalfWidth": 250,
+      "terrain": "flat foreground; central terrain props are background scenery"
+    }
+  ]
+}

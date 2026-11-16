@@ -1,0 +1,797 @@
+{
+  "source": "UNIT-ROLES.md",
+  "status": "cue-reference-only-artwork-in-progress",
+  "format": {
+    "frames": 8,
+    "cell": 384,
+    "feet": 352,
+    "margin": 16,
+    "contactOrReleaseFrame": 5,
+    "directions": [
+      "right",
+      "left"
+    ],
+    "projectiles": "separate layer"
+  },
+  "roleAdvantages": {
+    "Walker": "Ranged",
+    "Ranged": "Flyer",
+    "Flyer": "Walker"
+  },
+  "damage": {
+    "advantage": 1.2,
+    "disadvantage": 0.85
+  },
+  "species": [
+    {
+      "id": "worker",
+      "name": "Worker Ant",
+      "className": "ants",
+      "weapon": "Serrated pincer spear, two-handed (as on the sheet)",
+      "role": "Walker",
+      "reach": 14,
+      "flies": false,
+      "movement": "Walks (hatches \u00d73)",
+      "canHitFlyers": "Climbs into ant ladders to reach flyers",
+      "special": "The standard-issue spear; cheap and plentiful",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "wingedant",
+      "name": "Flying Ant",
+      "className": "ants",
+      "weapon": "Light pincer javelin",
+      "role": "Ranged",
+      "reach": 60,
+      "flies": true,
+      "movement": "Flies (hatches \u00d72)",
+      "canHitFlyers": "Yes",
+      "special": "Flies and throws javelins, at flyers too",
+      "action": "attack",
+      "cue": "Ready javelin, draw throwing arm back, extend and release at frame 5, follow through and reset; projectile is a separate layer.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "fire",
+      "name": "Fire Ant",
+      "className": "ants",
+      "weapon": "Ember glaive: a pincer blade with a glowing red edge",
+      "role": "Walker",
+      "reach": 14,
+      "flies": false,
+      "movement": "Walks (hatches \u00d72)",
+      "canHitFlyers": "Climbs into ant ladders to reach flyers",
+      "special": "Its bite sets enemies burning",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "bullet",
+      "name": "Bullet Ant",
+      "className": "ants",
+      "weapon": "Great stinger pike, thick and heavy",
+      "role": "Walker",
+      "reach": 16,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Climbs into ant ladders to reach flyers",
+      "special": "A slow giant whose sting stuns",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "leafcutter",
+      "name": "Leafcutter Ant",
+      "className": "ants",
+      "weapon": "Serrated machete with a leaf pavise (tall leaf shield)",
+      "role": "Walker",
+      "reach": 14,
+      "flies": false,
+      "movement": "Walks (hatches \u00d72)",
+      "canHitFlyers": "Climbs into ant ladders to reach flyers",
+      "special": "The leaf blocks the first 3 shots",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "army",
+      "name": "Army Ant",
+      "className": "ants",
+      "weapon": "Twin sickle swords, crossed like mandibles",
+      "role": "Walker",
+      "reach": 14,
+      "flies": false,
+      "movement": "Walks (hatches \u00d72)",
+      "canHitFlyers": "Climbs into ant ladders to reach flyers",
+      "special": "A raider that grows stronger with every kill",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "ladybug",
+      "name": "Ladybug",
+      "className": "beetles",
+      "weapon": "Spotted flanged mace",
+      "role": "Flyer",
+      "reach": 12,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "A small flyer that heals from the damage it deals",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "rhino",
+      "name": "Rhino Beetle",
+      "className": "beetles",
+      "weapon": "War hammer with a ring emblem, two-handed (as on the sheet)",
+      "role": "Walker",
+      "reach": 18,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Reaches very low flyers",
+      "special": "A tank whose charge deals triple damage",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "bombardier",
+      "name": "Bombardier Beetle",
+      "className": "beetles",
+      "weapon": "Acid blunderbuss with a twin flared barrel",
+      "role": "Ranged",
+      "reach": 55,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Yes",
+      "special": "Ranged acid spray that splashes walkers",
+      "action": "attack",
+      "cue": "Brace and aim sprayer, emit at frame 5, recoil and settle; stream and droplets separate.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "dung",
+      "name": "Dung Beetle",
+      "className": "beetles",
+      "weapon": "Ball flail with a heavy rolling ball",
+      "role": "Walker",
+      "reach": 16,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Reaches flyers only when they dive or land",
+      "special": "Rolls in, smashes nests and shoves walkers",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "stag",
+      "name": "Stag Beetle",
+      "className": "beetles",
+      "weapon": "Antler poleaxe with two branching blades",
+      "role": "Walker",
+      "reach": 20,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Reaches very low flyers",
+      "special": "Big bites that take a share of the victim's health",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "monarch",
+      "name": "Monarch",
+      "className": "butterflies",
+      "weapon": "Pollen dart crossbow",
+      "role": "Ranged",
+      "reach": 70,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "Ranged pollen darts; poisons what bites it",
+      "action": "attack",
+      "cue": "Brace crossbow, aim, release pollen dart at frame 5, recoil and reset; dart separate. Redraw pending after service block.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "swallowtail",
+      "name": "Swallowtail",
+      "className": "butterflies",
+      "weapon": "Lance (as on the sheet)",
+      "role": "Flyer",
+      "reach": 12,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "Its first dive strike deals 2.5x damage",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "morpho",
+      "name": "Blue Morpho",
+      "className": "butterflies",
+      "weapon": "Prism scepter that flashes light",
+      "role": "Ranged",
+      "reach": 80,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "Support: dazzles enemies so they attack slower",
+      "action": "attack",
+      "cue": "Raise prism scepter, aim light flash at frame 5, lower and reset; beam separate.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "atlas",
+      "name": "Atlas Moth",
+      "className": "butterflies",
+      "weapon": "Silk longbow",
+      "role": "Ranged",
+      "reach": 60,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "Ranged; spins a cocoon and comes back once",
+      "action": "attack",
+      "cue": "Nock arrow, draw silk longbow, release at frame 5, recover; arrow separate. Walk-only artwork approved; attack pending.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "hawkmoth",
+      "name": "Hawk Moth",
+      "className": "butterflies",
+      "weapon": "Atlatl that hurls long darts",
+      "role": "Ranged",
+      "reach": 90,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "Longest range in the class; heavy and steady",
+      "action": "attack",
+      "cue": "Load long dart onto atlatl, draw arm back, lever forward to release at frame 5, recover; not a rifle. Dart separate.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "fruitfly",
+      "name": "Fruit Fly",
+      "className": "flies",
+      "weapon": "Twin needle stilettos",
+      "role": "Flyer",
+      "reach": 10,
+      "flies": true,
+      "movement": "Flies (hatches \u00d74)",
+      "canHitFlyers": "Yes",
+      "special": "A cloud of four tiny flies",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "housefly",
+      "name": "Housefly",
+      "className": "flies",
+      "weapon": "Twin daggers (as on the sheet)",
+      "role": "Flyer",
+      "reach": 12,
+      "flies": true,
+      "movement": "Flies (hatches \u00d72)",
+      "canHitFlyers": "Yes",
+      "special": "The baseline fly, hatched in pairs",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "horsefly",
+      "name": "Horsefly",
+      "className": "flies",
+      "weapon": "Twin cleavers",
+      "role": "Flyer",
+      "reach": 12,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "Double damage against anything big",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "botfly",
+      "name": "Botfly",
+      "className": "flies",
+      "weapon": "Barbed hook knives that stay in the wound",
+      "role": "Flyer",
+      "reach": 12,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "Infests its victim; a maggot hatches if it dies",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "robberfly",
+      "name": "Robber Fly",
+      "className": "flies",
+      "weapon": "Needle rapier and a grappling hook",
+      "role": "Flyer",
+      "reach": 12,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "Hunts other flyers",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "camel",
+      "name": "Camel Cricket",
+      "className": "crickets",
+      "weapon": "Twin short kamas",
+      "role": "Walker",
+      "reach": 14,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Pounces at flyers overhead",
+      "special": "Skittish and quick; dodges one hit in three",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "field",
+      "name": "Field Cricket",
+      "className": "crickets",
+      "weapon": "Curved short sword (as on the sheet)",
+      "role": "Walker",
+      "reach": 14,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Pounces at flyers overhead",
+      "special": "Its chirp makes nearby allies attack faster",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "mole",
+      "name": "Mole Cricket",
+      "className": "crickets",
+      "weapon": "Digging-claw gauntlets",
+      "role": "Walker",
+      "reach": 14,
+      "flies": false,
+      "movement": "Tunnels",
+      "canHitFlyers": "Pounces at flyers overhead",
+      "special": "Tunnels underground and hits nests",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk",
+        "tunnel"
+      ]
+    },
+    {
+      "id": "katydid",
+      "name": "Katydid",
+      "className": "crickets",
+      "weapon": "Leaf-blade naginata",
+      "role": "Walker",
+      "reach": 14,
+      "flies": false,
+      "movement": "Walks, leaps",
+      "canHitFlyers": "Pounces at flyers overhead",
+      "special": "Leaps over the front line to strike the back",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "weta",
+      "name": "Giant Weta",
+      "className": "crickets",
+      "weapon": "Spiked war club",
+      "role": "Walker",
+      "reach": 18,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Pounces at flyers overhead",
+      "special": "A heavyweight that kicks walkers back",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "pseudo",
+      "name": "Pseudoscorpion",
+      "className": "scorpions",
+      "weapon": "Tiny pincer hooks and a climbing grapple",
+      "role": "Walker",
+      "reach": 14,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Reaches low flyers",
+      "special": "Climbs up to bite low flyers; no tail",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "emperor",
+      "name": "Emperor Scorpion",
+      "className": "scorpions",
+      "weapon": "Claw gauntlets (as on the sheet)",
+      "role": "Walker",
+      "reach": 22,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Reaches low flyers",
+      "special": "Pins its prey in its claws while it strikes",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "bark",
+      "name": "Bark Scorpion",
+      "className": "scorpions",
+      "weapon": "Slim sickle claws dripping venom",
+      "role": "Walker",
+      "reach": 18,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Reaches low flyers",
+      "special": "Venom slows its victims and keeps hurting",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "vinegaroon",
+      "name": "Vinegaroon",
+      "className": "scorpions",
+      "weapon": "Acid siphon with a whip tail",
+      "role": "Ranged",
+      "reach": 70,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Yes",
+      "special": "Sprays acid at range, even at flyers",
+      "action": "attack",
+      "cue": "Brace and aim sprayer, emit at frame 5, recoil and settle; stream and droplets separate.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "deathstalker",
+      "name": "Deathstalker",
+      "className": "scorpions",
+      "weapon": "Venom katars (punch daggers)",
+      "role": "Walker",
+      "reach": 18,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Reaches low flyers",
+      "special": "Venom assassin with lethal damage over time",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "honeybee",
+      "name": "Honeybee",
+      "className": "bees",
+      "weapon": "Striped stinger spear (as on the sheet)",
+      "role": "Flyer",
+      "reach": 12,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "One huge armour-piercing sting, then it dies",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "forager",
+      "name": "Forager Bee",
+      "className": "bees",
+      "weapon": "Pollen sickle and pollen baskets",
+      "role": "Flyer",
+      "reach": 0,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Never fights",
+      "special": "Gathers food rather than fighting",
+      "action": "gather",
+      "cue": "Lower pollen sickle, collect food into basket at frame 5, lift and return; never strike.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "bumble",
+      "name": "Bumblebee",
+      "className": "bees",
+      "weapon": "Honey censer staff that trails healing mist",
+      "role": "Flyer",
+      "reach": 14,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "Heals every ally around it",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "killer",
+      "name": "Killer Bee",
+      "className": "bees",
+      "weapon": "Short barbed javelins",
+      "role": "Ranged",
+      "reach": 55,
+      "flies": true,
+      "movement": "Flies (hatches \u00d72)",
+      "canHitFlyers": "Yes",
+      "special": "An angry pair that throws barbed javelins that pierce armour",
+      "action": "attack",
+      "cue": "Ready javelin, draw throwing arm back, extend and release at frame 5, follow through and reset; projectile is a separate layer.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "carpenter",
+      "name": "Carpenter Bee",
+      "className": "bees",
+      "weapon": "Auger drill lance",
+      "role": "Flyer",
+      "reach": 14,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "Bores into wood: big damage to nests and walls",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "alate",
+      "name": "Alate",
+      "className": "termites",
+      "weapon": "Light javelin",
+      "role": "Ranged",
+      "reach": 60,
+      "flies": true,
+      "movement": "Flies",
+      "canHitFlyers": "Yes",
+      "special": "Winged and cheap; its javelin reaches flyers",
+      "action": "attack",
+      "cue": "Ready javelin, draw throwing arm back, extend and release at frame 5, follow through and reset; projectile is a separate layer.",
+      "requiredMovement": [
+        "walk",
+        "takeoff",
+        "fly",
+        "land",
+        "dive"
+      ]
+    },
+    {
+      "id": "tworker",
+      "name": "Worker Termite",
+      "className": "termites",
+      "weapon": "Mattock and hex shield (as on the sheet)",
+      "role": "Walker",
+      "reach": 14,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Reaches flyers from atop a mound wall, or when they land",
+      "special": "Builds mound walls when it meets the enemy",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "nasute",
+      "name": "Nasute Soldier",
+      "className": "termites",
+      "weapon": "Glue sprayer fed from the helmet nozzle",
+      "role": "Ranged",
+      "reach": 80,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Yes",
+      "special": "Squirts glue at range, rooting its target",
+      "action": "attack",
+      "cue": "Brace and aim sprayer, emit at frame 5, recoil and settle; stream and droplets separate.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "kamikaze",
+      "name": "Kamikaze Termite",
+      "className": "termites",
+      "weapon": "Glue-crystal backpack and a short club",
+      "role": "Walker",
+      "reach": 14,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Reaches flyers from atop a mound wall, or when they land",
+      "special": "Bursts when it dies, gluing everything around it",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    },
+    {
+      "id": "major",
+      "name": "Major Soldier",
+      "className": "termites",
+      "weapon": "Great mattock and a tower hex shield",
+      "role": "Walker",
+      "reach": 18,
+      "flies": false,
+      "movement": "Walks",
+      "canHitFlyers": "Reaches very low flyers",
+      "special": "The armoured defender that holds the line",
+      "action": "attack",
+      "cue": "Ready, weapon-specific windup, extend into contact at frame 5, follow through and return; preserve weapon grip and full silhouette.",
+      "requiredMovement": [
+        "walk"
+      ]
+    }
+  ]
+}

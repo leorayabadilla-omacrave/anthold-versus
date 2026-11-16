@@ -1,0 +1,1 @@
+Animation cue handoff derived from UNIT-ROLES. Reference only, not replacement character artwork. All 41 species, separate directions and traveling effects; Forager gathers. Review walks and unfinished attack art are not included. No gameplay files modified.
