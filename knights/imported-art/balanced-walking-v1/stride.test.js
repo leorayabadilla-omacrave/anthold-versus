@@ -1,0 +1,12 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import './stride.js';
+const {advance,frame,foot,strideLength}=globalThis.ANTHOLDStride;
+const unit=()=>({x:0,sp:{size:1},st:{}});
+const state=()=>({phase:0,time:0,moving:false});
+test('one travelled stride plays all eight frames',()=>{const s=state(),u=unit(),seen=new Set();for(let i=0;i<8;i++){const before=u.x;u.x+=4;advance(s,u,before,1/60);seen.add(frame(s));}assert.deepEqual([...seen].sort(),[0,1,2,3,4,5,6,7]);assert.equal(strideLength(1),32);});
+test('both legs have identical reach and lift half a cycle apart',()=>{const left=[],right=[];for(let i=0;i<8;i++){left.push(foot(i/8));right.push(foot(i/8+.5));}for(let i=0;i<8;i++)assert.deepEqual(left[i],right[(i+4)%8]);assert.equal(Math.max(...left.map(p=>p.x)),11);assert.equal(Math.min(...left.map(p=>p.x)),-11);assert.equal(Math.min(...left.map(p=>p.y)),-7);});
+test('foot stays on the floor throughout its planted half',()=>{for(const p of [0,.125,.25,.375])assert.equal(foot(p).y,0);assert.ok(foot(.75).y<0);});
+test('slowed travel slows the animation by the same amount',()=>{const s=state(),t=state(),u=unit(),v=unit();u.x=8;v.x=4;advance(s,u,0,1/60);advance(t,v,0,1/60);assert.equal(s.phase,.25);assert.equal(t.phase,.125);});
+test('standing, attacks, stun, root, flight and knockback never walk',()=>{for(const extra of [{},{atk:{}},{st:{stun:1}},{st:{root:1}},{sp:{fly:true,size:1},alt:30},{pushT:0},{dead:true},{hop:2}]){const u={...unit(),...extra},s=state();u.x=extra.sp||extra.atk||extra.st||extra.dead||extra.hop||extra.pushT!=null?5:0;advance(s,u,0,1/60);assert.equal(frame(s),0);assert.equal(s.moving,false);}});
+test('left-facing movement uses the same cadence as right-facing',()=>{const s=state(),t=state(),u=unit(),v=unit();u.x=12;v.x=-12;advance(s,u,0,1/60);advance(t,v,0,1/60);assert.equal(frame(s),frame(t));});

@@ -1,0 +1,330 @@
+{
+  "worker": {
+    "y": 104,
+    "h": 78,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "worker.png"
+  },
+  "fire": {
+    "y": 99,
+    "h": 72,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "fire.png"
+  },
+  "leafcutter": {
+    "y": 104,
+    "h": 73,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "leafcutter.png"
+  },
+  "army": {
+    "y": 106,
+    "h": 84,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "army.png"
+  },
+  "wingedant": {
+    "y": 107,
+    "h": 85,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "wingedant.png"
+  },
+  "bullet": {
+    "y": 97,
+    "h": 69,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "bullet.png"
+  },
+  "killer": {
+    "y": 111,
+    "h": 82,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "killer.png"
+  },
+  "forager": {
+    "y": 101,
+    "h": 75,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "forager.png"
+  },
+  "carpenter": {
+    "y": 101,
+    "h": 78,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "carpenter.png"
+  },
+  "bumble": {
+    "y": 104,
+    "h": 71,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "bumble.png"
+  },
+  "honeybee": {
+    "y": 100,
+    "h": 71,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "honeybee.png"
+  },
+  "ladybug": {
+    "y": 111,
+    "h": 86,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "ladybug.png"
+  },
+  "rhino": {
+    "y": 103,
+    "h": 78,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "rhino.png"
+  },
+  "bombardier": {
+    "y": 111,
+    "h": 92,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "bombardier.png"
+  },
+  "stag": {
+    "y": 105,
+    "h": 74,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "stag.png"
+  },
+  "dung": {
+    "y": 104,
+    "h": 73,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "dung.png"
+  },
+  "monarch": {
+    "y": 106,
+    "h": 76,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "monarch.png"
+  },
+  "morpho": {
+    "y": 106,
+    "h": 82,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "morpho.png"
+  },
+  "swallowtail": {
+    "y": 104,
+    "h": 77,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "swallowtail.png"
+  },
+  "hawkmoth": {
+    "y": 108,
+    "h": 83,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "hawkmoth.png"
+  },
+  "atlas": {
+    "y": 108,
+    "h": 83,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "atlas.png"
+  },
+  "camel": {
+    "y": 111,
+    "h": 84,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "camel.png"
+  },
+  "katydid": {
+    "y": 111,
+    "h": 86,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "katydid.png"
+  },
+  "mole": {
+    "y": 105,
+    "h": 79,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "mole.png"
+  },
+  "field": {
+    "y": 106,
+    "h": 78,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "field.png"
+  },
+  "weta": {
+    "y": 106,
+    "h": 85,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "weta.png"
+  },
+  "fruitfly": {
+    "y": 107,
+    "h": 78,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "fruitfly.png"
+  },
+  "horsefly": {
+    "y": 110,
+    "h": 79,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "horsefly.png"
+  },
+  "botfly": {
+    "y": 111,
+    "h": 83,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "botfly.png"
+  },
+  "housefly": {
+    "y": 109,
+    "h": 83,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "housefly.png"
+  },
+  "robberfly": {
+    "y": 109,
+    "h": 77,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "robberfly.png"
+  },
+  "pseudo": {
+    "y": 111,
+    "h": 91,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "pseudo.png"
+  },
+  "bark": {
+    "y": 111,
+    "h": 88,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "bark.png"
+  },
+  "vinegaroon": {
+    "y": 107,
+    "h": 78,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "vinegaroon.png"
+  },
+  "deathstalker": {
+    "y": 107,
+    "h": 78,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "deathstalker.png"
+  },
+  "emperor": {
+    "y": 103,
+    "h": 78,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "emperor.png"
+  },
+  "alate": {
+    "y": 107,
+    "h": 79,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "alate.png"
+  },
+  "nasute": {
+    "y": 108,
+    "h": 79,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "nasute.png"
+  },
+  "kamikaze": {
+    "y": 109,
+    "h": 82,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "kamikaze.png"
+  },
+  "major": {
+    "y": 111,
+    "h": 76,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "major.png"
+  },
+  "tworker": {
+    "y": 110,
+    "h": 81,
+    "frames": 8,
+    "cellWidth": 144,
+    "cellHeight": 112,
+    "file": "tworker.png"
+  }
+}
