@@ -482,6 +482,9 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
  #dock #units .hc.merge .cart{min-height:34px}
  #dock #units .hc.merge{grid-template-columns:58px minmax(0,1fr)}#dock #units .hc.merge .cart{width:58px}
  #dock #units .hc .cmerge{min-height:56px}}
+/* relics on a short screen: smaller cards so a whole row shows */
+@media (max-height:520px){.tc{min-height:0!important;padding-bottom:6px}.tc-art{width:40px!important;height:40px!important}.cx-grid{grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}}
+.rules p{margin:0 0 8px;font:500 14px/1.4 var(--body)}.rules b{font-weight:700}
 </style>
 
 <div id="hud" hidden>
@@ -534,7 +537,15 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
 <div id="rotate" aria-live="polite"><div><b>Turn your phone sideways</b><span>The meadow is wide. Play in landscape.</span></div></div>
 <div id="pause" class="overlay" hidden><div class="page narrow">
   <h1>Paused</h1>
-  <p>New bugs gather behind the front line. Every 18 seconds both waves clash. Before each clash pick a tactic (Z Charge, X Hold, C Flank): Charge beats Flank, Flank beats Hold, Hold beats Charge, and the enemy's pick is only revealed when the waves meet. Win a clash and the front moves one mark toward their nest; win at their door and you storm it. Survivors come home and fight again. Every bug has a role: ■ walkers beat ● ranged, ● ranged beat ▲ flyers, ▲ flyers beat ■ walkers. Watch what the enemy gathers and build against it. Hatch units with the cards (or keys 1 to 6); each class deploys in its own way (ant squads, beetle pupae, scorpion ambushes and more). Click a disaster card, then click the battlefield where it should strike (keys Q, W, E...). Height matters: flyers dive down to bite and land to rest when they tire, and that is when walkers can reach them. Ants climb into ladders, crickets pounce, and tall bugs (scorpion tails, bombardier spray, beetle horns) reach low flyers.</p>
+  <div class="rules">
+  <p><b>Goal.</b> Break the enemy nest before they break yours. In the last minute (overtime) food comes twice as fast; when the clock runs out, both nests start to crumble.</p>
+  <p><b>Food and cards.</b> Food fills a bar from 0 to 10. You always hold 3 cards, knights or disasters: tap one (or press 1 to 3) to play it, and a new card takes its place. ↻ Refresh (R) deals 3 new cards for 1 food.</p>
+  <p><b>Merge.</b> Hold two or three of the same knight and you can merge them (Merge button, or Shift + its number): one knight with +60% health and damage per extra copy, for one card's price plus 1 food per copy. Or send just one.</p>
+  <p><b>Roles.</b> ■ Walkers beat ● ranged, ● ranged beat ▲ flyers, ▲ flyers beat ■ walkers. Flyers are out of a walker's reach until they dive or land; ants climb into ladders, crickets pounce, and long tails, horns and claws reach low flyers.</p>
+  <p><b>Disasters.</b> At most one is dealt at a time, and none for 15 seconds after you play one. Each warns for 1 second, then strikes the enemy.</p>
+  <p><b>Army.</b> Up to 12 knights. Every 20 seconds each nest also sends a free wave of plain insects.</p>
+  <p><b>Keys.</b> 1 to 3 play · Shift + number merges · R refresh · A auto · P pause · M sound.</p>
+  </div>
   <div class="row"><button class="go" id="resume">Resume</button><button id="sndPause" aria-pressed="true">Sound on</button><button id="pQuit">Quit match</button></div>
 </div></div>
 
@@ -855,7 +866,7 @@ function startRound(preview){
   R.bases.forEach((b,i)=>{b.max=b.hp=KC.nest*mods(M.pl[i]).nest;});
   for(const p of M.pl)p.workers=0;
   baked=null;show(null);renderDock();state="play";paused=false;aim=null;
-  if(!preview)toast(`${map.name}: play one of your 3 choices (1-3). Matching knights merge into a stronger one. Destroy their nest!`);
+  if(!preview)toast(`${map.name}: play one of your 3 cards (1-3); hold two of the same knight to merge them. Destroy their nest!`);
 }
 
 // ======================= waves and roles =======================
@@ -997,7 +1008,7 @@ function hurt(t,amt,src,kind){ // kind: "hit" (armor applies), "dot", "dis" (dis
 function hurtBase(team,amt,kind){
   const b=R.bases[team];let a=amt;if(kind==="dis")a*=mods(M.pl[team]).hardy;
   b.hp-=a;b.flash=8;sfx("nest",{x:b.x});
-  if(kind!=="ot")for(const th of[.65,.3])if(!b["ls"+th]&&b.hp<=b.max*th){b["ls"+th]=1;R.stand[team]=1;say(team,"Last Stand ready: call the Swarm (S)");} // a charge at 65% and at 30% nest health, once each, so a regrowing nest can't farm it
+  if(kind!=="ot")for(const th of[.65,.3])if(!b["ls"+th]&&b.hp<=b.max*th){b["ls"+th]=1;R.stand[team]=1;} // (Last Stand is switched off, so no prompt) a charge at 65% and at 30% nest health, once each, so a regrowing nest can't farm it
   if(b.hp<=0&&!R.over){b.hp=0;endRound(1-team);}
 }
 function nestRally(team){ // a shockwave from the nest: nearby attackers are flung back and stunned
@@ -2636,7 +2647,7 @@ function menu(){
     b.onpointermove=e=>{if(calm||e.pointerType!=="mouse")return;const r=b.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;b.style.transform=`perspective(700px) rotateX(${-y*10}deg) rotateY(${x*12}deg)`;};
     b.onpointerleave=()=>{b.style.transform="";};
     b.setAttribute("aria-pressed",pickCls===k);b.onclick=()=>{pickCls=k;menu();};b.ondblclick=()=>{pickCls=k;deckScreen();};box.appendChild(b);}
-  {const c=CLASSES[pickCls],el=$("clsSum");el.innerHTML=c?`<span class="pro">+ ${c.pro}</span><span class="con">− ${c.con}</span><button id="sumDos">Units and power-ups →</button>`:`<span class="hint">Tap a colony to pick it. Double-tap to pick and start.</span>`;if(c)$("sumDos").onclick=()=>dossier(pickCls);}
+  {const c=CLASSES[pickCls],el=$("clsSum");el.innerHTML=c?`<span class="pro">+ ${c.pro}</span><span class="con">− ${c.con}</span><button id="sumDos">Units and relics →</button>`:`<span class="hint">Tap a colony to pick it. Double-tap to pick and start.</span>`;if(c)$("sumDos").onclick=()=>dossier(pickCls);}
   $("clsInfo").hidden=true;
   const db=$("diffs");db.innerHTML="";for(const[k,L]of Object.entries(BOT_LEVELS)){const b=document.createElement("button");b.textContent=L.name;b.className=pickDiff===k?"on":"";b.onclick=()=>{pickDiff=k;menu();};db.appendChild(b);}
   $("startMatch").disabled=!pickCls;$("startMatch").onclick=()=>deckScreen();
@@ -2649,8 +2660,8 @@ function dossier(k){ // the class's full page, laid over the class grid
     <div class="dz"><div class="dl"><h1><span class="sig">${sigilSVG(k,34)}</span>${KNIGHT_NAME[k]}</h1>${knightArt(k,1)}
       <p class="pro"><b>Strength</b> · ${c.pro}</p><p class="con"><b>Weakness</b> · ${c.con}</p>
       <p class="perk"><b>Perk</b> · ${c.perk}</p><p class="perk"><b>Deploys</b> · ${DEPLOY[k].how}</p>
-      <div class="ups"><em>Power-ups</em>${Object.values(UPS).filter(u=>u.cls===k).map(u=>`<span title="${u.desc}">${u.name}</span>`).join("")}</div></div>
-    <div class="dr"><h2>The roster</h2><div class="roster">${c.species.map(id=>{const s=SP[id];return`<div class="unit"><canvas data-sp="${id}" aria-hidden="true"></canvas><div class="ut"><b>${s.name}</b><span class="meta">${ROLE_GLYPH[roleOf(s)]} ${ROLE_NAME[roleOf(s)]} · ${s.cost} food${s.n>1?" · ×"+s.n:""}</span><span class="desc" title="${s.desc} ${reachText(s)}">${s.desc} ${reachText(s)}</span></div>
+      <div class="ups"><em>Relics</em>${BOOSTS.filter(b=>b.cls===k).map(b=>`<span title="${boostText(b)}">${b.name}</span>`).join("")}</div></div>
+    <div class="dr"><h2>The roster</h2><div class="roster">${c.species.map(id=>{const s=SP[id];return`<div class="unit"><canvas data-sp="${id}" aria-hidden="true"></canvas><div class="ut"><b>${s.name}</b><span class="meta">${ROLE_GLYPH[roleOf(s)]} ${ROLE_NAME[roleOf(s)]} · ${knightElix(id)} food${s.n>1?" · ×"+s.n:""}</span><span class="desc" title="${s.desc} ${reachText(s)}">${s.desc} ${reachText(s)}</span></div>
       <div class="stats">${bar("HP",s.hp/STAT_MAX.hp)}${bar("Dmg",s.dmg*s.rate/STAT_MAX.dps)}${bar("Spd",s.speed/STAT_MAX.speed)}${bar("Rch",s.range/STAT_MAX.range)}</div></div>`;}).join("")}</div>
       <div class="row"><button class="go" id="ciPick">${pickCls===k?"Chosen":"Choose "+c.name}</button><button id="ciStart">Choose and start</button></div></div></div>`;
   box.hidden=false;box.scrollTop=0;box.parentNode.scrollIntoView({block:"nearest",behavior:"smooth"});
@@ -3453,7 +3464,7 @@ function netLost(){
 $("netHost").onclick=()=>netOpen("h");$("netJoin").onclick=()=>netOpen("g",$("netCode").value);$("netCancel").onclick=()=>netLeave();
 $("netCode").addEventListener("keydown",e=>{if(e.key==="Enter")netOpen("g",e.target.value);});
 
-const DPR=()=>Math.min(2,devicePixelRatio||1),VIEW={w:1340,h:270,bottom:605}; // world x 30..1370 across the screen; at least y 335..605 tall (a whole nest); y 605 sits on the dock
+const DPR=()=>Math.min(2,devicePixelRatio||1),VIEW={w:1340,h:290,bottom:630}; // world x 30..1370 across the screen; at least y 340..630 tall (a whole nest, and ground under the feet); y 630 sits on the dock
 function resize(){
   cv.width=cv.clientWidth*DPR();cv.height=cv.clientHeight*DPR();
   const on=!$("hud").hidden,top=on?$("top").getBoundingClientRect().bottom+6:0,bot=on?cv.clientHeight-$("dock").getBoundingClientRect().top:0,room=Math.max(140,cv.clientHeight-top-bot);
