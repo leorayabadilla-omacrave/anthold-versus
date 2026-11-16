@@ -30,7 +30,8 @@ The `smooth-2d-v1` sheets use 256 px cells with almost no room around the figure
 | Feet | The feet rest on y = 352 in every frame of every move (the checker tests the walk) |
 | Body position | The body stays near x = 192; a lunge may travel, but everything still fits inside the margin |
 | Figure size | Standing figure about 200 px tall (head to feet), so raised weapons and jumps fit |
-| Facing | Right. The game mirrors for the other side |
+| Facing | Right, in every frame of every move: walk, attack, special, hit and death. Several current sheets walk facing left but attack facing right, so they look like they walk backwards. A side or three-quarter view that clearly reads as right-facing; never a front view. The game mirrors for the other side |
+| Walk cycle | The legs clearly alternate (left foot forward, then right) over the 8 frames, with the body moving forward. Several current walks barely move their legs, so the knight looks like it slides |
 | Effects | Slash arcs, sparks and puffs stay inside their own frame's cell |
 | One figure per cell | Never draw a piece of the next or previous frame in a cell |
 
