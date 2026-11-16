@@ -1,0 +1,1738 @@
+{
+  "knights": [
+    {
+      "class": "ant",
+      "knight": "01-ant-knight",
+      "sheet": "ant/01-ant-knight-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "ant",
+      "knight": "02-fire-ant",
+      "sheet": "ant/02-fire-ant-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "ant",
+      "knight": "03-leafcutter",
+      "sheet": "ant/03-leafcutter-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "ant",
+      "knight": "04-army-ant",
+      "sheet": "ant/04-army-ant-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "ant",
+      "knight": "05-flying-ant",
+      "sheet": "ant/05-flying-ant-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "ant",
+      "knight": "06-bullet-ant",
+      "sheet": "ant/06-bullet-ant-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "bee",
+      "knight": "02-killer-bee",
+      "sheet": "bee/02-killer-bee-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "bee",
+      "knight": "03-forager",
+      "sheet": "bee/03-forager-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "bee",
+      "knight": "04-carpenter-bee",
+      "sheet": "bee/04-carpenter-bee-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "bee",
+      "knight": "05-bumblebee",
+      "sheet": "bee/05-bumblebee-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "bee",
+      "knight": "07-bee-knight",
+      "sheet": "bee/07-bee-knight-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "beetle",
+      "knight": "01-ladybug",
+      "sheet": "beetle/01-ladybug-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "beetle",
+      "knight": "02-beetle-knight",
+      "sheet": "beetle/02-beetle-knight-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "beetle",
+      "knight": "02-bombardier",
+      "sheet": "beetle/02-bombardier-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "beetle",
+      "knight": "03-stag-beetle",
+      "sheet": "beetle/03-stag-beetle-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "beetle",
+      "knight": "05-dung-beetle",
+      "sheet": "beetle/05-dung-beetle-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "butterfly",
+      "knight": "01-monarch",
+      "sheet": "butterfly/01-monarch-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "butterfly",
+      "knight": "03-blue-morpho",
+      "sheet": "butterfly/03-blue-morpho-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "butterfly",
+      "knight": "03-butterfly-knight",
+      "sheet": "butterfly/03-butterfly-knight-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "butterfly",
+      "knight": "04-hawk-moth",
+      "sheet": "butterfly/04-hawk-moth-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "butterfly",
+      "knight": "05-atlas-moth",
+      "sheet": "butterfly/05-atlas-moth-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "cricket",
+      "knight": "01-camel-cricket",
+      "sheet": "cricket/01-camel-cricket-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "cricket",
+      "knight": "03-katydid",
+      "sheet": "cricket/03-katydid-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "cricket",
+      "knight": "04-mole-cricket",
+      "sheet": "cricket/04-mole-cricket-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "cricket",
+      "knight": "05-cricket-knight",
+      "sheet": "cricket/05-cricket-knight-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "cricket",
+      "knight": "05-giant-weta",
+      "sheet": "cricket/05-giant-weta-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "fly",
+      "knight": "01-fruit-fly",
+      "sheet": "fly/01-fruit-fly-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "fly",
+      "knight": "03-horsefly",
+      "sheet": "fly/03-horsefly-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "fly",
+      "knight": "04-botfly",
+      "sheet": "fly/04-botfly-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "fly",
+      "knight": "04-fly-knight",
+      "sheet": "fly/04-fly-knight-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "fly",
+      "knight": "05-robber-fly",
+      "sheet": "fly/05-robber-fly-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "scorpion",
+      "knight": "01-pseudoscorpion",
+      "sheet": "scorpion/01-pseudoscorpion-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "scorpion",
+      "knight": "02-bark-scorpion",
+      "sheet": "scorpion/02-bark-scorpion-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "scorpion",
+      "knight": "03-vinegaroon",
+      "sheet": "scorpion/03-vinegaroon-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "scorpion",
+      "knight": "04-deathstalker",
+      "sheet": "scorpion/04-deathstalker-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "scorpion",
+      "knight": "06-scorpion-knight",
+      "sheet": "scorpion/06-scorpion-knight-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "termite",
+      "knight": "01-alate",
+      "sheet": "termite/01-alate-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "termite",
+      "knight": "03-nasute-soldier",
+      "sheet": "termite/03-nasute-soldier-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "termite",
+      "knight": "04-kamikaze-termite",
+      "sheet": "termite/04-kamikaze-termite-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "termite",
+      "knight": "05-major-soldier",
+      "sheet": "termite/05-major-soldier-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    },
+    {
+      "class": "termite",
+      "knight": "08-termite-knight",
+      "sheet": "termite/08-termite-knight-sheet.png",
+      "cell_width": 256,
+      "cell_height": 256,
+      "columns": 8,
+      "rows": 5,
+      "moves": {
+        "walk": {
+          "row": 0,
+          "frames": 8,
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "row": 1,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "row": 2,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "hit": {
+          "row": 3,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        },
+        "death": {
+          "row": 4,
+          "frames": 8,
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "status": "prototype animation draft; requires manual continuity and engine review"
+    }
+  ],
+  "row_order": [
+    "walk",
+    "attack",
+    "special",
+    "hit",
+    "death"
+  ],
+  "pivot": [
+    0.5,
+    1.0
+  ],
+  "status": "AI-assisted smooth 2D prototype animation drafts"
+}

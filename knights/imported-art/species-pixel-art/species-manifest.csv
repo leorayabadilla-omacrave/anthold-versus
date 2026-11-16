@@ -1,0 +1,34 @@
+species,class,id,sheet,still,cell_width,cell_height,frame_order,pivot_x,pivot_y
+Fire Ant,Ant,ant/02-fire-ant,anim-pixel/ant/02-fire-ant-sheet.png,pixel/ant/02-fire-ant.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Leafcutter,Ant,ant/03-leafcutter,anim-pixel/ant/03-leafcutter-sheet.png,pixel/ant/03-leafcutter.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Army Ant,Ant,ant/04-army-ant,anim-pixel/ant/04-army-ant-sheet.png,pixel/ant/04-army-ant.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Flying Ant,Ant,ant/05-flying-ant,anim-pixel/ant/05-flying-ant-sheet.png,pixel/ant/05-flying-ant.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Bullet Ant,Ant,ant/06-bullet-ant,anim-pixel/ant/06-bullet-ant-sheet.png,pixel/ant/06-bullet-ant.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Ladybug,Beetle,beetle/01-ladybug,anim-pixel/beetle/01-ladybug-sheet.png,pixel/beetle/01-ladybug.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Bombardier,Beetle,beetle/02-bombardier,anim-pixel/beetle/02-bombardier-sheet.png,pixel/beetle/02-bombardier.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Stag Beetle,Beetle,beetle/03-stag-beetle,anim-pixel/beetle/03-stag-beetle-sheet.png,pixel/beetle/03-stag-beetle.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Dung Beetle,Beetle,beetle/05-dung-beetle,anim-pixel/beetle/05-dung-beetle-sheet.png,pixel/beetle/05-dung-beetle.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Monarch,Butterfly,butterfly/01-monarch,anim-pixel/butterfly/01-monarch-sheet.png,pixel/butterfly/01-monarch.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Blue Morpho,Butterfly,butterfly/03-blue-morpho,anim-pixel/butterfly/03-blue-morpho-sheet.png,pixel/butterfly/03-blue-morpho.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Hawk Moth,Butterfly,butterfly/04-hawk-moth,anim-pixel/butterfly/04-hawk-moth-sheet.png,pixel/butterfly/04-hawk-moth.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Atlas Moth,Butterfly,butterfly/05-atlas-moth,anim-pixel/butterfly/05-atlas-moth-sheet.png,pixel/butterfly/05-atlas-moth.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Fruit Fly,Fly,fly/01-fruit-fly,anim-pixel/fly/01-fruit-fly-sheet.png,pixel/fly/01-fruit-fly.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Horsefly,Fly,fly/03-horsefly,anim-pixel/fly/03-horsefly-sheet.png,pixel/fly/03-horsefly.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Botfly,Fly,fly/04-botfly,anim-pixel/fly/04-botfly-sheet.png,pixel/fly/04-botfly.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Robber Fly,Fly,fly/05-robber-fly,anim-pixel/fly/05-robber-fly-sheet.png,pixel/fly/05-robber-fly.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Camel Cricket,Cricket,cricket/01-camel-cricket,anim-pixel/cricket/01-camel-cricket-sheet.png,pixel/cricket/01-camel-cricket.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Katydid,Cricket,cricket/03-katydid,anim-pixel/cricket/03-katydid-sheet.png,pixel/cricket/03-katydid.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Mole Cricket,Cricket,cricket/04-mole-cricket,anim-pixel/cricket/04-mole-cricket-sheet.png,pixel/cricket/04-mole-cricket.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Giant Weta,Cricket,cricket/05-giant-weta,anim-pixel/cricket/05-giant-weta-sheet.png,pixel/cricket/05-giant-weta.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Pseudoscorpion,Scorpion,scorpion/01-pseudoscorpion,anim-pixel/scorpion/01-pseudoscorpion-sheet.png,pixel/scorpion/01-pseudoscorpion.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Bark Scorpion,Scorpion,scorpion/02-bark-scorpion,anim-pixel/scorpion/02-bark-scorpion-sheet.png,pixel/scorpion/02-bark-scorpion.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Vinegaroon,Scorpion,scorpion/03-vinegaroon,anim-pixel/scorpion/03-vinegaroon-sheet.png,pixel/scorpion/03-vinegaroon.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Deathstalker,Scorpion,scorpion/04-deathstalker,anim-pixel/scorpion/04-deathstalker-sheet.png,pixel/scorpion/04-deathstalker.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Killer Bee,Bee,bee/02-killer-bee,anim-pixel/bee/02-killer-bee-sheet.png,pixel/bee/02-killer-bee.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Forager,Bee,bee/03-forager,anim-pixel/bee/03-forager-sheet.png,pixel/bee/03-forager.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Carpenter Bee,Bee,bee/04-carpenter-bee,anim-pixel/bee/04-carpenter-bee-sheet.png,pixel/bee/04-carpenter-bee.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Bumblebee,Bee,bee/05-bumblebee,anim-pixel/bee/05-bumblebee-sheet.png,pixel/bee/05-bumblebee.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Alate,Termite,termite/01-alate,anim-pixel/termite/01-alate-sheet.png,pixel/termite/01-alate.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Nasute Soldier,Termite,termite/03-nasute-soldier,anim-pixel/termite/03-nasute-soldier-sheet.png,pixel/termite/03-nasute-soldier.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Kamikaze Termite,Termite,termite/04-kamikaze-termite,anim-pixel/termite/04-kamikaze-termite-sheet.png,pixel/termite/04-kamikaze-termite.png,128,128,idle|walk|attack|hit,0.5,0.96875
+Major Soldier,Termite,termite/05-major-soldier,anim-pixel/termite/05-major-soldier-sheet.png,pixel/termite/05-major-soldier.png,128,128,idle|walk|attack|hit,0.5,0.96875

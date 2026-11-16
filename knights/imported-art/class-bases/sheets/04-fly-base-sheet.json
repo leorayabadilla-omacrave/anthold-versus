@@ -1,0 +1,35 @@
+{
+  "image": "04-fly-base-sheet.png",
+  "cell_width": 256,
+  "cell_height": 256,
+  "pivot": {
+    "x": 0.5,
+    "y": 0.96875
+  },
+  "states": {
+    "intact": {
+      "x": 0,
+      "y": 0,
+      "w": 256,
+      "h": 256
+    },
+    "damaged": {
+      "x": 256,
+      "y": 0,
+      "w": 256,
+      "h": 256
+    },
+    "critical": {
+      "x": 512,
+      "y": 0,
+      "w": 256,
+      "h": 256
+    },
+    "destroyed": {
+      "x": 768,
+      "y": 0,
+      "w": 256,
+      "h": 256
+    }
+  }
+}

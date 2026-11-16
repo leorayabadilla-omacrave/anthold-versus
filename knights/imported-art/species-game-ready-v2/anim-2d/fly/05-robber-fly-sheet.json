@@ -1,0 +1,64 @@
+{
+  "species": "Robber Fly",
+  "class": "Fly",
+  "image": "05-robber-fly-sheet.png",
+  "size": {
+    "w": 2048,
+    "h": 512
+  },
+  "pivot": {
+    "x": 0.5,
+    "y": 0.96875
+  },
+  "frames": {
+    "idle": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 512,
+        "h": 512
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.96875
+      }
+    },
+    "walk": {
+      "frame": {
+        "x": 512,
+        "y": 0,
+        "w": 512,
+        "h": 512
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.96875
+      }
+    },
+    "attack": {
+      "frame": {
+        "x": 1024,
+        "y": 0,
+        "w": 512,
+        "h": 512
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.96875
+      }
+    },
+    "hit": {
+      "frame": {
+        "x": 1536,
+        "y": 0,
+        "w": 512,
+        "h": 512
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.96875
+      }
+    }
+  },
+  "notes": "One pose per action, not a multi-frame walk cycle. Playback and recovery timing are engine-controlled."
+}
