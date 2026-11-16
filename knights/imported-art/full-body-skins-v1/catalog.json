@@ -1,0 +1,2822 @@
+[
+ {
+  "id": "worker",
+  "name": "Worker Ant",
+  "className": "ants",
+  "weapon": "Serrated pincer spear, two-handed (as on the sheet)",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "ant",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "worker-idle-right.png",
+   "idle-left": "worker-idle-left.png",
+   "walk-right": "worker-walk-right.png",
+   "walk-left": "worker-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    186.5,
+    99.0
+   ],
+   "pelvis": [
+    175.0,
+    154.5
+   ],
+   "near": {
+    "hip": [
+     159.5,
+     163.0
+    ],
+    "knee": [
+     148.5,
+     189.5
+    ],
+    "ankle": [
+     117.0,
+     223.5
+    ],
+    "toe": [
+     103.5,
+     231.5
+    ]
+   },
+   "far": {
+    "hip": [
+     184.0,
+     163.0
+    ],
+    "knee": [
+     202.5,
+     182.0
+    ],
+    "ankle": [
+     197.0,
+     220.5
+    ],
+    "toe": [
+     225.0,
+     227.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "fire",
+  "name": "Fire Ant",
+  "className": "ants",
+  "weapon": "Ember glaive: a pincer blade with a glowing red edge",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "ant",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "fire-idle-right.png",
+   "idle-left": "fire-idle-left.png",
+   "walk-right": "fire-walk-right.png",
+   "walk-left": "fire-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    151.0,
+    86.0
+   ],
+   "pelvis": [
+    139.0,
+    143.0
+   ],
+   "near": {
+    "hip": [
+     149.0,
+     151.0
+    ],
+    "knee": [
+     170.0,
+     170.0
+    ],
+    "ankle": [
+     163.5,
+     203.0
+    ],
+    "toe": [
+     185.5,
+     218.0
+    ]
+   },
+   "far": {
+    "hip": [
+     130.5,
+     151.0
+    ],
+    "knee": [
+     121.0,
+     174.5
+    ],
+    "ankle": [
+     101.5,
+     202.5
+    ],
+    "toe": [
+     112.5,
+     218.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "leafcutter",
+  "name": "Leafcutter Ant",
+  "className": "ants",
+  "weapon": "Serrated machete with a leaf pavise (tall leaf shield)",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "ant",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "leafcutter-idle-right.png",
+   "idle-left": "leafcutter-idle-left.png",
+   "walk-right": "leafcutter-walk-right.png",
+   "walk-left": "leafcutter-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    146.5,
+    94.5
+   ],
+   "pelvis": [
+    132.0,
+    154.0
+   ],
+   "near": {
+    "hip": [
+     139.5,
+     157.5
+    ],
+    "knee": [
+     170.0,
+     183.5
+    ],
+    "ankle": [
+     165.5,
+     218.5
+    ],
+    "toe": [
+     188.5,
+     231.0
+    ]
+   },
+   "far": {
+    "hip": [
+     118.5,
+     157.5
+    ],
+    "knee": [
+     102.5,
+     185.5
+    ],
+    "ankle": [
+     79.0,
+     218.5
+    ],
+    "toe": [
+     89.5,
+     231.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "army",
+  "name": "Army Ant",
+  "className": "ants",
+  "weapon": "Twin sickle swords, crossed like mandibles",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "ant",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "army-idle-right.png",
+   "idle-left": "army-idle-left.png",
+   "walk-right": "army-walk-right.png",
+   "walk-left": "army-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    139.0,
+    77.0
+   ],
+   "pelvis": [
+    117.5,
+    150.0
+   ],
+   "near": {
+    "hip": [
+     107.0,
+     153.0
+    ],
+    "knee": [
+     95.0,
+     187.5
+    ],
+    "ankle": [
+     55.5,
+     222.0
+    ],
+    "toe": [
+     73.5,
+     239.0
+    ]
+   },
+   "far": {
+    "hip": [
+     132.0,
+     153.0
+    ],
+    "knee": [
+     162.5,
+     177.0
+    ],
+    "ankle": [
+     165.0,
+     222.0
+    ],
+    "toe": [
+     192.0,
+     239.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "wingedant",
+  "name": "Flying Ant",
+  "className": "ants",
+  "weapon": "Light pincer javelin",
+  "role": "Ranged",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "ant",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "wingedant-idle-right.png",
+   "idle-left": "wingedant-idle-left.png",
+   "walk-right": "wingedant-walk-right.png",
+   "walk-left": "wingedant-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    155.0,
+    95.0
+   ],
+   "pelvis": [
+    144.5,
+    149.5
+   ],
+   "near": {
+    "hip": [
+     152.5,
+     155.5
+    ],
+    "knee": [
+     171.5,
+     185.0
+    ],
+    "ankle": [
+     168.0,
+     225.0
+    ],
+    "toe": [
+     191.0,
+     240.0
+    ]
+   },
+   "far": {
+    "hip": [
+     134.0,
+     155.5
+    ],
+    "knee": [
+     125.5,
+     192.5
+    ],
+    "ankle": [
+     93.5,
+     221.0
+    ],
+    "toe": [
+     105.0,
+     239.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "bullet",
+  "name": "Bullet Ant",
+  "className": "ants",
+  "weapon": "Great stinger pike, thick and heavy",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "ant",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "bullet-idle-right.png",
+   "idle-left": "bullet-idle-left.png",
+   "walk-right": "bullet-walk-right.png",
+   "walk-left": "bullet-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    135.5,
+    76.5
+   ],
+   "pelvis": [
+    121.0,
+    139.5
+   ],
+   "near": {
+    "hip": [
+     106.0,
+     140.0
+    ],
+    "knee": [
+     106.0,
+     176.0
+    ],
+    "ankle": [
+     70.5,
+     200.0
+    ],
+    "toe": [
+     73.0,
+     214.5
+    ]
+   },
+   "far": {
+    "hip": [
+     134.0,
+     140.0
+    ],
+    "knee": [
+     137.0,
+     164.0
+    ],
+    "ankle": [
+     135.0,
+     202.0
+    ],
+    "toe": [
+     153.5,
+     214.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "killer",
+  "name": "Killer Bee",
+  "className": "bees",
+  "weapon": "Short barbed javelins",
+  "role": "Ranged",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "bee",
+  "sourceFacing": "left",
+  "assets": {
+   "idle-right": "killer-idle-right.png",
+   "idle-left": "killer-idle-left.png",
+   "walk-right": "killer-walk-right.png",
+   "walk-left": "killer-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    126.5,
+    97.5
+   ],
+   "pelvis": [
+    125.5,
+    166.0
+   ],
+   "near": {
+    "hip": [
+     110.5,
+     177.0
+    ],
+    "knee": [
+     102.0,
+     206.5
+    ],
+    "ankle": [
+     79.0,
+     240.0
+    ],
+    "toe": [
+     66.5,
+     255.5
+    ]
+   },
+   "far": {
+    "hip": [
+     139.0,
+     177.0
+    ],
+    "knee": [
+     156.0,
+     204.0
+    ],
+    "ankle": [
+     160.0,
+     240.0
+    ],
+    "toe": [
+     184.0,
+     255.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "forager",
+  "name": "Forager Bee",
+  "className": "bees",
+  "weapon": "Pollen sickle and pollen baskets",
+  "role": "Flyer",
+  "action": "gather",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "bee",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "forager-idle-right.png",
+   "idle-left": "forager-idle-left.png",
+   "walk-right": "forager-walk-right.png",
+   "walk-left": "forager-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    138.0,
+    83.0
+   ],
+   "pelvis": [
+    120.0,
+    140.0
+   ],
+   "near": {
+    "hip": [
+     105.5,
+     147.0
+    ],
+    "knee": [
+     99.0,
+     179.0
+    ],
+    "ankle": [
+     70.0,
+     212.0
+    ],
+    "toe": [
+     88.5,
+     226.0
+    ]
+   },
+   "far": {
+    "hip": [
+     132.0,
+     146.5
+    ],
+    "knee": [
+     151.0,
+     169.5
+    ],
+    "ankle": [
+     159.5,
+     212.0
+    ],
+    "toe": [
+     186.5,
+     209.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "carpenter",
+  "name": "Carpenter Bee",
+  "className": "bees",
+  "weapon": "Auger drill lance",
+  "role": "Flyer",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "bee",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "carpenter-idle-right.png",
+   "idle-left": "carpenter-idle-left.png",
+   "walk-right": "carpenter-walk-right.png",
+   "walk-left": "carpenter-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    139.5,
+    80.0
+   ],
+   "pelvis": [
+    122.0,
+    140.0
+   ],
+   "near": {
+    "hip": [
+     103.5,
+     155.5
+    ],
+    "knee": [
+     104.5,
+     185.5
+    ],
+    "ankle": [
+     71.5,
+     209.5
+    ],
+    "toe": [
+     83.5,
+     224.5
+    ]
+   },
+   "far": {
+    "hip": [
+     141.5,
+     155.0
+    ],
+    "knee": [
+     147.5,
+     182.5
+    ],
+    "ankle": [
+     147.5,
+     210.0
+    ],
+    "toe": [
+     175.0,
+     223.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "bumble",
+  "name": "Bumblebee",
+  "className": "bees",
+  "weapon": "Honey censer staff that trails healing mist",
+  "role": "Flyer",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "bee",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "bumble-idle-right.png",
+   "idle-left": "bumble-idle-left.png",
+   "walk-right": "bumble-walk-right.png",
+   "walk-left": "bumble-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    147.0,
+    105.0
+   ],
+   "pelvis": [
+    137.0,
+    161.0
+   ],
+   "near": {
+    "hip": [
+     112.0,
+     170.0
+    ],
+    "knee": [
+     104.5,
+     199.0
+    ],
+    "ankle": [
+     90.0,
+     222.0
+    ],
+    "toe": [
+     106.5,
+     230.0
+    ]
+   },
+   "far": {
+    "hip": [
+     156.0,
+     169.5
+    ],
+    "knee": [
+     171.0,
+     194.5
+    ],
+    "ankle": [
+     161.5,
+     222.0
+    ],
+    "toe": [
+     184.0,
+     230.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "honeybee",
+  "name": "Honeybee",
+  "className": "bees",
+  "weapon": "Striped stinger spear (as on the sheet)",
+  "role": "Flyer",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "bee",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "honeybee-idle-right.png",
+   "idle-left": "honeybee-idle-left.png",
+   "walk-right": "honeybee-walk-right.png",
+   "walk-left": "honeybee-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    135.0,
+    100.0
+   ],
+   "pelvis": [
+    109.0,
+    153.5
+   ],
+   "near": {
+    "hip": [
+     95.0,
+     156.0
+    ],
+    "knee": [
+     88.5,
+     184.5
+    ],
+    "ankle": [
+     53.5,
+     205.0
+    ],
+    "toe": [
+     67.5,
+     221.5
+    ]
+   },
+   "far": {
+    "hip": [
+     123.5,
+     156.0
+    ],
+    "knee": [
+     140.0,
+     177.5
+    ],
+    "ankle": [
+     139.5,
+     210.5
+    ],
+    "toe": [
+     165.0,
+     221.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "ladybug",
+  "name": "Ladybug",
+  "className": "beetles",
+  "weapon": "Spotted flanged mace",
+  "role": "Flyer",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "beetle",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "ladybug-idle-right.png",
+   "idle-left": "ladybug-idle-left.png",
+   "walk-right": "ladybug-walk-right.png",
+   "walk-left": "ladybug-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    135.0,
+    95.5
+   ],
+   "pelvis": [
+    120.5,
+    160.5
+   ],
+   "near": {
+    "hip": [
+     137.0,
+     165.0
+    ],
+    "knee": [
+     158.5,
+     197.5
+    ],
+    "ankle": [
+     168.0,
+     229.5
+    ],
+    "toe": [
+     200.0,
+     238.0
+    ]
+   },
+   "far": {
+    "hip": [
+     108.0,
+     164.5
+    ],
+    "knee": [
+     99.5,
+     207.5
+    ],
+    "ankle": [
+     63.0,
+     227.5
+    ],
+    "toe": [
+     45.0,
+     238.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "rhino",
+  "name": "Rhino Beetle",
+  "className": "beetles",
+  "weapon": "War hammer with a ring emblem, two-handed (as on the sheet)",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "beetle",
+  "sourceFacing": "left",
+  "assets": {
+   "idle-right": "rhino-idle-right.png",
+   "idle-left": "rhino-idle-left.png",
+   "walk-right": "rhino-walk-right.png",
+   "walk-left": "rhino-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    108.5,
+    97.5
+   ],
+   "pelvis": [
+    108.5,
+    163.0
+   ],
+   "near": {
+    "hip": [
+     120.5,
+     171.5
+    ],
+    "knee": [
+     139.5,
+     189.5
+    ],
+    "ankle": [
+     131.5,
+     218.5
+    ],
+    "toe": [
+     155.0,
+     229.0
+    ]
+   },
+   "far": {
+    "hip": [
+     91.5,
+     171.5
+    ],
+    "knee": [
+     74.5,
+     191.5
+    ],
+    "ankle": [
+     47.5,
+     222.5
+    ],
+    "toe": [
+     35.0,
+     230.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "bombardier",
+  "name": "Bombardier Beetle",
+  "className": "beetles",
+  "weapon": "Acid blunderbuss with a twin flared barrel",
+  "role": "Ranged",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "beetle",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "bombardier-idle-right.png",
+   "idle-left": "bombardier-idle-left.png",
+   "walk-right": "bombardier-walk-right.png",
+   "walk-left": "bombardier-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    139.0,
+    77.5
+   ],
+   "pelvis": [
+    129.0,
+    148.5
+   ],
+   "near": {
+    "hip": [
+     137.5,
+     154.0
+    ],
+    "knee": [
+     159.0,
+     177.5
+    ],
+    "ankle": [
+     159.0,
+     213.0
+    ],
+    "toe": [
+     187.5,
+     223.0
+    ]
+   },
+   "far": {
+    "hip": [
+     105.5,
+     154.0
+    ],
+    "knee": [
+     103.5,
+     185.0
+    ],
+    "ankle": [
+     73.0,
+     217.0
+    ],
+    "toe": [
+     88.0,
+     229.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "stag",
+  "name": "Stag Beetle",
+  "className": "beetles",
+  "weapon": "Antler poleaxe with two branching blades",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "beetle",
+  "sourceFacing": "left",
+  "assets": {
+   "idle-right": "stag-idle-right.png",
+   "idle-left": "stag-idle-left.png",
+   "walk-right": "stag-walk-right.png",
+   "walk-left": "stag-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    102.0,
+    109.0
+   ],
+   "pelvis": [
+    102.0,
+    163.5
+   ],
+   "near": {
+    "hip": [
+     90.5,
+     171.0
+    ],
+    "knee": [
+     76.0,
+     201.5
+    ],
+    "ankle": [
+     49.0,
+     224.5
+    ],
+    "toe": [
+     36.5,
+     234.0
+    ]
+   },
+   "far": {
+    "hip": [
+     111.5,
+     171.0
+    ],
+    "knee": [
+     136.5,
+     187.0
+    ],
+    "ankle": [
+     133.0,
+     224.5
+    ],
+    "toe": [
+     157.0,
+     234.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "dung",
+  "name": "Dung Beetle",
+  "className": "beetles",
+  "weapon": "Ball flail with a heavy rolling ball",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "beetle",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "dung-idle-right.png",
+   "idle-left": "dung-idle-left.png",
+   "walk-right": "dung-walk-right.png",
+   "walk-left": "dung-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    150.0,
+    90.0
+   ],
+   "pelvis": [
+    134.0,
+    162.5
+   ],
+   "near": {
+    "hip": [
+     139.0,
+     167.5
+    ],
+    "knee": [
+     146.0,
+     186.0
+    ],
+    "ankle": [
+     138.0,
+     222.5
+    ],
+    "toe": [
+     160.0,
+     235.5
+    ]
+   },
+   "far": {
+    "hip": [
+     119.5,
+     166.5
+    ],
+    "knee": [
+     125.0,
+     182.5
+    ],
+    "ankle": [
+     116.0,
+     222.0
+    ],
+    "toe": [
+     129.0,
+     233.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "monarch",
+  "name": "Monarch",
+  "className": "butterflies",
+  "weapon": "Pollen dart crossbow",
+  "role": "Ranged",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "butterfly",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "monarch-idle-right.png",
+   "idle-left": "monarch-idle-left.png",
+   "walk-right": "monarch-walk-right.png",
+   "walk-left": "monarch-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    137.0,
+    100.5
+   ],
+   "pelvis": [
+    123.0,
+    156.5
+   ],
+   "near": {
+    "hip": [
+     115.0,
+     165.5
+    ],
+    "knee": [
+     120.0,
+     194.5
+    ],
+    "ankle": [
+     83.0,
+     218.5
+    ],
+    "toe": [
+     92.5,
+     234.5
+    ]
+   },
+   "far": {
+    "hip": [
+     132.5,
+     165.5
+    ],
+    "knee": [
+     142.0,
+     192.0
+    ],
+    "ankle": [
+     135.5,
+     224.5
+    ],
+    "toe": [
+     152.0,
+     238.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "morpho",
+  "name": "Blue Morpho",
+  "className": "butterflies",
+  "weapon": "Prism scepter that flashes light",
+  "role": "Ranged",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "butterfly",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "morpho-idle-right.png",
+   "idle-left": "morpho-idle-left.png",
+   "walk-right": "morpho-walk-right.png",
+   "walk-left": "morpho-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    145.5,
+    84.5
+   ],
+   "pelvis": [
+    128.5,
+    153.5
+   ],
+   "near": {
+    "hip": [
+     115.5,
+     159.5
+    ],
+    "knee": [
+     112.5,
+     184.5
+    ],
+    "ankle": [
+     91.0,
+     225.0
+    ],
+    "toe": [
+     108.0,
+     236.0
+    ]
+   },
+   "far": {
+    "hip": [
+     138.0,
+     159.5
+    ],
+    "knee": [
+     151.5,
+     183.5
+    ],
+    "ankle": [
+     154.5,
+     225.0
+    ],
+    "toe": [
+     178.0,
+     236.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "swallowtail",
+  "name": "Swallowtail",
+  "className": "butterflies",
+  "weapon": "Lance (as on the sheet)",
+  "role": "Flyer",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "butterfly",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "swallowtail-idle-right.png",
+   "idle-left": "swallowtail-idle-left.png",
+   "walk-right": "swallowtail-walk-right.png",
+   "walk-left": "swallowtail-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    173.0,
+    96.0
+   ],
+   "pelvis": [
+    148.0,
+    153.5
+   ],
+   "near": {
+    "hip": [
+     139.0,
+     158.0
+    ],
+    "knee": [
+     128.0,
+     185.5
+    ],
+    "ankle": [
+     90.5,
+     209.0
+    ],
+    "toe": [
+     103.5,
+     227.5
+    ]
+   },
+   "far": {
+    "hip": [
+     160.0,
+     158.0
+    ],
+    "knee": [
+     169.5,
+     182.5
+    ],
+    "ankle": [
+     161.0,
+     216.5
+    ],
+    "toe": [
+     187.5,
+     233.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "hawkmoth",
+  "name": "Hawk Moth",
+  "className": "butterflies",
+  "weapon": "Atlatl that hurls long darts",
+  "role": "Ranged",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "butterfly",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "hawkmoth-idle-right.png",
+   "idle-left": "hawkmoth-idle-left.png",
+   "walk-right": "hawkmoth-walk-right.png",
+   "walk-left": "hawkmoth-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    158.5,
+    78.5
+   ],
+   "pelvis": [
+    136.5,
+    150.5
+   ],
+   "near": {
+    "hip": [
+     147.0,
+     157.5
+    ],
+    "knee": [
+     170.5,
+     185.0
+    ],
+    "ankle": [
+     170.0,
+     228.0
+    ],
+    "toe": [
+     197.0,
+     242.0
+    ]
+   },
+   "far": {
+    "hip": [
+     127.0,
+     160.0
+    ],
+    "knee": [
+     123.0,
+     195.0
+    ],
+    "ankle": [
+     78.5,
+     217.5
+    ],
+    "toe": [
+     88.5,
+     244.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "atlas",
+  "name": "Atlas Moth",
+  "className": "butterflies",
+  "weapon": "Silk longbow",
+  "role": "Ranged",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "butterfly",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "atlas-idle-right.png",
+   "idle-left": "atlas-idle-left.png",
+   "walk-right": "atlas-walk-right.png",
+   "walk-left": "atlas-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    139.5,
+    75.5
+   ],
+   "pelvis": [
+    135.5,
+    151.5
+   ],
+   "near": {
+    "hip": [
+     117.5,
+     164.5
+    ],
+    "knee": [
+     109.5,
+     191.0
+    ],
+    "ankle": [
+     87.5,
+     227.5
+    ],
+    "toe": [
+     100.5,
+     242.5
+    ]
+   },
+   "far": {
+    "hip": [
+     150.5,
+     164.5
+    ],
+    "knee": [
+     163.5,
+     189.0
+    ],
+    "ankle": [
+     155.0,
+     227.5
+    ],
+    "toe": [
+     175.5,
+     242.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "camel",
+  "name": "Camel Cricket",
+  "className": "crickets",
+  "weapon": "Twin short kamas",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "cricket",
+  "sourceFacing": "left",
+  "assets": {
+   "idle-right": "camel-idle-right.png",
+   "idle-left": "camel-idle-left.png",
+   "walk-right": "camel-walk-right.png",
+   "walk-left": "camel-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    135.5,
+    119.5
+   ],
+   "pelvis": [
+    125.0,
+    178.0
+   ],
+   "near": {
+    "hip": [
+     122.5,
+     189.0
+    ],
+    "knee": [
+     139.0,
+     211.5
+    ],
+    "ankle": [
+     135.5,
+     244.5
+    ],
+    "toe": [
+     151.0,
+     255.0
+    ]
+   },
+   "far": {
+    "hip": [
+     115.0,
+     190.0
+    ],
+    "knee": [
+     119.0,
+     219.5
+    ],
+    "ankle": [
+     100.5,
+     244.0
+    ],
+    "toe": [
+     86.5,
+     255.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "katydid",
+  "name": "Katydid",
+  "className": "crickets",
+  "weapon": "Leaf-blade naginata",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "cricket",
+  "sourceFacing": "left",
+  "assets": {
+   "idle-right": "katydid-idle-right.png",
+   "idle-left": "katydid-idle-left.png",
+   "walk-right": "katydid-walk-right.png",
+   "walk-left": "katydid-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    141.0,
+    113.0
+   ],
+   "pelvis": [
+    135.0,
+    166.0
+   ],
+   "near": {
+    "hip": [
+     125.0,
+     172.5
+    ],
+    "knee": [
+     117.0,
+     204.0
+    ],
+    "ankle": [
+     94.0,
+     233.5
+    ],
+    "toe": [
+     108.0,
+     249.0
+    ]
+   },
+   "far": {
+    "hip": [
+     145.0,
+     172.0
+    ],
+    "knee": [
+     154.0,
+     201.5
+    ],
+    "ankle": [
+     152.5,
+     234.5
+    ],
+    "toe": [
+     176.5,
+     248.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "mole",
+  "name": "Mole Cricket",
+  "className": "crickets",
+  "weapon": "Digging-claw gauntlets",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "tunnel"
+  ],
+  "classLabel": "cricket",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "mole-idle-right.png",
+   "idle-left": "mole-idle-left.png",
+   "walk-right": "mole-walk-right.png",
+   "walk-left": "mole-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    135.0,
+    89.0
+   ],
+   "pelvis": [
+    126.5,
+    153.0
+   ],
+   "near": {
+    "hip": [
+     113.5,
+     156.0
+    ],
+    "knee": [
+     126.5,
+     189.0
+    ],
+    "ankle": [
+     123.0,
+     225.0
+    ],
+    "toe": [
+     146.0,
+     240.5
+    ]
+   },
+   "far": {
+    "hip": [
+     141.0,
+     156.0
+    ],
+    "knee": [
+     148.5,
+     189.0
+    ],
+    "ankle": [
+     105.0,
+     215.0
+    ],
+    "toe": [
+     113.5,
+     235.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "field",
+  "name": "Field Cricket",
+  "className": "crickets",
+  "weapon": "Curved short sword (as on the sheet)",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "cricket",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "field-idle-right.png",
+   "idle-left": "field-idle-left.png",
+   "walk-right": "field-walk-right.png",
+   "walk-left": "field-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    132.0,
+    100.0
+   ],
+   "pelvis": [
+    115.0,
+    159.5
+   ],
+   "near": {
+    "hip": [
+     103.5,
+     164.5
+    ],
+    "knee": [
+     103.0,
+     197.0
+    ],
+    "ankle": [
+     79.0,
+     222.0
+    ],
+    "toe": [
+     96.0,
+     235.5
+    ]
+   },
+   "far": {
+    "hip": [
+     128.5,
+     164.5
+    ],
+    "knee": [
+     143.0,
+     189.5
+    ],
+    "ankle": [
+     139.0,
+     222.0
+    ],
+    "toe": [
+     164.5,
+     235.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "weta",
+  "name": "Giant Weta",
+  "className": "crickets",
+  "weapon": "Spiked war club",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "cricket",
+  "sourceFacing": "left",
+  "assets": {
+   "idle-right": "weta-idle-right.png",
+   "idle-left": "weta-idle-left.png",
+   "walk-right": "weta-walk-right.png",
+   "walk-left": "weta-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    133.0,
+    95.5
+   ],
+   "pelvis": [
+    126.0,
+    162.5
+   ],
+   "near": {
+    "hip": [
+     107.5,
+     161.5
+    ],
+    "knee": [
+     98.5,
+     198.5
+    ],
+    "ankle": [
+     57.5,
+     224.5
+    ],
+    "toe": [
+     72.5,
+     237.0
+    ]
+   },
+   "far": {
+    "hip": [
+     148.0,
+     168.5
+    ],
+    "knee": [
+     164.5,
+     182.5
+    ],
+    "ankle": [
+     155.5,
+     224.5
+    ],
+    "toe": [
+     186.5,
+     237.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "fruitfly",
+  "name": "Fruit Fly",
+  "className": "flies",
+  "weapon": "Twin needle stilettos",
+  "role": "Flyer",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "fly",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "fruitfly-idle-right.png",
+   "idle-left": "fruitfly-idle-left.png",
+   "walk-right": "fruitfly-walk-right.png",
+   "walk-left": "fruitfly-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    153.5,
+    86.0
+   ],
+   "pelvis": [
+    131.0,
+    152.5
+   ],
+   "near": {
+    "hip": [
+     140.0,
+     157.5
+    ],
+    "knee": [
+     166.5,
+     187.0
+    ],
+    "ankle": [
+     170.0,
+     225.5
+    ],
+    "toe": [
+     198.5,
+     235.5
+    ]
+   },
+   "far": {
+    "hip": [
+     121.0,
+     158.5
+    ],
+    "knee": [
+     107.0,
+     196.5
+    ],
+    "ankle": [
+     66.5,
+     205.0
+    ],
+    "toe": [
+     64.5,
+     231.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "horsefly",
+  "name": "Horsefly",
+  "className": "flies",
+  "weapon": "Twin cleavers",
+  "role": "Flyer",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "fly",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "horsefly-idle-right.png",
+   "idle-left": "horsefly-idle-left.png",
+   "walk-right": "horsefly-walk-right.png",
+   "walk-left": "horsefly-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    147.0,
+    97.0
+   ],
+   "pelvis": [
+    135.0,
+    152.0
+   ],
+   "near": {
+    "hip": [
+     153.5,
+     165.5
+    ],
+    "knee": [
+     168.5,
+     195.0
+    ],
+    "ankle": [
+     158.0,
+     230.5
+    ],
+    "toe": [
+     183.5,
+     249.0
+    ]
+   },
+   "far": {
+    "hip": [
+     111.5,
+     165.0
+    ],
+    "knee": [
+     102.5,
+     198.0
+    ],
+    "ankle": [
+     75.5,
+     230.5
+    ],
+    "toe": [
+     61.5,
+     247.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "botfly",
+  "name": "Botfly",
+  "className": "flies",
+  "weapon": "Barbed hook knives that stay in the wound",
+  "role": "Flyer",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "fly",
+  "sourceFacing": "left",
+  "assets": {
+   "idle-right": "botfly-idle-right.png",
+   "idle-left": "botfly-idle-left.png",
+   "walk-right": "botfly-walk-right.png",
+   "walk-left": "botfly-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    97.5,
+    102.0
+   ],
+   "pelvis": [
+    120.5,
+    171.0
+   ],
+   "near": {
+    "hip": [
+     140.0,
+     179.5
+    ],
+    "knee": [
+     149.5,
+     217.0
+    ],
+    "ankle": [
+     183.0,
+     246.0
+    ],
+    "toe": [
+     199.0,
+     255.5
+    ]
+   },
+   "far": {
+    "hip": [
+     101.5,
+     179.0
+    ],
+    "knee": [
+     81.5,
+     208.0
+    ],
+    "ankle": [
+     90.0,
+     247.5
+    ],
+    "toe": [
+     80.0,
+     255.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "housefly",
+  "name": "Housefly",
+  "className": "flies",
+  "weapon": "Twin daggers (as on the sheet)",
+  "role": "Flyer",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "fly",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "housefly-idle-right.png",
+   "idle-left": "housefly-idle-left.png",
+   "walk-right": "housefly-walk-right.png",
+   "walk-left": "housefly-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    159.5,
+    88.0
+   ],
+   "pelvis": [
+    135.0,
+    151.5
+   ],
+   "near": {
+    "hip": [
+     121.5,
+     157.0
+    ],
+    "knee": [
+     118.0,
+     199.0
+    ],
+    "ankle": [
+     84.5,
+     230.5
+    ],
+    "toe": [
+     102.5,
+     247.0
+    ]
+   },
+   "far": {
+    "hip": [
+     147.5,
+     157.5
+    ],
+    "knee": [
+     172.0,
+     191.0
+    ],
+    "ankle": [
+     164.5,
+     230.5
+    ],
+    "toe": [
+     189.5,
+     247.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "robberfly",
+  "name": "Robber Fly",
+  "className": "flies",
+  "weapon": "Needle rapier and a grappling hook",
+  "role": "Flyer",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "fly",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "robberfly-idle-right.png",
+   "idle-left": "robberfly-idle-left.png",
+   "walk-right": "robberfly-walk-right.png",
+   "walk-left": "robberfly-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    158.5,
+    88.5
+   ],
+   "pelvis": [
+    135.5,
+    142.0
+   ],
+   "near": {
+    "hip": [
+     141.0,
+     153.5
+    ],
+    "knee": [
+     145.5,
+     185.0
+    ],
+    "ankle": [
+     134.5,
+     233.0
+    ],
+    "toe": [
+     153.0,
+     245.5
+    ]
+   },
+   "far": {
+    "hip": [
+     124.5,
+     153.0
+    ],
+    "knee": [
+     132.0,
+     192.5
+    ],
+    "ankle": [
+     114.0,
+     225.0
+    ],
+    "toe": [
+     99.0,
+     226.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "pseudo",
+  "name": "Pseudoscorpion",
+  "className": "scorpions",
+  "weapon": "Tiny pincer hooks and a climbing grapple",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "scorpion",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "pseudo-idle-right.png",
+   "idle-left": "pseudo-idle-left.png",
+   "walk-right": "pseudo-walk-right.png",
+   "walk-left": "pseudo-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    144.0,
+    75.5
+   ],
+   "pelvis": [
+    136.5,
+    144.5
+   ],
+   "near": {
+    "hip": [
+     139.5,
+     151.0
+    ],
+    "knee": [
+     143.5,
+     173.0
+    ],
+    "ankle": [
+     134.5,
+     222.0
+    ],
+    "toe": [
+     157.5,
+     236.5
+    ]
+   },
+   "far": {
+    "hip": [
+     123.5,
+     151.0
+    ],
+    "knee": [
+     125.0,
+     173.0
+    ],
+    "ankle": [
+     110.5,
+     219.0
+    ],
+    "toe": [
+     98.5,
+     232.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "bark",
+  "name": "Bark Scorpion",
+  "className": "scorpions",
+  "weapon": "Slim sickle claws dripping venom",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "scorpion",
+  "sourceFacing": "left",
+  "assets": {
+   "idle-right": "bark-idle-right.png",
+   "idle-left": "bark-idle-left.png",
+   "walk-right": "bark-walk-right.png",
+   "walk-left": "bark-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    116.0,
+    117.5
+   ],
+   "pelvis": [
+    138.0,
+    179.0
+   ],
+   "near": {
+    "hip": [
+     151.5,
+     187.0
+    ],
+    "knee": [
+     164.0,
+     215.0
+    ],
+    "ankle": [
+     202.5,
+     235.0
+    ],
+    "toe": [
+     213.5,
+     255.5
+    ]
+   },
+   "far": {
+    "hip": [
+     123.5,
+     187.0
+    ],
+    "knee": [
+     100.0,
+     214.0
+    ],
+    "ankle": [
+     105.0,
+     243.5
+    ],
+    "toe": [
+     96.0,
+     255.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "vinegaroon",
+  "name": "Vinegaroon",
+  "className": "scorpions",
+  "weapon": "Acid siphon with a whip tail",
+  "role": "Ranged",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "scorpion",
+  "sourceFacing": "left",
+  "assets": {
+   "idle-right": "vinegaroon-idle-right.png",
+   "idle-left": "vinegaroon-idle-left.png",
+   "walk-right": "vinegaroon-walk-right.png",
+   "walk-left": "vinegaroon-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    144.5,
+    84.0
+   ],
+   "pelvis": [
+    133.5,
+    145.0
+   ],
+   "near": {
+    "hip": [
+     116.0,
+     152.5
+    ],
+    "knee": [
+     104.0,
+     194.5
+    ],
+    "ankle": [
+     78.5,
+     223.5
+    ],
+    "toe": [
+     61.5,
+     240.0
+    ]
+   },
+   "far": {
+    "hip": [
+     147.0,
+     153.0
+    ],
+    "knee": [
+     158.5,
+     189.5
+    ],
+    "ankle": [
+     156.0,
+     225.0
+    ],
+    "toe": [
+     184.5,
+     239.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "deathstalker",
+  "name": "Deathstalker",
+  "className": "scorpions",
+  "weapon": "Venom katars (punch daggers)",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "scorpion",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "deathstalker-idle-right.png",
+   "idle-left": "deathstalker-idle-left.png",
+   "walk-right": "deathstalker-walk-right.png",
+   "walk-left": "deathstalker-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    108.0,
+    127.0
+   ],
+   "pelvis": [
+    95.0,
+    163.5
+   ],
+   "near": {
+    "hip": [
+     80.0,
+     175.5
+    ],
+    "knee": [
+     70.5,
+     200.0
+    ],
+    "ankle": [
+     42.5,
+     228.5
+    ],
+    "toe": [
+     34.5,
+     239.5
+    ]
+   },
+   "far": {
+    "hip": [
+     106.0,
+     175.0
+    ],
+    "knee": [
+     129.0,
+     196.5
+    ],
+    "ankle": [
+     123.5,
+     229.0
+    ],
+    "toe": [
+     145.5,
+     239.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "emperor",
+  "name": "Emperor Scorpion",
+  "className": "scorpions",
+  "weapon": "Claw gauntlets (as on the sheet)",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "scorpion",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "emperor-idle-right.png",
+   "idle-left": "emperor-idle-left.png",
+   "walk-right": "emperor-walk-right.png",
+   "walk-left": "emperor-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    132.5,
+    110.0
+   ],
+   "pelvis": [
+    119.5,
+    160.0
+   ],
+   "near": {
+    "hip": [
+     105.0,
+     168.5
+    ],
+    "knee": [
+     96.5,
+     190.0
+    ],
+    "ankle": [
+     72.5,
+     219.0
+    ],
+    "toe": [
+     49.5,
+     230.5
+    ]
+   },
+   "far": {
+    "hip": [
+     131.5,
+     168.5
+    ],
+    "knee": [
+     154.5,
+     184.5
+    ],
+    "ankle": [
+     151.0,
+     218.5
+    ],
+    "toe": [
+     176.0,
+     229.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "alate",
+  "name": "Alate",
+  "className": "termites",
+  "weapon": "Light javelin",
+  "role": "Ranged",
+  "action": "attack",
+  "requiredMovement": [
+   "walk",
+   "takeoff",
+   "fly",
+   "land",
+   "dive"
+  ],
+  "classLabel": "termite",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "alate-idle-right.png",
+   "idle-left": "alate-idle-left.png",
+   "walk-right": "alate-walk-right.png",
+   "walk-left": "alate-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    155.0,
+    82.0
+   ],
+   "pelvis": [
+    138.0,
+    155.5
+   ],
+   "near": {
+    "hip": [
+     123.0,
+     160.5
+    ],
+    "knee": [
+     114.5,
+     195.5
+    ],
+    "ankle": [
+     75.0,
+     218.5
+    ],
+    "toe": [
+     83.0,
+     243.5
+    ]
+   },
+   "far": {
+    "hip": [
+     151.0,
+     161.0
+    ],
+    "knee": [
+     165.5,
+     188.0
+    ],
+    "ankle": [
+     152.0,
+     227.0
+    ],
+    "toe": [
+     173.0,
+     241.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "nasute",
+  "name": "Nasute Soldier",
+  "className": "termites",
+  "weapon": "Glue sprayer fed from the helmet nozzle",
+  "role": "Ranged",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "termite",
+  "sourceFacing": "left",
+  "assets": {
+   "idle-right": "nasute-idle-right.png",
+   "idle-left": "nasute-idle-left.png",
+   "walk-right": "nasute-walk-right.png",
+   "walk-left": "nasute-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    108.5,
+    90.0
+   ],
+   "pelvis": [
+    119.0,
+    164.5
+   ],
+   "near": {
+    "hip": [
+     101.0,
+     172.0
+    ],
+    "knee": [
+     88.5,
+     201.0
+    ],
+    "ankle": [
+     57.0,
+     227.0
+    ],
+    "toe": [
+     43.5,
+     239.0
+    ]
+   },
+   "far": {
+    "hip": [
+     135.5,
+     171.0
+    ],
+    "knee": [
+     157.0,
+     191.0
+    ],
+    "ankle": [
+     165.0,
+     227.0
+    ],
+    "toe": [
+     191.5,
+     239.0
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "kamikaze",
+  "name": "Kamikaze Termite",
+  "className": "termites",
+  "weapon": "Glue-crystal backpack and a short club",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "termite",
+  "sourceFacing": "left",
+  "assets": {
+   "idle-right": "kamikaze-idle-right.png",
+   "idle-left": "kamikaze-idle-left.png",
+   "walk-right": "kamikaze-walk-right.png",
+   "walk-left": "kamikaze-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    109.5,
+    78.5
+   ],
+   "pelvis": [
+    112.5,
+    149.5
+   ],
+   "near": {
+    "hip": [
+     86.5,
+     155.0
+    ],
+    "knee": [
+     86.5,
+     190.5
+    ],
+    "ankle": [
+     67.5,
+     229.5
+    ],
+    "toe": [
+     55.0,
+     239.0
+    ]
+   },
+   "far": {
+    "hip": [
+     126.0,
+     155.5
+    ],
+    "knee": [
+     141.0,
+     186.0
+    ],
+    "ankle": [
+     139.5,
+     229.0
+    ],
+    "toe": [
+     161.5,
+     238.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "major",
+  "name": "Major Soldier",
+  "className": "termites",
+  "weapon": "Great mattock and a tower hex shield",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "termite",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "major-idle-right.png",
+   "idle-left": "major-idle-left.png",
+   "walk-right": "major-walk-right.png",
+   "walk-left": "major-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    175.0,
+    108.0
+   ],
+   "pelvis": [
+    154.0,
+    170.0
+   ],
+   "near": {
+    "hip": [
+     143.5,
+     175.5
+    ],
+    "knee": [
+     143.0,
+     215.0
+    ],
+    "ankle": [
+     103.5,
+     238.5
+    ],
+    "toe": [
+     82.0,
+     236.5
+    ]
+   },
+   "far": {
+    "hip": [
+     170.5,
+     175.0
+    ],
+    "knee": [
+     206.0,
+     200.0
+    ],
+    "ankle": [
+     199.0,
+     240.0
+    ],
+    "toe": [
+     231.5,
+     255.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ },
+ {
+  "id": "tworker",
+  "name": "Worker Termite",
+  "className": "termites",
+  "weapon": "Mattock and hex shield (as on the sheet)",
+  "role": "Walker",
+  "action": "attack",
+  "requiredMovement": [
+   "walk"
+  ],
+  "classLabel": "termite",
+  "sourceFacing": "right",
+  "assets": {
+   "idle-right": "tworker-idle-right.png",
+   "idle-left": "tworker-idle-left.png",
+   "walk-right": "tworker-walk-right.png",
+   "walk-left": "tworker-walk-left.png"
+  },
+  "landmarks": {
+   "neck": [
+    139.0,
+    92.5
+   ],
+   "pelvis": [
+    128.5,
+    160.5
+   ],
+   "near": {
+    "hip": [
+     115.0,
+     165.5
+    ],
+    "knee": [
+     107.0,
+     199.5
+    ],
+    "ankle": [
+     83.0,
+     234.5
+    ],
+    "toe": [
+     70.0,
+     249.5
+    ]
+   },
+   "far": {
+    "hip": [
+     140.0,
+     165.5
+    ],
+    "knee": [
+     161.0,
+     194.5
+    ],
+    "ankle": [
+     159.5,
+     234.5
+    ],
+    "toe": [
+     187.0,
+     249.5
+    ]
+   }
+  },
+  "status": "full-body-fitted-skin-review",
+  "notes": "All pieces cut from original armour pixels; legs fitted to per-species joints. Arms/weapon move with torso."
+ }
+]
