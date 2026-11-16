@@ -11,6 +11,31 @@ python tools/check-art.py arena arena-02-garden-bed-back.png arena-02-garden-bed
 
 It prints "all checks passed", or a list of what to fix.
 
+## 0. Display format: what the screen shows
+
+The game keeps one world, **1400 × 700 game units**, and scales it to fit between the top bar and the card dock. The playfield always fits; whatever the screen has left over (wider phones, taller laptop windows) shows the world *around* the playfield. Measured from the running game:
+
+| Screen | Device | Visible width (units) | Visible height (units) |
+|---|---|---|---|
+| 1920 × 1080 | desktop | −23 to 1423 | −39 to 774 |
+| 1366 × 768 | laptop | −130 to 1530 | −63 to 870 |
+| 1180 × 820 | tablet, landscape | 0 to 1400 | −84 to 889 |
+| 1024 × 768 | small window | 0 to 1400 | −115 to 935 |
+| 932 × 430 | large phone, landscape | −316 to 1716 | −76 to 861 |
+| 800 × 360 | small phone, landscape | −416 to 1816 | −98 to 906 |
+
+The game is landscape only. The top bar covers about 46 screen px (29 on phones) and the card dock about 100 to 140 px (74 on phones), so the lowest part of the visible world sits under the cards.
+
+**Why things look inverted or sloppy today.** When an arena image does not reach the edge of the screen, the game has nothing to draw there, so it fills the gap with a mirrored copy of the art (and a solid ground colour below). That mirrored strip is the "inverted" look. Likewise, when an animation frame's art stops at the frame edge, the weapon or wing is simply cut. Neither can be fixed in code; the art has to be drawn bigger than what is on screen.
+
+**Templates.** `docs/templates/arena-template.png` (3600 × 2250) and `docs/templates/animation-template.png` (3072 × 384) mark every zone below. Put them on a layer above your art, then hide that layer before export. `python tools/make-templates.py` redraws them.
+
+### The three rules that prevent both problems
+
+1. **Paint past what the screen shows.** Arena layers are 3600 × 2250 and every pixel is painted, to the edges. The green zone of the template is on every screen; the blue zone is on some screens; the grey bleed is a safety margin. Nothing important goes outside the green zone, and nothing is left blank anywhere.
+2. **Leave air around every animation frame.** 16 px of empty margin on all four sides of every frame, including the swing of a weapon, a wing tip, a cape or a slash effect. If the widest pose does not fit, make the whole knight smaller, never crop it. A figure about 200 px tall in a 384 px frame leaves room for a full overhead swing.
+3. **Keep the anchors fixed.** Feet on the same line (y = 352) in every frame of every move; the lane line at y = 1440 in every arena; the same facing (right) in every frame.
+
 ---
 
 ## 1. Knight animations
