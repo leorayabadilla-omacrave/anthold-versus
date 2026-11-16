@@ -292,7 +292,7 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
 #units .hc:not(.poor) .cfill{opacity:0}
 #units .hc:disabled{opacity:1;cursor:not-allowed}#units .hc.poor img{filter:saturate(.55)}
 #units .hc.busy::after{content:"Queue full";position:absolute;right:8px;bottom:6px;font:700 10px var(--body);text-transform:uppercase;letter-spacing:.06em;color:var(--ember-d)}
-#units .hc.full::after{content:"Army full";position:absolute;right:8px;bottom:6px;font:700 10px var(--body);text-transform:uppercase;letter-spacing:.06em;color:var(--ember-d)}
+#units .hc.full::after{content:none;position:absolute;right:8px;bottom:6px;font:700 10px var(--body);text-transform:uppercase;letter-spacing:.06em;color:var(--ember-d)}
 #units .hc.merge{border-color:#b07d0a;box-shadow:0 0 0 2px #e2b33c,3px 3px 0 var(--ink)}
 #units .hc .cmerge{position:absolute;right:-6px;top:-10px;padding:2px 7px;border-radius:9px;background:#e2b33c;color:var(--ink);font:700 10px var(--body);text-transform:uppercase;letter-spacing:.05em;box-shadow:1px 1px 0 var(--ink)}
 #units .hc.dis{background:var(--blush)}
@@ -328,7 +328,7 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
 #dock .card.hire .cfill{position:absolute;left:0;bottom:0;height:3px;width:calc(var(--p,1)*100%);background:var(--ember)}#dock .card.hire:not(.poor) .cfill{opacity:0}
 
 /* ===== the dock: one full-width tray. Left: food, worker, army. Middle: the 3 choices, Next, Refresh. Right: Auto and the menu buttons. ===== */
-#dock{display:grid;grid-template-columns:118px 118px minmax(0,1fr) auto;grid-template-areas:"food food units auto" "army army units acts";
+#dock{display:grid;grid-template-columns:118px 118px minmax(0,1fr) auto;grid-template-areas:"food food units auto" "food food units acts";
   align-items:stretch;gap:6px 12px;pointer-events:auto;background:linear-gradient(var(--bone),#efe4c4);border-top:3px solid var(--ink);box-shadow:0 -3px 0 rgba(23,17,14,.18);
   padding:8px max(12px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
 #dock .food{grid-area:food;justify-content:flex-start;box-shadow:none;min-width:0}#dock .food .ebar{flex:1;width:auto;min-width:40px}
@@ -370,6 +370,11 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
   #dock #autoBtn{padding:2px 6px;font-size:9px}#dock .acts button{padding:3px 6px}}
 
 @media (max-width:700px),(max-height:520px){#dock #hireW,#dock #autoBtn,#dock .acts button,#dock #units .card.next,#dock #units .card.reroll{min-height:32px}#dock .food{min-height:30px}}
+
+/* the army box is a warning that appears above the dock only when the army is within 2 slots of the cap */
+#dock #clashBox{display:none!important}
+#dock #clashBox.near{display:grid!important;position:absolute;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(100% + 6px);grid-area:auto;width:auto;padding:4px 12px;background:var(--ember);color:var(--bone);border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+#dock #clashBox.near b,#dock #clashBox.near #ordF{color:var(--bone)}
 </style>
 
 <div id="hud" hidden>
@@ -2489,7 +2494,8 @@ function hud(){
   $("pHpN").textContent=Math.ceil(R.bases[0].hp);$("eHpN").textContent=Math.ceil(R.bases[1].hp);
   {const left=Math.max(0,KC.round-R.t);$("rnd").textContent=R.t>KC.round?"The nests are crumbling":`${Math.floor(left/60)}:${String(Math.floor(left%60)).padStart(2,"0")}${R.ot?" · overtime":""}`;$("pips").innerHTML="";}
   $("food").textContent=Math.floor(p.food);$("inc").textContent=`+${elixRate(0).toFixed(1)}/s`;$("eBar").style.width=p.food/KC.elix.max*100+"%";
-  $("ordF").textContent=`${Math.ceil(armyLoad(0)-.01)} of ${KC.cap} slots`;
+  {const n=Math.ceil(armyLoad(0)-.01),box=$("clashBox");box.classList.toggle("near",n>=KC.cap-2); // only shown near the cap
+   $("ordT").textContent=n>=KC.cap?"Army full":"Army almost full";$("ordF").textContent=`${n} of ${KC.cap} slots`;}
   {const rb=$("hRe");if(rb){const left=Math.max(0,(p.rerollT||0)-R.t);rb.disabled=left>0||p.food<KC.reroll;rb.style.setProperty("--p",(1-left/KC.rerollCd).toFixed(3));rb.classList.toggle("poor",left>0);}}
   if(p.hand)p.hand.forEach((c,i)=>{const el=$("h_"+i);if(!el)return;const cost=playCost(0,i),full=!!SP[c]&&capFull(0,c,mergeN(p.hand,i)),busy=!disReady(0,c);el.disabled=p.food<cost||full||busy;el.classList.toggle("busy",busy);
     el.querySelector(".ec").textContent=cost;el.style.setProperty("--p",Math.min(1,p.food/cost).toFixed(3));el.classList.toggle("poor",p.food<cost);el.classList.toggle("full",full);});
