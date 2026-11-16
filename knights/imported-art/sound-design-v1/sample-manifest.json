@@ -1,0 +1,151 @@
+[
+  {
+    "id": "weapon-ant",
+    "file": "sfx/weapon-ant.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-beetle",
+    "file": "sfx/weapon-beetle.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-butterfly",
+    "file": "sfx/weapon-butterfly.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-fly",
+    "file": "sfx/weapon-fly.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-cricket",
+    "file": "sfx/weapon-cricket.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-scorpion",
+    "file": "sfx/weapon-scorpion.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-bee",
+    "file": "sfx/weapon-bee.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-termite",
+    "file": "sfx/weapon-termite.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "ambient-meadow",
+    "file": "ambience/ambient-meadow.wav",
+    "loopRequested": true,
+    "category": "ambience"
+  },
+  {
+    "id": "ambient-garden-bed",
+    "file": "ambience/ambient-garden-bed.wav",
+    "loopRequested": true,
+    "category": "ambience"
+  },
+  {
+    "id": "ambient-creek",
+    "file": "ambience/ambient-creek.wav",
+    "loopRequested": true,
+    "category": "ambience"
+  },
+  {
+    "id": "ambient-log-hollow",
+    "file": "ambience/ambient-log-hollow.wav",
+    "loopRequested": true,
+    "category": "ambience"
+  },
+  {
+    "id": "ambient-sandpit",
+    "file": "ambience/ambient-sandpit.wav",
+    "loopRequested": true,
+    "category": "ambience"
+  },
+  {
+    "id": "ambient-night-porch",
+    "file": "ambience/ambient-night-porch.wav",
+    "loopRequested": true,
+    "category": "ambience"
+  },
+  {
+    "id": "disaster-warning",
+    "file": "sfx/disaster-warning.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "disaster-boulder",
+    "file": "sfx/disaster-boulder.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "ui-powerup",
+    "file": "sfx/ui-powerup.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "ui-confirm",
+    "file": "sfx/ui-confirm.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "flight-loop",
+    "file": "sfx/flight-loop.wav",
+    "loopRequested": true,
+    "category": "sfx"
+  },
+  {
+    "id": "flight-death",
+    "file": "sfx/flight-death.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "knight-hit",
+    "file": "sfx/knight-hit.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "knight-death",
+    "file": "sfx/knight-death.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "stronghold-stage",
+    "file": "sfx/stronghold-stage.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "stronghold-destroy",
+    "file": "sfx/stronghold-destroy.wav",
+    "loopRequested": false,
+    "category": "sfx"
+  },
+  {
+    "id": "music-duel",
+    "error": 402,
+    "detail": "{\"detail\":{\"type\":\"payment_required\",\"code\":\"paid_plan_required\",\"message\":\"Music API is not available for free users. Please upgrade to a paid plan to use the API.\",\"status\":\"limited_access\",\"request_id\":\"f9b764799ea0b3bcb636dcd21b2ce81d\"}}"
+  }
+]

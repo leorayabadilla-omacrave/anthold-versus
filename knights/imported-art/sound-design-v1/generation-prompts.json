@@ -1,0 +1,177 @@
+[
+  {
+    "id": "weapon-ant",
+    "prompt": "A single broad two-handed halberd cleave: firm wooden shaft motion, crisp air slice, dry steel edge striking insect carapace. Disciplined medium weight. Isolated game sound, no speech, no music, no background ambience.",
+    "duration": 1.4,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-beetle",
+    "prompt": "One heavy two-handed war hammer overhead smash: short weighty swing, dense wooden and stone impact, low shell resonance and brief grit debris. No explosion. Isolated game sound, no speech, no music, no background ambience.",
+    "duration": 1.4,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-butterfly",
+    "prompt": "One precise rapier lunge: fine airy thrust and bright needle-point steel contact. Elegant, fast, very short ringing tail. Isolated game sound, no speech, no music, no background ambience.",
+    "duration": 1.4,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-fly",
+    "prompt": "A fast pair of twin dagger slashes: two tight contrasting sharp air cuts and dry metallic contacts, agile and surgical. Isolated game sound, no speech, no music, no background ambience.",
+    "duration": 1.4,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-cricket",
+    "prompt": "A paired sickle diagonal slash: springy scrape then two hooked steel slices and sharp chitin contact, nimble rhythmic pair. Isolated game sound, no speech, no music, no background ambience.",
+    "duration": 1.4,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-scorpion",
+    "prompt": "One venom dagger cut: dry sharp blade swipe, compact shell contact and restrained liquid toxin hiss. Not wet gore. Isolated game sound, no speech, no music, no background ambience.",
+    "duration": 1.4,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-bee",
+    "prompt": "A stinger blade jab: brief rising wing buzz, needle-sharp puncture of armour and clipped metallic tick. Focused forward motion. Isolated game sound, no speech, no music, no background ambience.",
+    "duration": 1.4,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "weapon-termite",
+    "prompt": "One massive two-handed mound breaker strike: slow earthy rush, packed-soil crunch, hollow timber break and heavy low thud. Different from metallic hammer. Isolated game sound, no speech, no music, no background ambience.",
+    "duration": 1.4,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "ambient-meadow",
+    "prompt": "Gentle open meadow at insect scale: soft grass rustle and distant occasional birds, warm breeze. No prominent insect chirps, no voices or music. Continuous even ambient bed intended to loop smoothly.",
+    "duration": 10,
+    "loop": true,
+    "category": "ambience"
+  },
+  {
+    "id": "ambient-garden-bed",
+    "prompt": "Quiet garden at insect scale: leafy breeze, soft distant watering-can drips onto soil. No constant rainfall, no voices or music. Continuous even ambient bed intended to loop smoothly.",
+    "duration": 10,
+    "loop": true,
+    "category": "ambience"
+  },
+  {
+    "id": "ambient-creek",
+    "prompt": "Quiet shallow creek flowing around stones with softly swaying reeds, close little water ripples, no dramatic splashes, no voices or music. Continuous even ambient bed intended to loop smoothly.",
+    "duration": 10,
+    "loop": true,
+    "category": "ambience"
+  },
+  {
+    "id": "ambient-log-hollow",
+    "prompt": "Quiet hollow fallen log: soft woody room tone and faint breeze through a crack, subtle creaks and distant outside nature, no scary voices, no music. Continuous even ambient bed intended to loop smoothly.",
+    "duration": 10,
+    "loop": true,
+    "category": "ambience"
+  },
+  {
+    "id": "ambient-sandpit",
+    "prompt": "Dry sandy patch: soft wind over sand, sparse grain skittering, warm open quiet landscape, no storm, no voices or music. Continuous even ambient bed intended to loop smoothly.",
+    "duration": 10,
+    "loop": true,
+    "category": "ambience"
+  },
+  {
+    "id": "ambient-night-porch",
+    "prompt": "Quiet wooden porch at night: subtle lamp electrical hum, delicate distant leaf wind and intermittent soft moth flutter. No combat-like buzzing or loud chirps, no voices or music. Continuous even ambient bed intended to loop smoothly.",
+    "duration": 10,
+    "loop": true,
+    "category": "ambience"
+  },
+  {
+    "id": "disaster-warning",
+    "prompt": "Single one-second urgent game hazard warning: two low wooden clicks rising into a short clear metallic tremolo. Distinct from a power-up reward, no voice, no music.",
+    "duration": 1,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "disaster-boulder",
+    "prompt": "Single rolling boulder game effect: rough low rolling rumble, stone scraping, one strong compact impact then crumbling grit. No music, no voices.",
+    "duration": 3,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "ui-powerup",
+    "prompt": "Short positive power-up choice notification: two soft seed-shell clicks then a small warm rising bell tone, elegant insect knight game reward, no voices or background music.",
+    "duration": 0.8,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "ui-confirm",
+    "prompt": "Single compact polished wooden click and tiny bright steel tick for game selection confirmation, no voices, no music.",
+    "duration": 0.5,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "flight-loop",
+    "prompt": "Steady soft insect wingbeat hovering loop: light papery flutter with controlled warm buzzing, not a mosquito whine, consistent level, no voices, no music.",
+    "duration": 4,
+    "loop": true,
+    "category": "sfx"
+  },
+  {
+    "id": "flight-death",
+    "prompt": "Insect knight mid-air death: interrupted wing flutter, wingbeats stop, short air fall and dry armour landing with a loose weapon clatter. No screams, blood or music.",
+    "duration": 2,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "knight-hit",
+    "prompt": "Single readable non-gory insect armour damage hit: dry chitin crack and short hollow armour knock. No voice, no music.",
+    "duration": 0.6,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "knight-death",
+    "prompt": "Insect knight falls like an armoured toy: shell and cloth shift, low ground thump and a single loose blade rattle, no screaming, no music.",
+    "duration": 1.2,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "stronghold-stage",
+    "prompt": "One insect stronghold damage-stage break: timber, dried earth and shell supports crack together, brief debris cascade and solid low thump. Not total destruction, no voices or music.",
+    "duration": 2,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "stronghold-destroy",
+    "prompt": "Final insect stronghold collapse: layered timber snap, soil and shell rubble crash, low satisfying decay. Compact stylized game sound, no explosions, no voices or music.",
+    "duration": 4,
+    "loop": false,
+    "category": "sfx"
+  },
+  {
+    "id": "music-duel",
+    "prompt": "Original instrumental insect-knight side-scrolling stronghold duel music. Heroic miniature scale, wooden percussion, plucked strings, tight low brass accents, restrained analogue synth pulse. 112 BPM, disciplined playful tension, clear midrange space for weapon hits. 30-second review excerpt, one small recurring three-note motif, no vocals, no imitation of existing songs.",
+    "duration": 30,
+    "loop": false,
+    "category": "music"
+  }
+]

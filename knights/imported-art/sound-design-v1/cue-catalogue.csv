@@ -1,0 +1,90 @@
+cue_id,trigger,direction,review_sample,status
+weapon-ant,Review illustration; split/sync to gameplay events before production,"A single broad two-handed halberd cleave: firm wooden shaft motion, crisp air slice, dry steel edge striking insect carapace. Disciplined medium weight. Isolated game sound, no speech, no music, no background ambience.",sfx/weapon-ant.wav,REVIEW SAMPLE
+weapon-beetle,Review illustration; split/sync to gameplay events before production,"One heavy two-handed war hammer overhead smash: short weighty swing, dense wooden and stone impact, low shell resonance and brief grit debris. No explosion. Isolated game sound, no speech, no music, no background ambience.",sfx/weapon-beetle.wav,REVIEW SAMPLE
+weapon-butterfly,Review illustration; split/sync to gameplay events before production,"One precise rapier lunge: fine airy thrust and bright needle-point steel contact. Elegant, fast, very short ringing tail. Isolated game sound, no speech, no music, no background ambience.",sfx/weapon-butterfly.wav,REVIEW SAMPLE
+weapon-fly,Review illustration; split/sync to gameplay events before production,"A fast pair of twin dagger slashes: two tight contrasting sharp air cuts and dry metallic contacts, agile and surgical. Isolated game sound, no speech, no music, no background ambience.",sfx/weapon-fly.wav,REVIEW SAMPLE
+weapon-cricket,Review illustration; split/sync to gameplay events before production,"A paired sickle diagonal slash: springy scrape then two hooked steel slices and sharp chitin contact, nimble rhythmic pair. Isolated game sound, no speech, no music, no background ambience.",sfx/weapon-cricket.wav,REVIEW SAMPLE
+weapon-scorpion,Review illustration; split/sync to gameplay events before production,"One venom dagger cut: dry sharp blade swipe, compact shell contact and restrained liquid toxin hiss. Not wet gore. Isolated game sound, no speech, no music, no background ambience.",sfx/weapon-scorpion.wav,REVIEW SAMPLE
+weapon-bee,Review illustration; split/sync to gameplay events before production,"A stinger blade jab: brief rising wing buzz, needle-sharp puncture of armour and clipped metallic tick. Focused forward motion. Isolated game sound, no speech, no music, no background ambience.",sfx/weapon-bee.wav,REVIEW SAMPLE
+weapon-termite,Review illustration; split/sync to gameplay events before production,"One massive two-handed mound breaker strike: slow earthy rush, packed-soil crunch, hollow timber break and heavy low thud. Different from metallic hammer. Isolated game sound, no speech, no music, no background ambience.",sfx/weapon-termite.wav,REVIEW SAMPLE
+ambient-meadow,Review illustration; split/sync to gameplay events before production,"Gentle open meadow at insect scale: soft grass rustle and distant occasional birds, warm breeze. No prominent insect chirps, no voices or music. Continuous even ambient bed intended to loop smoothly.",ambience/ambient-meadow.wav,REVIEW SAMPLE
+ambient-garden-bed,Review illustration; split/sync to gameplay events before production,"Quiet garden at insect scale: leafy breeze, soft distant watering-can drips onto soil. No constant rainfall, no voices or music. Continuous even ambient bed intended to loop smoothly.",ambience/ambient-garden-bed.wav,REVIEW SAMPLE
+ambient-creek,Review illustration; split/sync to gameplay events before production,"Quiet shallow creek flowing around stones with softly swaying reeds, close little water ripples, no dramatic splashes, no voices or music. Continuous even ambient bed intended to loop smoothly.",ambience/ambient-creek.wav,REVIEW SAMPLE
+ambient-log-hollow,Review illustration; split/sync to gameplay events before production,"Quiet hollow fallen log: soft woody room tone and faint breeze through a crack, subtle creaks and distant outside nature, no scary voices, no music. Continuous even ambient bed intended to loop smoothly.",ambience/ambient-log-hollow.wav,REVIEW SAMPLE
+ambient-sandpit,Review illustration; split/sync to gameplay events before production,"Dry sandy patch: soft wind over sand, sparse grain skittering, warm open quiet landscape, no storm, no voices or music. Continuous even ambient bed intended to loop smoothly.",ambience/ambient-sandpit.wav,REVIEW SAMPLE
+ambient-night-porch,Review illustration; split/sync to gameplay events before production,"Quiet wooden porch at night: subtle lamp electrical hum, delicate distant leaf wind and intermittent soft moth flutter. No combat-like buzzing or loud chirps, no voices or music. Continuous even ambient bed intended to loop smoothly.",ambience/ambient-night-porch.wav,REVIEW SAMPLE
+disaster-warning,Review illustration; split/sync to gameplay events before production,"Single one-second urgent game hazard warning: two low wooden clicks rising into a short clear metallic tremolo. Distinct from a power-up reward, no voice, no music.",sfx/disaster-warning.wav,REVIEW SAMPLE
+disaster-boulder,Review illustration; split/sync to gameplay events before production,"Single rolling boulder game effect: rough low rolling rumble, stone scraping, one strong compact impact then crumbling grit. No music, no voices.",sfx/disaster-boulder.wav,REVIEW SAMPLE
+ui-powerup,Review illustration; split/sync to gameplay events before production,"Short positive power-up choice notification: two soft seed-shell clicks then a small warm rising bell tone, elegant insect knight game reward, no voices or background music.",sfx/ui-powerup.wav,REVIEW SAMPLE
+ui-confirm,Review illustration; split/sync to gameplay events before production,"Single compact polished wooden click and tiny bright steel tick for game selection confirmation, no voices, no music.",sfx/ui-confirm.wav,REVIEW SAMPLE
+flight-loop,Review illustration; split/sync to gameplay events before production,"Steady soft insect wingbeat hovering loop: light papery flutter with controlled warm buzzing, not a mosquito whine, consistent level, no voices, no music.",sfx/flight-loop.wav,REVIEW SAMPLE
+flight-death,Review illustration; split/sync to gameplay events before production,"Insect knight mid-air death: interrupted wing flutter, wingbeats stop, short air fall and dry armour landing with a loose weapon clatter. No screams, blood or music.",sfx/flight-death.wav,REVIEW SAMPLE
+knight-hit,Review illustration; split/sync to gameplay events before production,"Single readable non-gory insect armour damage hit: dry chitin crack and short hollow armour knock. No voice, no music.",sfx/knight-hit.wav,REVIEW SAMPLE
+knight-death,Review illustration; split/sync to gameplay events before production,"Insect knight falls like an armoured toy: shell and cloth shift, low ground thump and a single loose blade rattle, no screaming, no music.",sfx/knight-death.wav,REVIEW SAMPLE
+stronghold-stage,Review illustration; split/sync to gameplay events before production,"One insect stronghold damage-stage break: timber, dried earth and shell supports crack together, brief debris cascade and solid low thump. Not total destruction, no voices or music.",sfx/stronghold-stage.wav,REVIEW SAMPLE
+stronghold-destroy,Review illustration; split/sync to gameplay events before production,"Final insect stronghold collapse: layered timber snap, soil and shell rubble crash, low satisfying decay. Compact stylized game sound, no explosions, no voices or music.",sfx/stronghold-destroy.wav,REVIEW SAMPLE
+ant-basic,Halberd Cleave: confirmed move start/release/contact as applicable,Wide two-handed chop that hits every enemy in front.,,DESIGN ONLY
+ant-special,Colony Rally: confirmed move start/release/contact as applicable,Raises the halberd: +20% attack for 6s and a small ant column charges across the lane.,,DESIGN ONLY
+ant-mobility,Halberd Vault: confirmed move start/release/contact as applicable,"Pole-vaults forward over enemies, landing with a small shockwave.",,DESIGN ONLY
+ant-ultimate,Queen's Decree: confirmed move start/release/contact as applicable,"Full colony surge: rally rings pulse three times, each pulse damaging and slowing enemies.",,DESIGN ONLY
+beetle-basic,Hammer Smash: confirmed move start/release/contact as applicable,Slow overhead smash with heavy knockback on the hit frame.,,DESIGN ONLY
+beetle-special,Carapace Guard: confirmed move start/release/contact as applicable,"Shell flares into a barrier: blocks all damage for 2s, then shatters outward.",,DESIGN ONLY
+beetle-mobility,Bulldoze Charge: confirmed move start/release/contact as applicable,Shoulder charge that pushes enemies aside and ends in a hammer plant.,,DESIGN ONLY
+beetle-ultimate,Atlas Slam: confirmed move start/release/contact as applicable,Leaps and slams the hammer: huge area damage and a long stun at the impact point.,,DESIGN ONLY
+butterfly-basic,Fencing Lunge: confirmed move start/release/contact as applicable,Quick rapier thrust with extra range on the lunge frame.,,DESIGN ONLY
+butterfly-special,Wing Dust Burst: confirmed move start/release/contact as applicable,Wing cape spreads blinding dust: nearby enemies miss their next attack.,,DESIGN ONLY
+butterfly-mobility,Gale Step: confirmed move start/release/contact as applicable,"Glides backward or forward on the wing cape, untargetable mid-glide.",,DESIGN ONLY
+butterfly-ultimate,Silk Gale: confirmed move start/release/contact as applicable,A storm of dust and petals: repeated rapier strikes on every marked enemy.,,DESIGN ONLY
+fly-basic,Cross Slash: confirmed move start/release/contact as applicable,Fast alternating dagger slashes; every third hit crits.,,DESIGN ONLY
+fly-special,Swarm Dash: confirmed move start/release/contact as applicable,"Dissolves into a small swarm and reappears behind the target, striking once.",,DESIGN ONLY
+fly-mobility,Blink: confirmed move start/release/contact as applicable,Short instant teleport in any direction.,,DESIGN ONLY
+fly-ultimate,Plague Swarm: confirmed move start/release/contact as applicable,"Becomes a roaming swarm for 4s, damaging everything passed through.",,DESIGN ONLY
+cricket-basic,Sickle Combo: confirmed move start/release/contact as applicable,Diagonal slash pair; the second slash pulls the knight slightly forward.,,DESIGN ONLY
+cricket-special,Chirp Leap: confirmed move start/release/contact as applicable,"Crouches, springs high, and lands sickles-first with an area shockwave.",,DESIGN ONLY
+cricket-mobility,Spring Kick: confirmed move start/release/contact as applicable,Kicks off the ground or an enemy to reposition in the air.,,DESIGN ONLY
+cricket-ultimate,Deafening Chirp: confirmed move start/release/contact as applicable,"A piercing chirp stuns the whole lane, followed by a guaranteed Chirp Leap.",,DESIGN ONLY
+scorpion-basic,Venom Slash: confirmed move start/release/contact as applicable,"Dagger slashes that apply 1 stack of venom (damage over 4s, max 5 stacks).",,DESIGN ONLY
+scorpion-special,Venom Strike: confirmed move start/release/contact as applicable,Coats both daggers: next two hits apply double stacks and slow.,,DESIGN ONLY
+scorpion-mobility,Burrow: confirmed move start/release/contact as applicable,"Digs under the lane and erupts at a chosen spot, knocking enemies up.",,DESIGN ONLY
+scorpion-ultimate,Deathstalker Toxin: confirmed move start/release/contact as applicable,Tail sting detonates all venom stacks on the lane at once.,,DESIGN ONLY
+bee-basic,Stinger Jab: confirmed move start/release/contact as applicable,Rapid thrust combo; the final thrust has bonus range.,,DESIGN ONLY
+bee-special,Stinger Dive: confirmed move start/release/contact as applicable,"Takes off and dives diagonally, stinger first, through the target.",,DESIGN ONLY
+bee-mobility,Hover: confirmed move start/release/contact as applicable,"Holds altitude briefly, dodging ground attacks, then drifts to a spot.",,DESIGN ONLY
+bee-ultimate,Swarm Call: confirmed move start/release/contact as applicable,"Calls the hive: a bee cloud follows the knight, stinging nearby enemies for 6s.",,DESIGN ONLY
+termite-basic,Crushing Blow: confirmed move start/release/contact as applicable,Heavy two-handed swing; hits in a wide arc but is easy to dodge.,,DESIGN ONLY
+termite-special,Mound Bash: confirmed move start/release/contact as applicable,"Slams the ground: earth pillars erupt in a line, blocking and damaging.",,DESIGN ONLY
+termite-mobility,Tunnel: confirmed move start/release/contact as applicable,"Burrows forward a fixed distance and bursts out, damaging enemies above.",,DESIGN ONLY
+termite-ultimate,Colony Collapse: confirmed move start/release/contact as applicable,"The whole lane shakes: three waves of pillars, each wider than the last.",,DESIGN ONLY
+disaster-hailstorm-telegraph,"Actual field activation, during one-second warning",Shared recognisable warning + unique material accent,,DESIGN ONLY
+disaster-hailstorm-active,Actual active hazard start/contact/end,See disaster direction in PDF,,DESIGN ONLY
+disaster-downpour-telegraph,"Actual field activation, during one-second warning",Shared recognisable warning + unique material accent,,DESIGN ONLY
+disaster-downpour-active,Actual active hazard start/contact/end,See disaster direction in PDF,,DESIGN ONLY
+disaster-gale-telegraph,"Actual field activation, during one-second warning",Shared recognisable warning + unique material accent,,DESIGN ONLY
+disaster-gale-active,Actual active hazard start/contact/end,See disaster direction in PDF,,DESIGN ONLY
+disaster-boulder-telegraph,"Actual field activation, during one-second warning",Shared recognisable warning + unique material accent,,DESIGN ONLY
+disaster-boulder-active,Actual active hazard start/contact/end,See disaster direction in PDF,,DESIGN ONLY
+disaster-earthquake-telegraph,"Actual field activation, during one-second warning",Shared recognisable warning + unique material accent,,DESIGN ONLY
+disaster-earthquake-active,Actual active hazard start/contact/end,See disaster direction in PDF,,DESIGN ONLY
+disaster-sunbeam-telegraph,"Actual field activation, during one-second warning",Shared recognisable warning + unique material accent,,DESIGN ONLY
+disaster-sunbeam-active,Actual active hazard start/contact/end,See disaster direction in PDF,,DESIGN ONLY
+disaster-tornado-telegraph,"Actual field activation, during one-second warning",Shared recognisable warning + unique material accent,,DESIGN ONLY
+disaster-tornado-active,Actual active hazard start/contact/end,See disaster direction in PDF,,DESIGN ONLY
+disaster-wildfire-telegraph,"Actual field activation, during one-second warning",Shared recognisable warning + unique material accent,,DESIGN ONLY
+disaster-wildfire-active,Actual active hazard start/contact/end,See disaster direction in PDF,,DESIGN ONLY
+footstep,Actual planted foot,Surface and weight variations,,DESIGN ONLY
+takeoff,Enter airborne state,Ramp wings in,,DESIGN ONLY
+land,Confirmed ground contact,Fade wings; surface impact,,DESIGN ONLY
+respawn,Confirmed stronghold respawn,Shell reforms,,DESIGN ONLY
+block,Confirmed blocked contact,"Plate knock, no damage crack",,DESIGN ONLY
+miss,Attack misses,"Swing only, no contact",,DESIGN ONLY
+ultimate-ready,Local ready event,Quiet optional motif,,DESIGN ONLY
+stage-warning,Local stronghold threatened,Brief warning; no repeating siren,,DESIGN ONLY
+victory,Confirmed opponent base destruction,Resolved motif after collapse,,DESIGN ONLY
+defeat,Confirmed own base destruction,Soft descending resolution,,DESIGN ONLY
+class-select,Class focus,Tiny class texture,,DESIGN ONLY
+species-select,Species confirmation,Compact material click,,DESIGN ONLY
+match-found,Opponent assigned,Anticipatory motif,,DESIGN ONLY
+powerup-sharpen,Sharpen selected,Edge ring,,DESIGN ONLY
+powerup-quicken,Quicken selected,Fast short ticks,,DESIGN ONLY
+powerup-mutation,Mutation selected,Shell unfurl,,DESIGN ONLY
+ui-cancel,Cancel action,Soft downwards wooden tap,,DESIGN ONLY
