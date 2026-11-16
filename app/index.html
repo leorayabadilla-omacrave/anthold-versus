@@ -451,7 +451,7 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
 #dock .food b{font-family:var(--body);font-weight:700}
 /* phones: Merge is a full-width button along the bottom of the card, tall enough to hit with a thumb */
 @media (pointer:coarse),(max-height:520px){
- #dock #units .hc.merge{grid-template-areas:"name name" "art role" "art merge"}#dock #units .hc.merge .cchips{display:none} /* a matching pair trades its stat rows for the button, so the dock stays short */
+ #dock #units .hc.merge{grid-template-areas:"name name" "art merge"}#dock #units .hc.merge .cchips,#dock #units .hc.merge .crole{display:none!important} /* a matching pair trades its stat rows for the button, so the dock stays short */
  #dock #units .hc .cmerge{grid-area:merge;justify-self:stretch;display:flex;align-items:center;justify-content:center;gap:6px;min-height:36px;margin:2px 0 0;font-size:13px;letter-spacing:.03em;border-width:2px;border-radius:4px;box-shadow:2px 2px 0 var(--ink)}
  #dock #units .hc .cmerge s{font-size:11px}
  #dock #units .hc .cmerge:active{transform:translateY(1px);box-shadow:1px 1px 0 var(--ink)}}
@@ -465,6 +465,23 @@ button.go:hover{box-shadow:5px 5px 0 var(--ink)}
  #dock .food small{display:block!important;font-size:9px;color:var(--muted);white-space:nowrap}
  #dock #clashBox.near{display:flex!important;align-items:baseline;gap:6px;min-height:0!important;height:auto;max-width:none!important;padding:3px 10px;border-radius:12px;bottom:calc(100% + 4px)}
  #dock #clashBox.near b{font-size:12px!important;white-space:nowrap}#dock #clashBox.near #ordF{font-size:10px!important;white-space:nowrap}}
+#dock #units .hc .cmerge em{font-style:normal}
+/* phones: Merge fills the card beside the portrait, two lines, strong gold, and stays gold (dimmed) when you can't afford it yet */
+@media (pointer:coarse),(max-height:520px){
+ #dock #units .hc .cmerge{flex-direction:column;gap:0;min-height:52px;align-self:stretch;margin:0;background:#e2b33c;line-height:1.05}
+ #dock #units .hc .cmerge em{font:700 17px/1 var(--body);text-transform:uppercase;letter-spacing:.04em}
+ #dock #units .hc .cmerge small{display:block!important;font:700 11px/1.2 var(--body);color:var(--ink)}
+ #dock #units .hc .cmerge.poor{background:#e2b33c;opacity:.5}
+ #dock #units .hc.merge .cart{min-height:52px}}
+/* merge preview: merged health on the button; on phones the portrait plus a "Send 1" tag is the single-play side */
+#dock #units .hc .cbonus,#dock #units .hc .csend{display:none}
+@media (pointer:coarse),(max-height:520px){
+ #dock #units .hc.merge{grid-template-areas:"name name" "art merge" "send merge";grid-template-rows:auto 1fr auto}
+ #dock #units .hc .cbonus{display:block!important;font:700 10px/1.2 var(--body);color:#5a3b06;margin-top:1px}
+ #dock #units .hc.merge .csend{display:block!important;grid-area:send;align-self:end;text-align:center;font:700 10px/1 var(--body);text-transform:uppercase;letter-spacing:.04em;color:var(--ink);background:var(--paper);border:1.5px solid var(--ink);border-radius:3px;padding:5px 0;margin-top:2px}
+ #dock #units .hc.merge .cart{min-height:34px}
+ #dock #units .hc.merge{grid-template-columns:58px minmax(0,1fr)}#dock #units .hc.merge .cart{width:58px}
+ #dock #units .hc .cmerge{min-height:56px}}
 </style>
 
 <div id="hud" hidden>
@@ -719,7 +736,7 @@ const BOT_LEVELS={easy:{name:"Easy",inc:.8,think:1.2,cast:6},normal:{name:"Norma
 // every 4th attack is the species' special. Overtime at 3:00 doubles food; from 4:00 both nests crumble.
 const KC={nest:1400,round:240,ot:180,cap:12,start:150,baseInc:1,workerCost:4,workerMax:6,workerInc:.5,workerCd:2,size:100,hold:.5,gap:14,rank:3,
   impact:4/8,special:4,specialDmg:1.75,stagger:.15,startWorkers:2,
-  elix:{max:10,start:6,base:.6},wave:{first:6,every:20,n:3},hand:3,merge:.6,loadout:6,disLock:15,reroll:1,rerollCd:6}; // a 0-10 food bar, free insect waves, 3 dealt choices (matching knights merge: +60% health and damage per extra copy), up to 6 boost cards
+  elix:{max:10,start:6,base:.6},wave:{first:6,every:20,n:3},hand:3,merge:.6,loadout:6,disLock:15,reroll:1,rerollCd:6}; // a 0-10 food bar, free insect waves, 3 dealt choices (matching knights can merge: +60% health and damage per extra copy), up to 6 boost cards
 const isWorker=u=>!!(u.worker||u.sp.forage);
 const workerId=team=>CLASSES[M.pl[team].cls].species[0]; // a class's workers are its starter species, gathering instead of fighting
 const workersOf=team=>M.pl[team].workers||0; // workers are a count: they gather off-field, raising food income
@@ -754,7 +771,7 @@ function cardInfo(cls,c){
   if(c.startsWith("dis:")){const k=c.slice(4);return{name:DIS[k].name,img:DIS_ART[k],pix:0,tag:"disaster",stats:"Disaster · hits the whole field",role:"Disaster",chips:disChips(DIS[k].desc),desc:DIS[k].desc.replace(/\s*1 s warning first\.?/,""),title:DIS[k].desc};}
   const sp=SP[c],m=M&&M.pl&&M.pl[0]&&M.pl[0].cls===cls?mods(M.pl[0]):{hp:1,dmg:1},role={w:"walker",f:"flyer",r:"ranged"}[roleOf(sp)];
   return{name:sp.name,img:icon(sp),pix:1,tag:ROLE_GLYPH[roleOf(sp)]+(sp.n>1?" ×"+sp.n:"")+(sp.fly?" flies":"")+(sp.range>40?" ranged":""),
-    stats:`♥ ${Math.round(sp.hp*m.hp)} · ⚔ ${Math.round(sp.dmg*m.dmg)}${sp.n>1?" · squad of "+sp.n:""} · ${role}`,desc:sp.desc,title:sp.desc,
+    stats:`♥ ${Math.round(sp.hp*m.hp)} · ⚔ ${Math.round(sp.dmg*m.dmg)}${sp.n>1?" · squad of "+sp.n:""} · ${role}`,desc:sp.desc,title:sp.desc,hp:Math.round(sp.hp*m.hp),dmg:Math.round(sp.dmg*m.dmg),
     role:`${ROLE_GLYPH[roleOf(sp)]} ${role[0].toUpperCase()+role.slice(1)}${sp.n>1?" · squad of "+sp.n:""}`, // the trading card: role, then six numbers including how it reaches flyers
     chips:`<i title="Health"><span>♥</span>${Math.round(sp.hp*m.hp)}</i><i title="Damage per hit"><span>⚔</span>${Math.round(sp.dmg*m.dmg)}</i><i title="Reach"><span>◎</span>${sp.range}</i><i title="Attacks per second"><span>⏱</span>${(sp.rate||1).toFixed(1)}/s</i><i title="Move speed"><span>»</span>${sp.speed>=1.4?"fast":sp.speed>=.85?"steady":sp.speed>0?"slow":"still"}</i><i title="Against flyers: ${reachText(sp)}"><span>▲</span>${airShort(sp)}</i>`};}
 const disChips=d=>{const g=(re,ic,t,f)=>{const m=re.exec(d);return m?`<i title="${t}"><span>${ic}</span>${f(m[1])}</i>`:"";}; // a disaster's numbers, read from its description
@@ -1037,7 +1054,7 @@ function strike(u,t){ // one attack from u on target t (a unit, a wall or a nest
   const p=M.pl[u.team],m=mods(p),high=t.sp&&altOf(t)-altOf(u)>(u.sp.reach||22)&&!u.sp.fly&&!u.sp.air;
   if(high&&u.sp.cls==="crickets"){u.pounceCd=(u.sp.leap?1.2:2)*(m.flag.pounce2?.5:1);u.hop=20;u.hopH=altOf(t);}
   if(high&&u.sp.cls==="ants")u.climb=24;
-  const sw=m.flag.swarm2?[.08,.6]:[.04,.4];let d=u.sp.dmg*m.dmg*(1+Math.min(sw[1],sw[0]*u.swarm))*(u.sp.raid?1+Math.min(.75,.15*u.kills):1);if(u.vet)d*=1+VET.boost;if(u.star>1)d*=1+KC.merge*(u.star-1);
+  const sw=m.flag.swarm2?[.08,.6]:[.04,.4];let d=u.sp.dmg*m.dmg*(1+Math.min(sw[1],sw[0]*u.swarm))*(u.sp.raid?1+Math.min(.75,.15*u.kills):1);if(u.vet)d*=1+VET.boost;if(u.star>1)d*=1+KC.merge*(u.star-1); // a merged knight hits harder tooif(u.star>1)d*=1+KC.merge*(u.star-1);
   d*=1+STAND.boost*frK(u.team);if(t.sp&&!t.isWall)d*=roleMul(u.sp,t.sp);if(R.clash&&!R.clash.done&&u.wave!=null&&u.wave===R.clash.w[u.team])d*=tacMul(u.team);if(u.charging){d*=1+WAVE.bonus;u.charging=0;}
   if(u.sp.raptor&&t.sp&&isAir(t))d*=1.8;
   if(high&&u.sp.cls==="crickets"&&m.flag.pounce2)d*=1.5;
@@ -2550,7 +2567,7 @@ function renderHand(){ // your 3 dealt choices: cost, art, stats and what it doe
   p.hand.forEach((c,i)=>{const f=cardInfo(p.cls,c),n=mergeN(p.hand,i),b=document.createElement("button");b.className="card hc"+(n>1?" merge":"")+(c.startsWith("dis:")?" dis":"");b.id="h_"+i;
     b.title=f.title+(n>1?` You hold ${n}: press Merge (or Shift+${i+1}) to play them as one knight with +${Math.round(KC.merge*(n-1)*100)}% health and damage.`:"");
     b.innerHTML=`<span class="ccost"><em class="ec"></em></span><span class="cart"><img class="${f.pix?"pix":"art"}" src="${f.img}" alt=""></span><span class="cbody"><b><kbd>${i+1}</kbd>${f.name}</b><span class="crole">${f.role}</span>${f.chips?`<span class="cchips">${f.chips}</span>`:""}<span class="cdesc">${f.desc}</span></span>`+
-      (n>1?`<span class="cmerge" title="Play all ${n} as one knight: +${Math.round(KC.merge*(n-1)*100)}% health and damage">Merge ×${n} · ${playCost(0,i,true)} food <s>${playCost(0,i,false)*n}</s></span>`:"")+`<i class="cfill"></i>`;
+      (n>1?`<span class="cmerge" title="Play all ${n} as one knight: +${Math.round(KC.merge*(n-1)*100)}% health and damage"><em>Merge ×${n}</em> <small>${playCost(0,i,true)} food <s>${playCost(0,i,false)*n}</s></small><span class="cbonus">♥ ${Math.round(f.hp*(1+KC.merge*(n-1)))} · ⚔ ${Math.round(f.dmg*(1+KC.merge*(n-1)))} · +${Math.round(KC.merge*(n-1)*100)}%</span></span><span class="csend">Send 1 · ${playCost(0,i,false)}</span>`:"")+`<i class="cfill"></i>`;
     b.style.setProperty("--cc",SIGIL[p.cls].col);if(prev[i]!==c)b.classList.add("deal");
     b.onclick=e=>playCard(0,i,!!e.target.closest(".cmerge"));box.appendChild(b);});
   const rb=document.createElement("button");rb.className="card reroll";rb.id="hRe";rb.title=`Refresh: deal 3 new choices (${KC.reroll} food, then ${KC.rerollCd} s to recharge). Key R`;
